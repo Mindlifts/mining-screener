@@ -1,0 +1,330 @@
+{
+  "slug": "first-majestic-silver",
+  "companySlug": "first-majestic-silver",
+  "company": "First Majestic Silver",
+  "ticker": "AG",
+  "exchange": "NYSE",
+  "logo": "/brands/first-majestic.png",
+  "commodityExposure": ["Silver", "Gold"],
+  "score": 72,
+  "thesis": "A high-torque silver producer where stronger free cash flow and a broader operating base could convert commodity upside into disproportionate equity returns.",
+  "asOf": "2026-06-23",
+  "dataStatus": "placeholder",
+  "whyItMatters": [
+    {
+      "label": "Silver leverage",
+      "value": "High",
+      "detail": "Equity sensitivity rises quickly when silver expands above the cost base.",
+      "progress": 91,
+      "tone": "positive"
+    },
+    {
+      "label": "Production scale",
+      "value": "31–33 Moz",
+      "detail": "Illustrative annual silver-equivalent production range.",
+      "progress": 74,
+      "tone": "neutral"
+    },
+    {
+      "label": "Reserve base",
+      "value": "7 years",
+      "detail": "Placeholder reserve-life estimate pending technical-report mapping.",
+      "progress": 58,
+      "tone": "caution"
+    },
+    {
+      "label": "Jurisdiction quality",
+      "value": "Mixed",
+      "detail": "Established mining regions offset by Mexico policy and tax complexity.",
+      "progress": 62,
+      "tone": "caution"
+    },
+    {
+      "label": "Growth potential",
+      "value": "Strong",
+      "detail": "Mine optimization, portfolio integration, and restart optionality.",
+      "progress": 84,
+      "tone": "positive"
+    }
+  ],
+  "assets": [
+    {
+      "name": "San Dimas",
+      "country": "Mexico",
+      "jurisdiction": "Durango",
+      "commodity": "Silver / Gold",
+      "stage": "Producing",
+      "latitude": 24.11,
+      "longitude": -105.93,
+      "production": "Illustrative 13.5 Moz AgEq",
+      "reserveLife": "6 years",
+      "description": "Core underground silver-gold operation and a major source of operating leverage."
+    },
+    {
+      "name": "Santa Elena",
+      "country": "Mexico",
+      "jurisdiction": "Sonora",
+      "commodity": "Silver / Gold",
+      "stage": "Producing",
+      "latitude": 30.03,
+      "longitude": -110.17,
+      "production": "Illustrative 9.0 Moz AgEq",
+      "reserveLife": "5 years",
+      "description": "Underground operation with exploration and processing optimization potential."
+    },
+    {
+      "name": "La Encantada",
+      "country": "Mexico",
+      "jurisdiction": "Coahuila",
+      "commodity": "Silver",
+      "stage": "Producing",
+      "latitude": 28.68,
+      "longitude": -102.55,
+      "production": "Illustrative 3.2 Moz Ag",
+      "reserveLife": "4 years",
+      "description": "Silver-focused operation where throughput and grade discipline drive margins."
+    },
+    {
+      "name": "Jerritt Canyon",
+      "country": "United States",
+      "jurisdiction": "Nevada",
+      "commodity": "Gold",
+      "stage": "Care and maintenance",
+      "latitude": 40.93,
+      "longitude": -116.12,
+      "production": "No current production",
+      "reserveLife": "Restart study",
+      "description": "Gold restart optionality with meaningful execution and capital requirements."
+    }
+  ],
+  "production": [
+    {
+      "label": "Annual production",
+      "value": "26.9 Moz",
+      "detail": "Illustrative consolidated production baseline.",
+      "progress": 78,
+      "tone": "neutral"
+    },
+    {
+      "label": "Silver equivalent",
+      "value": "31–33 Moz",
+      "detail": "Placeholder forward range for presentation design.",
+      "progress": 86,
+      "tone": "positive"
+    },
+    {
+      "label": "YoY growth",
+      "value": "+18%",
+      "detail": "Illustrative growth case, not company guidance.",
+      "progress": 68,
+      "tone": "positive"
+    },
+    {
+      "label": "Reserve life",
+      "value": "7 years",
+      "detail": "Portfolio-level placeholder estimate.",
+      "progress": 58,
+      "tone": "caution"
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "Bull case",
+      "headline": "Silver breaks higher while operating execution compounds the move.",
+      "probability": "25%",
+      "target": "2.3x upside",
+      "tone": "positive",
+      "points": [
+        "Silver sustains a structurally higher price regime.",
+        "Core mines deliver stronger grades and lower unit costs.",
+        "Portfolio integration expands production and mine life.",
+        "Restart optionality gains strategic value without stressing the balance sheet."
+      ]
+    },
+    {
+      "name": "Base case",
+      "headline": "Cash generation improves, but valuation remains tied to execution.",
+      "probability": "50%",
+      "target": "35% upside",
+      "tone": "neutral",
+      "points": [
+        "Silver remains constructive but volatile.",
+        "Production meets the mid-range operating plan.",
+        "Free cash flow funds measured growth and debt reduction.",
+        "Multiple expansion is gradual rather than immediate."
+      ]
+    },
+    {
+      "name": "Bear case",
+      "headline": "Cost inflation and softer silver expose the operating leverage.",
+      "probability": "25%",
+      "target": "40% downside",
+      "tone": "negative",
+      "points": [
+        "Silver retraces while energy and labor costs stay elevated.",
+        "Grades or recoveries underperform at a core operation.",
+        "Mexico tax or regulatory friction absorbs management attention.",
+        "Growth capital competes with balance-sheet repair."
+      ]
+    }
+  ],
+  "financials": [
+    {
+      "label": "Market cap",
+      "value": "$8.2B",
+      "detail": "Placeholder presentation value; map to daily market cache.",
+      "tone": "neutral"
+    },
+    {
+      "label": "Enterprise value",
+      "value": "$8.5B",
+      "detail": "Placeholder; replace with normalized direct-source EV.",
+      "tone": "neutral"
+    },
+    {
+      "label": "EV / EBITDA",
+      "value": "9.4x",
+      "detail": "Illustrative multiple pending presentation-data adapter.",
+      "tone": "caution"
+    },
+    {
+      "label": "FCF yield",
+      "value": "3.8%",
+      "detail": "Uses current dashboard research baseline.",
+      "tone": "positive"
+    },
+    {
+      "label": "Net debt",
+      "value": "$450M",
+      "detail": "Illustrative normalized balance-sheet value.",
+      "tone": "caution"
+    }
+  ],
+  "rickRule": [
+    {
+      "label": "Survival score",
+      "value": "62",
+      "detail": "Cycle resilience and financing risk.",
+      "progress": 62,
+      "tone": "caution"
+    },
+    {
+      "label": "Asset quality",
+      "value": "71",
+      "detail": "Scale, mine life, and operating relevance.",
+      "progress": 71,
+      "tone": "neutral"
+    },
+    {
+      "label": "Jurisdiction",
+      "value": "62",
+      "detail": "Mexico concentration with Nevada optionality.",
+      "progress": 62,
+      "tone": "caution"
+    },
+    {
+      "label": "Valuation",
+      "value": "68",
+      "detail": "Margin of safety versus normalized silver assumptions.",
+      "progress": 68,
+      "tone": "neutral"
+    }
+  ],
+  "ericSprott": [
+    {
+      "label": "Torque score",
+      "value": "88",
+      "detail": "Sensitivity to a rising silver price.",
+      "progress": 88,
+      "tone": "positive"
+    },
+    {
+      "label": "Silver leverage",
+      "value": "91",
+      "detail": "Direct precious-metals operating exposure.",
+      "progress": 91,
+      "tone": "positive"
+    },
+    {
+      "label": "Growth score",
+      "value": "79",
+      "detail": "Organic optimization plus portfolio optionality.",
+      "progress": 79,
+      "tone": "positive"
+    },
+    {
+      "label": "Catalyst score",
+      "value": "84",
+      "detail": "Multiple operational and commodity-driven triggers.",
+      "progress": 84,
+      "tone": "positive"
+    }
+  ],
+  "timeline": [
+    {
+      "year": "2004",
+      "title": "First producing asset",
+      "category": "Milestone",
+      "description": "The company begins its transition from exploration concept to operating silver producer.",
+      "status": "complete"
+    },
+    {
+      "year": "2018",
+      "title": "San Dimas acquisition",
+      "category": "Acquisition",
+      "description": "A transformational transaction adds a cornerstone underground silver-gold operation.",
+      "status": "complete"
+    },
+    {
+      "year": "2021",
+      "title": "Jerritt Canyon acquired",
+      "category": "Acquisition",
+      "description": "Nevada gold exposure adds strategic processing infrastructure and restart optionality.",
+      "status": "complete"
+    },
+    {
+      "year": "2025",
+      "title": "Portfolio expansion",
+      "category": "Expansion",
+      "description": "Illustrative integration milestone broadens the production and reserve platform.",
+      "status": "current"
+    },
+    {
+      "year": "2026+",
+      "title": "Cash flow inflection",
+      "category": "Catalyst",
+      "description": "Higher silver prices, mine optimization, and disciplined capital allocation could reshape returns.",
+      "status": "future"
+    }
+  ],
+  "risks": [
+    {
+      "name": "Political",
+      "probability": 3,
+      "impact": 4,
+      "level": "High",
+      "mitigation": "Diversification, active tax management, and disciplined capital deployment."
+    },
+    {
+      "name": "Operational",
+      "probability": 3,
+      "impact": 3,
+      "level": "Medium",
+      "mitigation": "Multiple producing assets, development discipline, and grade-control investment."
+    },
+    {
+      "name": "Commodity price",
+      "probability": 4,
+      "impact": 5,
+      "level": "High",
+      "mitigation": "Liquidity, cost control, and staged growth capital."
+    },
+    {
+      "name": "Balance sheet",
+      "probability": 2,
+      "impact": 4,
+      "level": "Medium",
+      "mitigation": "Free-cash-flow retention and measured restart spending."
+    }
+  ]
+}
