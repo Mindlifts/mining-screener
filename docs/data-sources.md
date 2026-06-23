@@ -32,4 +32,8 @@ The GitHub Action `.github/workflows/refresh-official-data.yml` runs once daily 
 
 ## Market Data
 
-Daily market-derived metrics such as market cap, EV/EBITDA, FCF yield, and dividend yield generally require delayed exchange feeds or licensed vendors to be fully reliable across NYSE, TSX/TSXV, ASX, and other venues. The current implementation does not scrape unofficial quote sites. Add a licensed or explicitly permitted provider adapter before replacing those values at scale.
+Daily market-derived metrics such as market cap, EV/EBITDA, FCF yield, dividend yield, and commodity spot prices generally require delayed exchange feeds or licensed vendors to be fully reliable across NYSE, TSX/TSXV, ASX, LME/LBMA, uranium price publishers, coal indexes, and other venues.
+
+Commodity tiles read from `data/commodity-price-cache.json` when populated. If that cache is empty, the UI labels them as static fallback values. The SEC filing refresh does not update commodity prices because commodity prices are not company filing data.
+
+The current implementation does not scrape unofficial quote sites. Add a licensed or explicitly permitted provider adapter before replacing those values at scale.
