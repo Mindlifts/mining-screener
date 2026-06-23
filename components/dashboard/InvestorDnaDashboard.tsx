@@ -10,6 +10,7 @@ import {
   type DevelopmentStage
 } from "@/data/mining-universe";
 import { ModeNavigation } from "@/components/dashboard/ModeNavigation";
+import { MobileScreenerCards } from "@/components/dashboard/MobileScreenerCards";
 import {
   CompanyCell,
   ScorePill,
@@ -320,7 +321,7 @@ export function InvestorDnaDashboard() {
 
         {activeMode === "Custom" ? <CustomWeightPanel weights={customWeights} onChange={setCustomWeights} /> : null}
 
-        <ShellCard className="p-3">
+        <ShellCard className="sticky top-0 z-20 p-3 shadow-glow lg:static lg:shadow-none">
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
             <label className="sm:col-span-2">
               <span className="mb-1 block text-xs uppercase tracking-wide text-zinc-500">Search</span>
@@ -373,7 +374,14 @@ export function InvestorDnaDashboard() {
 
         <section className="grid gap-4 xl:grid-cols-[1fr_360px]">
           <div className="space-y-3">
-            <div className="flex items-center justify-between gap-3">
+            <MobileScreenerCards
+              rows={rows}
+              activeMode={activeMode}
+              primaryLabel={modeConfig.shortLabel}
+              primaryScore={modeConfig.primaryScore}
+            />
+
+            <div className="hidden items-center justify-between gap-3 lg:flex">
               <div>
                 <h2 className="text-base font-semibold text-zinc-50">{activeMode} ranking table</h2>
                 <p className="mt-1 text-xs text-zinc-500">
@@ -382,13 +390,15 @@ export function InvestorDnaDashboard() {
               </div>
               <span className="border border-zincLine px-3 py-1 font-mono text-xs text-zinc-400">{rows.length} rows</span>
             </div>
-            <ScreenerTable
-              rows={rows}
-              columns={columns}
-              sortKey={sortKey}
-              sortDirection={sortDirection}
-              onSort={handleSort}
-            />
+            <div className="hidden lg:block">
+              <ScreenerTable
+                rows={rows}
+                columns={columns}
+                sortKey={sortKey}
+                sortDirection={sortDirection}
+                onSort={handleSort}
+              />
+            </div>
           </div>
 
           <aside className="space-y-4">
