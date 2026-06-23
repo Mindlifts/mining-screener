@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-23T14:57:52.626Z",
-  "expiresAt": "2026-06-24T14:57:52.626Z",
+  "generatedAt": "2026-06-23T15:07:02.396Z",
+  "expiresAt": "2026-06-24T15:07:02.396Z",
   "sourcePolicy": "Daily delayed prices are refreshed at most once per day from Yahoo Finance chart data. Market cap is recalculated only when an official SEC shares-outstanding fact exists; otherwise the static universe value remains in use.",
   "records": {
     "pan-american-silver": {
@@ -8,11 +8,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/PAAS?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:44.009Z",
+      "refreshedAt": "2026-06-23T15:06:53.967Z",
       "metrics": {
-        "sharePrice": 46.49,
+        "sharePrice": 46.53,
         "sharesOutstanding": 421847046,
-        "marketCap": 19613.8
+        "marketCap": 19628.5
       },
       "warnings": []
     },
@@ -21,11 +21,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/AG?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:44.225Z",
+      "refreshedAt": "2026-06-23T15:06:54.179Z",
       "metrics": {
-        "sharePrice": 16.7,
+        "sharePrice": 16.74,
         "sharesOutstanding": 491322304,
-        "marketCap": 8205.1
+        "marketCap": 8224.7
       },
       "warnings": []
     },
@@ -34,11 +34,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/EXK?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:44.408Z",
+      "refreshedAt": "2026-06-23T15:06:54.368Z",
       "metrics": {
-        "sharePrice": 8.06,
+        "sharePrice": 8.09,
         "sharesOutstanding": 262323863,
-        "marketCap": 2113
+        "marketCap": 2122.2
       },
       "warnings": []
     },
@@ -47,11 +47,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/CCJ?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:44.633Z",
+      "refreshedAt": "2026-06-23T15:06:54.605Z",
       "metrics": {
-        "sharePrice": 109.08,
+        "sharePrice": 109.26,
         "sharesOutstanding": 435457978,
-        "marketCap": 47501.9
+        "marketCap": 47578.1
       },
       "warnings": []
     },
@@ -60,11 +60,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/NXE?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:44.848Z",
+      "refreshedAt": "2026-06-23T15:06:54.795Z",
       "metrics": {
-        "sharePrice": 10.48,
+        "sharePrice": 10.51,
         "sharesOutstanding": 659960072,
-        "marketCap": 6916.4
+        "marketCap": 6932.9
       },
       "warnings": []
     },
@@ -73,11 +73,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/DNN?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:45.101Z",
+      "refreshedAt": "2026-06-23T15:06:54.978Z",
       "metrics": {
-        "sharePrice": 3.28,
+        "sharePrice": 3.3,
         "sharesOutstanding": 901610950,
-        "marketCap": 2957.6
+        "marketCap": 2970.8
       },
       "warnings": []
     },
@@ -86,11 +86,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/FCX?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:45.443Z",
+      "refreshedAt": "2026-06-23T15:06:55.191Z",
       "metrics": {
-        "sharePrice": 64.49,
+        "sharePrice": 64.13,
         "sharesOutstanding": 1437559865,
-        "marketCap": 92708.2
+        "marketCap": 92190.7
       },
       "warnings": []
     },
@@ -99,9 +99,9 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/IVN.TO?range=5d&interval=1d",
       "currency": "CAD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:45.754Z",
+      "refreshedAt": "2026-06-23T15:06:55.379Z",
       "metrics": {
-        "sharePrice": 11.08
+        "sharePrice": 11.1
       },
       "warnings": [
         "Market cap not recalculated because no official shares outstanding value is available."
@@ -112,11 +112,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/SCCO?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:46.015Z",
+      "refreshedAt": "2026-06-23T15:06:55.607Z",
       "metrics": {
-        "sharePrice": 179.16,
+        "sharePrice": 179.24,
         "sharesOutstanding": 826065041,
-        "marketCap": 147997.8
+        "marketCap": 148068
       },
       "warnings": []
     },
@@ -125,11 +125,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/NEM?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:46.242Z",
+      "refreshedAt": "2026-06-23T15:06:55.839Z",
       "metrics": {
-        "sharePrice": 97.83,
+        "sharePrice": 97.73,
         "sharesOutstanding": 1067552764,
-        "marketCap": 104438.7
+        "marketCap": 104331.9
       },
       "warnings": []
     },
@@ -138,11 +138,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/AEM?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:46.479Z",
+      "refreshedAt": "2026-06-23T15:06:56.072Z",
       "metrics": {
-        "sharePrice": 161.87,
+        "sharePrice": 161.75,
         "sharesOutstanding": 500046600,
-        "marketCap": 80942.5
+        "marketCap": 80882.5
       },
       "warnings": []
     },
@@ -151,9 +151,9 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/GOLD?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:46.728Z",
+      "refreshedAt": "2026-06-23T15:06:56.263Z",
       "metrics": {
-        "sharePrice": 41.99
+        "sharePrice": 42.12
       },
       "warnings": [
         "Market cap not recalculated because no official shares outstanding value is available."
@@ -164,11 +164,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/BTU?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:46.945Z",
+      "refreshedAt": "2026-06-23T15:06:56.484Z",
       "metrics": {
-        "sharePrice": 23.95,
+        "sharePrice": 23.98,
         "sharesOutstanding": 121800000,
-        "marketCap": 2917.1
+        "marketCap": 2920.8
       },
       "warnings": []
     },
@@ -177,11 +177,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/CNR?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:47.158Z",
+      "refreshedAt": "2026-06-23T15:06:56.715Z",
       "metrics": {
-        "sharePrice": 82.25,
+        "sharePrice": 82,
         "sharesOutstanding": 50407610,
-        "marketCap": 4145.8
+        "marketCap": 4133.4
       },
       "warnings": []
     },
@@ -190,7 +190,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/WHC.AX?range=5d&interval=1d",
       "currency": "AUD",
       "quoteTime": "2026-06-23T00:00:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:47.362Z",
+      "refreshedAt": "2026-06-23T15:06:56.956Z",
       "metrics": {
         "sharePrice": 8.25
       },
@@ -203,11 +203,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/HL?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:47.623Z",
+      "refreshedAt": "2026-06-23T15:06:57.279Z",
       "metrics": {
-        "sharePrice": 15.13,
+        "sharePrice": 15.15,
         "sharesOutstanding": 670712403,
-        "marketCap": 10147.9
+        "marketCap": 10157.9
       },
       "warnings": []
     },
@@ -216,7 +216,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/VZLA?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:47.818Z",
+      "refreshedAt": "2026-06-23T15:06:57.506Z",
       "metrics": {
         "sharePrice": 3.38,
         "sharesOutstanding": 298374460,
@@ -228,7 +228,7 @@
       "source": "Yahoo Finance delayed chart",
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/AGMR.V?range=5d&interval=1d",
       "currency": "USD",
-      "refreshedAt": "2026-06-23T14:57:48.005Z",
+      "refreshedAt": "2026-06-23T15:06:57.813Z",
       "metrics": {},
       "warnings": [
         "404 Not Found for AGMR.V"
@@ -238,7 +238,7 @@
       "source": "Yahoo Finance delayed chart",
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/EXN.TO?range=5d&interval=1d",
       "currency": "USD",
-      "refreshedAt": "2026-06-23T14:57:48.208Z",
+      "refreshedAt": "2026-06-23T15:06:57.996Z",
       "metrics": {},
       "warnings": [
         "404 Not Found for EXN.TO"
@@ -248,7 +248,7 @@
       "source": "Yahoo Finance delayed chart",
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/ABRA.V?range=5d&interval=1d",
       "currency": "USD",
-      "refreshedAt": "2026-06-23T14:57:48.411Z",
+      "refreshedAt": "2026-06-23T15:06:58.198Z",
       "metrics": {},
       "warnings": [
         "404 Not Found for ABRA.V"
@@ -259,7 +259,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/TUD.V?range=5d&interval=1d",
       "currency": "CAD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:48.602Z",
+      "refreshedAt": "2026-06-23T15:06:58.379Z",
       "metrics": {
         "sharePrice": 0.83
       },
@@ -272,7 +272,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/GGD.TO?range=5d&interval=1d",
       "currency": "CAD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:48.796Z",
+      "refreshedAt": "2026-06-23T15:06:58.556Z",
       "metrics": {
         "sharePrice": 3.3
       },
@@ -285,7 +285,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/PDN.AX?range=5d&interval=1d",
       "currency": "AUD",
       "quoteTime": "2026-06-23T00:00:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:49.062Z",
+      "refreshedAt": "2026-06-23T15:06:58.757Z",
       "metrics": {
         "sharePrice": 9.39
       },
@@ -298,7 +298,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/STUD.V?range=5d&interval=1d",
       "currency": "CAD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:49.270Z",
+      "refreshedAt": "2026-06-23T15:06:59.032Z",
       "metrics": {
         "sharePrice": 0.29
       },
@@ -311,7 +311,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/LOT.AX?range=5d&interval=1d",
       "currency": "AUD",
       "quoteTime": "2026-06-23T00:00:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:49.545Z",
+      "refreshedAt": "2026-06-23T15:06:59.212Z",
       "metrics": {
         "sharePrice": 0.66
       },
@@ -324,7 +324,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/EQR.AX?range=5d&interval=1d",
       "currency": "AUD",
       "quoteTime": "2026-06-23T00:00:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:49.736Z",
+      "refreshedAt": "2026-06-23T15:06:59.413Z",
       "metrics": {
         "sharePrice": 0.26
       },
@@ -337,7 +337,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/LYC.AX?range=5d&interval=1d",
       "currency": "AUD",
       "quoteTime": "2026-06-23T00:00:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:49.914Z",
+      "refreshedAt": "2026-06-23T15:06:59.626Z",
       "metrics": {
         "sharePrice": 18.59
       },
@@ -350,7 +350,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/MKA.V?range=5d&interval=1d",
       "currency": "CAD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:50.136Z",
+      "refreshedAt": "2026-06-23T15:06:59.801Z",
       "metrics": {
         "sharePrice": 0.86
       },
@@ -363,7 +363,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/LRV.AX?range=5d&interval=1d",
       "currency": "AUD",
       "quoteTime": "2026-06-23T00:00:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:50.320Z",
+      "refreshedAt": "2026-06-23T15:06:59.979Z",
       "metrics": {
         "sharePrice": 1.28
       },
@@ -376,11 +376,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/PROP?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:50.512Z",
+      "refreshedAt": "2026-06-23T15:07:00.158Z",
       "metrics": {
-        "sharePrice": 0.66,
+        "sharePrice": 0.67,
         "sharesOutstanding": 97732173,
-        "marketCap": 64.1
+        "marketCap": 65.1
       },
       "warnings": []
     },
@@ -389,11 +389,11 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/CNQ?range=5d&interval=1d",
       "currency": "USD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:50.728Z",
+      "refreshedAt": "2026-06-23T15:07:00.407Z",
       "metrics": {
-        "sharePrice": 40.84,
+        "sharePrice": 40.87,
         "sharesOutstanding": 2081578000,
-        "marketCap": 85011.6
+        "marketCap": 85074.1
       },
       "warnings": []
     },
@@ -402,9 +402,9 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/ARX.TO?range=5d&interval=1d",
       "currency": "CAD",
       "quoteTime": "2026-06-23T13:30:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:50.962Z",
+      "refreshedAt": "2026-06-23T15:07:00.646Z",
       "metrics": {
-        "sharePrice": 30.35
+        "sharePrice": 30.36
       },
       "warnings": [
         "Market cap not recalculated because no official shares outstanding value is available."
@@ -415,7 +415,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/SFR.AX?range=5d&interval=1d",
       "currency": "AUD",
       "quoteTime": "2026-06-23T00:00:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:51.172Z",
+      "refreshedAt": "2026-06-23T15:07:00.832Z",
       "metrics": {
         "sharePrice": 19.93
       },
@@ -428,7 +428,7 @@
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/AIS.AX?range=5d&interval=1d",
       "currency": "AUD",
       "quoteTime": "2026-06-23T00:00:00.000Z",
-      "refreshedAt": "2026-06-23T14:57:51.389Z",
+      "refreshedAt": "2026-06-23T15:07:01.012Z",
       "metrics": {
         "sharePrice": 0.4
       },

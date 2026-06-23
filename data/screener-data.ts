@@ -21,6 +21,7 @@ type OfficialMetricPatch = Partial<
     | "revenue"
     | "ebitda"
     | "evEbitda"
+    | "freeCashFlow"
     | "fcfYield"
     | "netDebt"
     | "cash"
@@ -167,6 +168,9 @@ export const companies: Company[] = sampleCompanies.map((company) => {
   }
   if (typeof merged.enterpriseValue === "number" && typeof merged.ebitda === "number" && merged.ebitda > 0) {
     merged.evEbitda = Math.round((merged.enterpriseValue / merged.ebitda) * 10) / 10;
+  }
+  if (typeof merged.freeCashFlow === "number" && typeof merged.marketCap === "number" && merged.marketCap > 0) {
+    merged.fcfYield = Math.round((merged.freeCashFlow / merged.marketCap) * 1000) / 10;
   }
 
   return merged;

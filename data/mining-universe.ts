@@ -32,6 +32,7 @@ export type Company = {
   revenue: number;
   ebitda: number;
   evEbitda: number | null;
+  freeCashFlow?: number;
   fcfYield: number | null;
   netDebt: number;
   cash: number;
@@ -92,6 +93,7 @@ type SampleCompanyInput = Pick<
   | "revenue"
   | "ebitda"
   | "evEbitda"
+  | "freeCashFlow"
   | "fcfYield"
   | "netDebt"
   | "cash"
@@ -208,7 +210,8 @@ export const companies: Company[] = [
     revenue: 610,
     ebitda: 218,
     evEbitda: 9.4,
-    fcfYield: 1.8,
+    freeCashFlow: 313.2,
+    fcfYield: 3.8,
     netDebt: 450,
     cash: 220,
     production: 26.9,
@@ -232,9 +235,9 @@ export const companies: Company[] = [
     marginOfSafety: 48,
     neglectedScore: 58,
     bullCase: ["High beta silver torque", "Meaningful operating leverage if San Dimas grades improve"],
-    bearCase: ["Elevated AISC versus larger peers", "Narrow free cash flow cushion"],
+    bearCase: ["Elevated AISC versus larger peers", "Silver-price sensitivity remains high despite improved free cash flow"],
     keyCatalysts: ["Jerritt Canyon restart plan", "San Dimas reserve update", "Mexican tax dispute progress"],
-    riskFlags: ["High unit costs", "Thin FCF yield"]
+    riskFlags: ["High unit costs", "Mexican tax and jurisdiction risk"]
   },
   {
     slug: "endeavour-silver",
