@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "refresh:data": "node scripts/refresh-official-data.mjs",
+    "refresh:data:force": "node scripts/refresh-official-data.mjs --force"
   },
   "dependencies": {
     "next": "16.2.9",

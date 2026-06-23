@@ -1,0 +1,27 @@
+{
+  "notes": "Official-source registry for low-frequency refreshes. Filing feeds are authoritative for filed fundamentals; daily market prices may require licensed exchange/vendor access.",
+  "companies": [
+    { "slug": "pan-american-silver", "ticker": "PAAS", "exchange": "NYSE", "regulator": "SEC", "officialFilingsUrl": "https://www.sec.gov/edgar/browse/?CIK=771992" },
+    { "slug": "first-majestic-silver", "ticker": "AG", "exchange": "NYSE", "regulator": "SEC", "officialFilingsUrl": "https://www.sec.gov/edgar/search/" },
+    { "slug": "endeavour-silver", "ticker": "EXK", "exchange": "NYSE", "regulator": "SEC", "officialFilingsUrl": "https://www.sec.gov/edgar/search/" },
+    { "slug": "hecla-mining", "ticker": "HL", "exchange": "NYSE", "regulator": "SEC", "officialFilingsUrl": "https://www.sec.gov/edgar/search/" },
+    { "slug": "vizsla-silver", "ticker": "VZLA", "exchange": "NYSE American", "regulator": "SEC", "officialFilingsUrl": "https://www.sec.gov/edgar/search/" },
+    { "slug": "cameco", "ticker": "CCJ", "exchange": "NYSE", "regulator": "SEC", "officialFilingsUrl": "https://www.sec.gov/edgar/search/" },
+    { "slug": "nexgen-energy", "ticker": "NXE", "exchange": "NYSE", "regulator": "SEC", "officialFilingsUrl": "https://www.sec.gov/edgar/search/" },
+    { "slug": "denison-mines", "ticker": "DNN", "exchange": "NYSE American", "regulator": "SEC", "officialFilingsUrl": "https://www.sec.gov/edgar/search/" },
+    { "slug": "paladin-energy", "ticker": "PDN.AX", "exchange": "ASX", "regulator": "ASX", "officialFilingsUrl": "https://www.asx.com.au/markets/company/PDN" },
+    { "slug": "lotus-resources", "ticker": "LOT.AX", "exchange": "ASX", "regulator": "ASX", "officialFilingsUrl": "https://www.asx.com.au/markets/company/LOT" },
+    { "slug": "eq-resources", "ticker": "EQR.AX", "exchange": "ASX", "regulator": "ASX", "officialFilingsUrl": "https://www.asx.com.au/markets/company/EQR" },
+    { "slug": "lynas-rare-earths", "ticker": "LYC.AX", "exchange": "ASX", "regulator": "ASX", "officialFilingsUrl": "https://www.asx.com.au/markets/company/LYC" },
+    { "slug": "sandfire-resources", "ticker": "SFR.AX", "exchange": "ASX", "regulator": "ASX", "officialFilingsUrl": "https://www.asx.com.au/markets/company/SFR" },
+    { "slug": "aeris-resources", "ticker": "AIS.AX", "exchange": "ASX", "regulator": "ASX", "officialFilingsUrl": "https://www.asx.com.au/markets/company/AIS" },
+    { "slug": "whitehaven-coal", "ticker": "WHC.AX", "exchange": "ASX", "regulator": "ASX", "officialFilingsUrl": "https://www.asx.com.au/markets/company/WHC" },
+    { "slug": "canadian-natural-resources", "ticker": "CNQ", "exchange": "NYSE", "regulator": "SEC", "officialFilingsUrl": "https://www.sec.gov/edgar/search/" },
+    { "slug": "arc-resources", "ticker": "ARX.TO", "exchange": "TSX", "regulator": "SEDAR+", "officialFilingsUrl": "https://www.sedarplus.ca/" },
+    { "slug": "ivanhoe-mines", "ticker": "IVN.TO", "exchange": "TSX", "regulator": "SEDAR+", "officialFilingsUrl": "https://www.sedarplus.ca/" },
+    { "slug": "gogold-resources", "ticker": "GGD.TO", "exchange": "TSX", "regulator": "SEDAR+", "officialFilingsUrl": "https://www.sedarplus.ca/" },
+    { "slug": "excellon-resources", "ticker": "EXN.TO", "exchange": "TSX", "regulator": "SEDAR+", "officialFilingsUrl": "https://www.sedarplus.ca/" },
+    { "slug": "abrasilver-resource", "ticker": "ABRA.V", "exchange": "TSXV", "regulator": "SEDAR+", "officialFilingsUrl": "https://www.sedarplus.ca/" },
+    { "slug": "tudor-gold", "ticker": "TUD.V", "exchange": "TSXV", "regulator": "SEDAR+", "officialFilingsUrl": "https://www.sedarplus.ca/" }
+  ]
+}

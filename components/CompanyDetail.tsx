@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Company } from "@/data/mining-universe";
+import { getOfficialRecord, type Company } from "@/data/screener-data";
 import { scoreCompany } from "@/lib/scoring";
 
 const moneyFormatter = new Intl.NumberFormat("en-US", {
@@ -77,6 +77,7 @@ function ScoreRow({ label, value }: { label: string; value: number }) {
 
 export function CompanyDetail({ company }: { company: Company }) {
   const score = scoreCompany(company);
+  const officialRecord = getOfficialRecord(company.slug);
 
   return (
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-zinc-950 text-zinc-100">
@@ -107,6 +108,14 @@ export function CompanyDetail({ company }: { company: Company }) {
                 <p className="mt-1 font-mono text-xl text-zinc-50">{formatPercent(company.fcfYield)}</p>
               </div>
             </div>
+          </div>
+          <div className="mt-4 rounded border border-zincLine bg-zincPanel/80 p-3 text-xs text-zinc-400">
+            <p className="font-semibold uppercase tracking-wide text-zinc-500">Data Source</p>
+            <p className="mt-1">
+              {officialRecord
+                ? `${officialRecord.source} · refreshed ${officialRecord.refreshedAt}`
+                : "Mock fallback. Run pnpm refresh:data to populate official filing data where free official APIs are available."}
+            </p>
           </div>
         </header>
 
