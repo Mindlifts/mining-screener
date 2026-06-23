@@ -43,6 +43,7 @@ import {
   formatNumber,
   formatPercent
 } from "@/components/dashboard/formatters";
+import { AppNavigation } from "@/components/AppNavigation";
 
 const customFactors: Array<{ key: ScoreFactor; label: string }> = [
   { key: "survival", label: "Survival" },
@@ -313,6 +314,7 @@ export function InvestorDnaDashboard() {
   return (
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-zinc-950 text-zinc-100">
       <div className="mx-auto flex w-full max-w-[1540px] flex-col gap-4 overflow-hidden px-3 py-3 sm:px-5 lg:px-6">
+        <AppNavigation />
         <header className="space-y-4 border-b border-zincLine pb-4">
           <div className="flex min-w-0 flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
             <div className="min-w-0">

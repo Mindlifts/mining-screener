@@ -47,3 +47,27 @@ select,
 textarea {
   font: inherit;
 }
+
+@keyframes asset-marker-pulse {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.24;
+  }
+}
+
+.asset-marker-pulse {
+  animation: asset-marker-pulse 2.8s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .asset-marker-pulse {
+    animation: none;
+  }
+}

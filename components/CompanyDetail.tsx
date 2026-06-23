@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getMarketRecord, getMetricQuality, getOfficialRecord, type Company } from "@/data/screener-data";
 import { toDisplayDate } from "@/lib/dataCache";
 import { scoreCompany } from "@/lib/scoring";
+import { AppNavigation } from "@/components/AppNavigation";
 
 const moneyFormatter = new Intl.NumberFormat("en-US", {
   notation: "compact",
@@ -100,6 +101,7 @@ export function CompanyDetail({ company }: { company: Company }) {
   return (
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-zinc-950 text-zinc-100">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 overflow-hidden px-3 py-3 sm:px-5 lg:px-6">
+        <AppNavigation />
         <header className="border-b border-zincLine pb-4">
           <Link href="/" className="text-xs font-semibold uppercase tracking-wide text-terminalGreen hover:text-zinc-50">
             Back to screener
