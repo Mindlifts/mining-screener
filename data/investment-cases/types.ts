@@ -6,6 +6,8 @@ export type InvestmentCaseMetric = {
   detail: string;
   progress?: number;
   tone?: InvestmentCaseTone;
+  sourcePage?: number;
+  calculated?: boolean;
 };
 
 export type InvestmentCaseAsset = {
@@ -19,6 +21,8 @@ export type InvestmentCaseAsset = {
   production: string;
   reserveLife: string;
   description: string;
+  sourcePage: number;
+  reserveLifeCalculated?: boolean;
 };
 
 export type InvestmentCaseScenario = {
@@ -28,6 +32,7 @@ export type InvestmentCaseScenario = {
   target: string;
   tone: InvestmentCaseTone;
   points: string[];
+  sourcePages: number[];
 };
 
 export type InvestmentCaseTimelineEvent = {
@@ -36,6 +41,7 @@ export type InvestmentCaseTimelineEvent = {
   category: "Milestone" | "Expansion" | "Acquisition" | "Catalyst";
   description: string;
   status: "complete" | "current" | "future";
+  sourcePage: number;
 };
 
 export type InvestmentCaseRisk = {
@@ -44,6 +50,7 @@ export type InvestmentCaseRisk = {
   impact: number;
   level: "Low" | "Medium" | "High";
   mitigation: string;
+  sourcePage: number;
 };
 
 export type InvestmentCaseData = {
@@ -57,7 +64,12 @@ export type InvestmentCaseData = {
   score: number;
   thesis: string;
   asOf: string;
-  dataStatus: "placeholder";
+  dataStatus: "official-presentation";
+  source: {
+    title: string;
+    url: string;
+    published: string;
+  };
   whyItMatters: InvestmentCaseMetric[];
   assets: InvestmentCaseAsset[];
   production: InvestmentCaseMetric[];

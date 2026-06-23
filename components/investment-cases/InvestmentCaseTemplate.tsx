@@ -63,6 +63,11 @@ function MetricCard({ metric, large = false }: { metric: InvestmentCaseMetric; l
             <div className={`h-full transition-all duration-700 ${barClasses[tone]}`} style={{ width: `${metric.progress}%` }} />
           </div>
         ) : null}
+        {metric.sourcePage ? (
+          <p className="mt-3 text-[9px] font-semibold uppercase tracking-wide text-zinc-600">
+            {metric.calculated ? "Calculated from " : ""}presentation · PDF page {metric.sourcePage}
+          </p>
+        ) : null}
       </div>
     </article>
   );
@@ -89,6 +94,9 @@ function ScenarioCard({ scenario }: { scenario: InvestmentCaseScenario }) {
             <li key={point} className="border-l border-zinc-700 pl-3 text-sm leading-6 text-zinc-300">{point}</li>
           ))}
         </ul>
+        <p className="mt-4 text-[9px] font-semibold uppercase tracking-wide text-zinc-600">
+          Research scenario · presentation pages {scenario.sourcePages.join(", ")}
+        </p>
       </div>
     </details>
   );
@@ -127,6 +135,11 @@ function ScorePanel({
             </div>
             <p className="mt-3 text-xs font-semibold text-zinc-200">{metric.label}</p>
             <p className="mt-1 text-[11px] leading-4 text-zinc-600">{metric.detail}</p>
+            {metric.sourcePage ? (
+              <p className="mt-2 text-[9px] uppercase text-zinc-700">
+                Calculated · p. {metric.sourcePage}
+              </p>
+            ) : null}
           </div>
         ))}
       </div>
@@ -153,12 +166,12 @@ export function InvestmentCaseTemplate({ data }: { data: InvestmentCaseData }) {
 
       <section className="relative overflow-hidden border-b border-zincLine">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_34%,rgba(213,217,226,0.12),transparent_34%)]" />
-        <div className="relative mx-auto grid w-full max-w-[1540px] grid-cols-1 items-center gap-8 px-5 py-8 lg:min-h-[620px] lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-10 lg:px-8 lg:py-20">
+        <div className="relative mx-auto grid w-full max-w-[1540px] grid-cols-1 items-center gap-6 px-5 py-6 sm:gap-8 sm:py-8 lg:min-h-[620px] lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-10 lg:px-8 lg:py-20">
           <div className="min-w-0">
             <div className="inline-flex items-center gap-2 rounded border border-caution/40 bg-caution/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-caution">
-              Placeholder investment case · map official presentation data later
+              Official May 2026 corporate presentation
             </div>
-            <div className="mt-6 flex min-w-0 flex-col gap-5 sm:mt-10 sm:flex-row sm:items-center sm:gap-6">
+            <div className="mt-4 flex min-w-0 flex-col gap-4 sm:mt-10 sm:flex-row sm:items-center sm:gap-6">
               <div className="grid h-20 w-36 shrink-0 place-items-center overflow-hidden rounded-lg border border-zincLine bg-zinc-950 p-3 shadow-glow sm:h-28 sm:w-44">
                 <Image src={data.logo} alt={`${data.company} logo`} width={180} height={115} className="h-full w-full object-contain" priority />
               </div>
@@ -172,7 +185,7 @@ export function InvestmentCaseTemplate({ data }: { data: InvestmentCaseData }) {
                 </div>
               </div>
             </div>
-            <p className="mt-6 max-w-4xl text-lg leading-7 text-zinc-200 sm:mt-10 sm:text-2xl sm:leading-9">{data.thesis}</p>
+            <p className="mt-5 max-w-4xl text-lg leading-7 text-zinc-200 sm:mt-10 sm:text-2xl sm:leading-9">{data.thesis}</p>
           </div>
 
           <div className="min-w-0 border-t border-zincLine pt-6 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
@@ -183,10 +196,10 @@ export function InvestmentCaseTemplate({ data }: { data: InvestmentCaseData }) {
               </div>
               <p className="shrink-0 font-mono text-6xl font-semibold text-terminalGreen lg:mt-4 lg:text-8xl">{data.score}</p>
             </div>
-            <div className="mt-8 h-1 overflow-hidden bg-zinc-800">
+            <div className="mt-5 h-1 overflow-hidden bg-zinc-800 lg:mt-8">
               <div className="h-full bg-terminalGreen" style={{ width: `${data.score}%` }} />
             </div>
-            <p className="mt-5 text-xs text-zinc-600">Presentation snapshot · {data.asOf}</p>
+            <p className="mt-3 text-xs text-zinc-600 lg:mt-5">Market snapshot · {data.asOf} · score calculated by Mining Intelligence</p>
           </div>
         </div>
       </section>
@@ -259,6 +272,9 @@ export function InvestmentCaseTemplate({ data }: { data: InvestmentCaseData }) {
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500">{currentEvent.category}</p>
                 <h3 className="mt-3 text-2xl font-semibold text-zinc-50">{currentEvent.title}</h3>
                 <p className="mt-4 max-w-3xl text-sm leading-7 text-zinc-300">{currentEvent.description}</p>
+                <p className="mt-4 text-[9px] font-semibold uppercase tracking-wide text-zinc-600">
+                  Corporate presentation · PDF page {currentEvent.sourcePage}
+                </p>
               </div>
             </div>
           </div>
@@ -299,6 +315,9 @@ export function InvestmentCaseTemplate({ data }: { data: InvestmentCaseData }) {
                     <span className={`text-[10px] font-semibold uppercase ${risk.level === "High" ? "text-red-300" : "text-caution"}`}>{risk.level}</span>
                   </summary>
                   <p className="mt-3 text-xs leading-5 text-zinc-500">{risk.mitigation}</p>
+                  <p className="mt-3 text-[9px] font-semibold uppercase tracking-wide text-zinc-700">
+                    Presentation · PDF page {risk.sourcePage}
+                  </p>
                 </details>
               ))}
             </div>
@@ -307,14 +326,24 @@ export function InvestmentCaseTemplate({ data }: { data: InvestmentCaseData }) {
 
         <footer className="flex min-w-0 flex-col gap-4 border-t border-zincLine pt-8 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-caution">Placeholder data notice</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-terminalGreen">Primary source</p>
             <p className="mt-1 max-w-3xl text-xs leading-5 text-zinc-600">
-              This page demonstrates the presentation model. Replace its JSON values with official presentations, filings, technical reports, and normalized market data before investment use.
+              Operating, reserve, guidance, liquidity and catalyst facts are mapped from First Majestic&apos;s May 2026 corporate presentation. Investor scores, scenarios and reserve ratios are Mining Intelligence calculations and are labelled as such.
             </p>
           </div>
-          <Link href={`/companies/${data.companySlug}`} className="shrink-0 rounded border border-zincLine px-4 py-2 text-xs font-semibold uppercase tracking-wide text-zinc-300 hover:border-zinc-500 hover:text-zinc-50">
-            Open standard company page
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <a
+              href={data.source.url}
+              target="_blank"
+              rel="noreferrer"
+              className="shrink-0 rounded border border-terminalGreen/50 bg-terminalGreen/10 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-terminalGreen hover:bg-terminalGreen/15"
+            >
+              Open official presentation
+            </a>
+            <Link href={`/companies/${data.companySlug}`} className="shrink-0 rounded border border-zincLine px-4 py-2 text-xs font-semibold uppercase tracking-wide text-zinc-300 hover:border-zinc-500 hover:text-zinc-50">
+              Open standard company page
+            </Link>
+          </div>
         </footer>
       </div>
     </main>
