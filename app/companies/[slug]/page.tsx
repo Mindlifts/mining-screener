@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { CompanyDetail } from "@/components/CompanyDetail";
-import { companies, getCompanyBySlug } from "@/data/mining-universe";
+import { companies, getCompanyBySlug } from "@/data/screener-data";
 
 export function generateStaticParams() {
   return companies.map((company) => ({

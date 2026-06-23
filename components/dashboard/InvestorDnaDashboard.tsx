@@ -5,10 +5,11 @@ import {
   commodities,
   commodityPrices,
   companies,
+  dataFreshness,
   type Commodity,
   type Company,
   type DevelopmentStage
-} from "@/data/mining-universe";
+} from "@/data/screener-data";
 import { ModeNavigation } from "@/components/dashboard/ModeNavigation";
 import { InvestorAvatar } from "@/components/dashboard/InvestorAvatar";
 import { MobileScreenerCards } from "@/components/dashboard/MobileScreenerCards";
@@ -332,7 +333,9 @@ export function InvestorDnaDashboard() {
               </div>
               <div className="min-w-0 border border-zincLine bg-zincPanel px-3 py-2">
                 <p className="text-zinc-500">Data</p>
-                <p className="mt-1 truncate font-mono text-caution">Mock API-ready</p>
+                <p className="mt-1 truncate font-mono text-caution">
+                  {dataFreshness.officialRecordCount > 0 ? `${dataFreshness.officialRecordCount} official` : "Mock fallback"}
+                </p>
               </div>
             </div>
           </div>
@@ -356,6 +359,11 @@ export function InvestorDnaDashboard() {
                 ) : null}
               </div>
               <p className="mt-3 max-w-4xl text-sm leading-6 text-zinc-300">{modeConfig.explanation}</p>
+              <p className="mt-2 max-w-4xl text-xs leading-5 text-zinc-500">
+                Data refresh: {dataFreshness.generatedAt ? `official cache generated ${dataFreshness.generatedAt}` : "official cache not populated yet"}.
+                {" "}
+                {dataFreshness.sourcePolicy}
+              </p>
             </div>
             <div className="grid min-w-0 grid-cols-1 gap-2 text-xs sm:grid-cols-2">
               {commodityPrices.map((price) => (
