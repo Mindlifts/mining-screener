@@ -49,7 +49,15 @@ function latestFact(facts, taxonomy, names, unit = "USD") {
 
     const filedValues = values
       .filter((item) => typeof item.val === "number" && item.filed)
-      .sort((a, b) => String(b.filed).localeCompare(String(a.filed)));
+      .sort((a, b) => {
+        const filed = String(b.filed).localeCompare(String(a.filed));
+        if (filed !== 0) return filed;
+
+        const end = String(b.end ?? "").localeCompare(String(a.end ?? ""));
+        if (end !== 0) return end;
+
+        return String(b.start ?? "").localeCompare(String(a.start ?? ""));
+      });
 
     if (filedValues.length) return filedValues[0];
   }
@@ -76,6 +84,16 @@ function deriveMetrics(companyFacts, metricScope = "standard") {
     latestFact(facts, "us-gaap", ["LongTermDebtAndFinanceLeaseObligationsNoncurrent", "LongTermDebtNoncurrent"]) ??
     latestFact(facts, "ifrs-full", ["NoncurrentBorrowings"]);
   const sharesOutstanding = latestFact(facts, "dei", ["EntityCommonStockSharesOutstanding"], "shares");
+  const operatingCashFlow =
+    latestFact(facts, "us-gaap", ["NetCashProvidedByUsedInOperatingActivities"]) ??
+    latestFact(facts, "ifrs-full", ["CashFlowsFromUsedInOperatingActivities"]);
+  const capitalExpenditures =
+    latestFact(facts, "us-gaap", ["PaymentsToAcquirePropertyPlantAndEquipment"]) ??
+    latestFact(facts, "ifrs-full", [
+      "PurchaseOfPropertyPlantAndEquipmentIntangibleAssetsOtherThanGoodwillInvestmentPropertyAndOtherNoncurrentAssets",
+      "PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities",
+      "PurchaseOfMiningAssets"
+    ]);
 
   const metrics = {};
   const warnings = [];
@@ -83,15 +101,29 @@ function deriveMetrics(companyFacts, metricScope = "standard") {
   if (metricScope !== "sharesOnly" && revenue) metrics.revenue = millions(revenue.val);
   if (metricScope !== "sharesOnly" && cash) metrics.cash = millions(cash.val);
   if (sharesOutstanding) metrics.sharesOutstanding = sharesOutstanding.val;
+  if (metricScope !== "sharesOnly" && operatingCashFlow && capitalExpenditures) {
+    metrics.freeCashFlow = millions(operatingCashFlow.val - Math.abs(capitalExpenditures.val));
+  }
   if (metricScope !== "sharesOnly" && cash && (debt || longDebt)) {
     metrics.netDebt = millions((debt?.val ?? 0) + (longDebt?.val ?? 0) - cash.val);
   }
 
   if (metricScope !== "sharesOnly" && !revenue) warnings.push("No standard revenue fact found in SEC companyfacts.");
   if (metricScope !== "sharesOnly" && !cash) warnings.push("No standard cash fact found in SEC companyfacts.");
+  if (metricScope !== "sharesOnly" && (!operatingCashFlow || !capitalExpenditures)) {
+    warnings.push("No complete standard free cash flow fact pair found in SEC companyfacts.");
+  }
   if (!sharesOutstanding) warnings.push("No common shares outstanding fact found in SEC companyfacts.");
 
-  const filedAt = [revenue?.filed, cash?.filed, debt?.filed, longDebt?.filed, sharesOutstanding?.filed].filter(Boolean).sort().at(-1);
+  const filedAt = [
+    revenue?.filed,
+    cash?.filed,
+    debt?.filed,
+    longDebt?.filed,
+    sharesOutstanding?.filed,
+    operatingCashFlow?.filed,
+    capitalExpenditures?.filed
+  ].filter(Boolean).sort().at(-1);
 
   return { metrics, warnings, filedAt };
 }

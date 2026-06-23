@@ -138,6 +138,7 @@ export function CompanyDetail({ company }: { company: Company }) {
               <Metric label="Enterprise Value" value={formatMoney(company.enterpriseValue)} />
               <Metric label="Revenue" value={formatMoney(company.revenue)} />
               <Metric label="EBITDA" value={formatMoney(company.ebitda)} />
+              <Metric label="Free Cash Flow" value={company.freeCashFlow === undefined ? "N/A" : formatMoney(company.freeCashFlow)} />
               <Metric label="Dividend Yield" value={formatPercent(company.dividendYield)} />
             </Card>
 
