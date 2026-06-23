@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getOfficialRecord, type Company } from "@/data/screener-data";
+import { getMarketRecord, getOfficialRecord, type Company } from "@/data/screener-data";
 import { scoreCompany } from "@/lib/scoring";
 
 const moneyFormatter = new Intl.NumberFormat("en-US", {
@@ -21,6 +21,10 @@ function formatPercent(value: number | null) {
 
 function formatMultiple(value: number | null) {
   return value === null ? "N/A" : `${numberFormatter.format(value)}x`;
+}
+
+function formatShares(value: number | undefined) {
+  return value === undefined ? "N/A" : numberFormatter.format(value);
 }
 
 function Card({
@@ -78,6 +82,7 @@ function ScoreRow({ label, value }: { label: string; value: number }) {
 export function CompanyDetail({ company }: { company: Company }) {
   const score = scoreCompany(company);
   const officialRecord = getOfficialRecord(company.slug);
+  const marketRecord = getMarketRecord(company.slug);
 
   return (
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-zinc-950 text-zinc-100">
@@ -110,11 +115,16 @@ export function CompanyDetail({ company }: { company: Company }) {
             </div>
           </div>
           <div className="mt-4 rounded border border-zincLine bg-zincPanel/80 p-3 text-xs text-zinc-400">
-            <p className="font-semibold uppercase tracking-wide text-zinc-500">Data Source</p>
+            <p className="font-semibold uppercase tracking-wide text-zinc-500">Data Sources</p>
             <p className="mt-1">
               {officialRecord
                 ? `${officialRecord.source} · refreshed ${officialRecord.refreshedAt}`
                 : "Mock fallback. Run pnpm refresh:data to populate official filing data where free official APIs are available."}
+            </p>
+            <p className="mt-1">
+              {marketRecord
+                ? `${marketRecord.source} · quote ${marketRecord.quoteTime ?? "N/A"} · refreshed ${marketRecord.refreshedAt}`
+                : "No daily market cache yet. Run pnpm refresh:market to populate delayed quote data."}
             </p>
           </div>
         </header>
@@ -123,6 +133,8 @@ export function CompanyDetail({ company }: { company: Company }) {
           <div className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">
             <Card title="Valuation Snapshot">
               <Metric label="Market Cap" value={formatMoney(company.marketCap)} />
+              <Metric label="Share Price" value={company.sharePrice === undefined ? "N/A" : `$${numberFormatter.format(company.sharePrice)}`} />
+              <Metric label="Shares Outstanding" value={formatShares(company.sharesOutstanding)} />
               <Metric label="Enterprise Value" value={formatMoney(company.enterpriseValue)} />
               <Metric label="Revenue" value={formatMoney(company.revenue)} />
               <Metric label="EBITDA" value={formatMoney(company.ebitda)} />

@@ -10,6 +10,9 @@ export type CommodityPrice = {
   unit: string;
   changePercent: number;
   macroRank: number;
+  quoteTime?: string;
+  stale?: boolean;
+  source?: string;
 };
 
 export type Company = {
@@ -22,6 +25,8 @@ export type Company = {
   jurisdiction: string;
   jurisdictionRisk: JurisdictionRisk;
   stage: DevelopmentStage;
+  sharePrice?: number;
+  sharesOutstanding?: number;
   marketCap: number;
   enterpriseValue: number;
   revenue: number;
@@ -705,9 +710,9 @@ export const companies: Company[] = [
     riskFlags: ["Commodity policy risk", "Thermal coal terminal value"]
   },
   {
-    slug: "arch-resources",
-    company: "Arch Resources",
-    ticker: "ARCH",
+    slug: "core-natural-resources",
+    company: "Core Natural Resources",
+    ticker: "CNR",
     exchange: "NYSE",
     commodity: "Coal",
     country: "United States",
@@ -742,10 +747,10 @@ export const companies: Company[] = [
     resourceScale: 84,
     marginOfSafety: 78,
     neglectedScore: 84,
-    bullCase: ["Met coal focus supports higher quality cash flow", "Shareholder returns remain central"],
-    bearCase: ["Cyclical pricing swings are severe", "Long-term demand uncertainty"],
-    keyCatalysts: ["Leer South productivity", "Capital return authorization", "Export price realizations"],
-    riskFlags: ["Coal demand risk", "High earnings cyclicality"]
+    bullCase: ["Arch and CONSOL merger created a larger North American coal platform", "Met coal and export exposure support cash flow torque"],
+    bearCase: ["Cyclical coal pricing swings are severe", "Integration and long-term demand uncertainty"],
+    keyCatalysts: ["Merger synergy delivery", "Capital return authorization", "Export price realizations"],
+    riskFlags: ["Coal demand risk", "High earnings cyclicality", "Post-merger integration"]
   },
   {
     slug: "whitehaven-coal",

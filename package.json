@@ -7,8 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "refresh:data": "node scripts/refresh-official-data.mjs",
-    "refresh:data:force": "node scripts/refresh-official-data.mjs --force"
+    "refresh:data": "node scripts/refresh-official-data.mjs && node scripts/refresh-market-data.mjs",
+    "refresh:data:force": "node scripts/refresh-official-data.mjs --force && node scripts/refresh-market-data.mjs --force",
+    "refresh:official": "node scripts/refresh-official-data.mjs",
+    "refresh:market": "node scripts/refresh-market-data.mjs"
   },
   "dependencies": {
     "next": "16.2.9",

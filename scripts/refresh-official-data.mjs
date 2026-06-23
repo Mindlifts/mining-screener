@@ -61,7 +61,7 @@ function millions(value) {
   return Math.round((value / 1_000_000) * 10) / 10;
 }
 
-function deriveMetrics(companyFacts) {
+function deriveMetrics(companyFacts, metricScope = "standard") {
   const facts = companyFacts.facts ?? {};
   const revenue =
     latestFact(facts, "us-gaap", ["RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet", "Revenues"]) ??
@@ -75,20 +75,23 @@ function deriveMetrics(companyFacts) {
   const longDebt =
     latestFact(facts, "us-gaap", ["LongTermDebtAndFinanceLeaseObligationsNoncurrent", "LongTermDebtNoncurrent"]) ??
     latestFact(facts, "ifrs-full", ["NoncurrentBorrowings"]);
+  const sharesOutstanding = latestFact(facts, "dei", ["EntityCommonStockSharesOutstanding"], "shares");
 
   const metrics = {};
   const warnings = [];
 
-  if (revenue) metrics.revenue = millions(revenue.val);
-  if (cash) metrics.cash = millions(cash.val);
-  if (cash && (debt || longDebt)) {
+  if (metricScope !== "sharesOnly" && revenue) metrics.revenue = millions(revenue.val);
+  if (metricScope !== "sharesOnly" && cash) metrics.cash = millions(cash.val);
+  if (sharesOutstanding) metrics.sharesOutstanding = sharesOutstanding.val;
+  if (metricScope !== "sharesOnly" && cash && (debt || longDebt)) {
     metrics.netDebt = millions((debt?.val ?? 0) + (longDebt?.val ?? 0) - cash.val);
   }
 
-  if (!revenue) warnings.push("No standard revenue fact found in SEC companyfacts.");
-  if (!cash) warnings.push("No standard cash fact found in SEC companyfacts.");
+  if (metricScope !== "sharesOnly" && !revenue) warnings.push("No standard revenue fact found in SEC companyfacts.");
+  if (metricScope !== "sharesOnly" && !cash) warnings.push("No standard cash fact found in SEC companyfacts.");
+  if (!sharesOutstanding) warnings.push("No common shares outstanding fact found in SEC companyfacts.");
 
-  const filedAt = [revenue?.filed, cash?.filed, debt?.filed, longDebt?.filed].filter(Boolean).sort().at(-1);
+  const filedAt = [revenue?.filed, cash?.filed, debt?.filed, longDebt?.filed, sharesOutstanding?.filed].filter(Boolean).sort().at(-1);
 
   return { metrics, warnings, filedAt };
 }
@@ -150,7 +153,7 @@ async function refresh() {
 
     try {
       const companyFacts = await secFetch(sourceUrl);
-      const derived = deriveMetrics(companyFacts);
+      const derived = deriveMetrics(companyFacts, source.metricScope);
       records[source.slug] = {
         source: "SEC EDGAR companyfacts",
         sourceUrl,

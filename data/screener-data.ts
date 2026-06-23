@@ -1,5 +1,6 @@
 import officialCache from "@/data/official-cache.json";
 import commodityPriceCache from "@/data/commodity-price-cache.json";
+import marketDataCache from "@/data/market-data-cache.json";
 import {
   commodities,
   commodityPrices as sampleCommodityPrices,
@@ -24,6 +25,18 @@ type OfficialMetricPatch = Partial<
     | "netDebt"
     | "cash"
     | "dividendYield"
+    | "sharesOutstanding"
+  >
+>;
+
+type MarketMetricPatch = Partial<
+  Pick<
+    Company,
+    | "sharePrice"
+    | "sharesOutstanding"
+    | "marketCap"
+    | "enterpriseValue"
+    | "evEbitda"
   >
 >;
 
@@ -50,6 +63,8 @@ type CommodityPriceCacheRecord = {
   source: string;
   sourceUrl?: string;
   refreshedAt: string;
+  quoteTime?: string;
+  stale?: boolean;
 };
 
 type CommodityPriceCache = {
@@ -59,11 +74,30 @@ type CommodityPriceCache = {
   records: Partial<Record<Commodity, CommodityPriceCacheRecord>>;
 };
 
+type MarketDataCacheRecord = {
+  source: string;
+  sourceUrl: string;
+  currency: string;
+  quoteTime?: string;
+  refreshedAt: string;
+  metrics: MarketMetricPatch;
+  warnings?: string[];
+};
+
+type MarketDataCache = {
+  generatedAt: string | null;
+  expiresAt: string | null;
+  sourcePolicy: string;
+  records: Record<string, MarketDataCacheRecord>;
+};
+
 export type DataFreshness = {
   generatedAt: string | null;
   expiresAt: string | null;
   sourcePolicy: string;
   officialRecordCount: number;
+  marketRecordCount: number;
+  marketGeneratedAt: string | null;
 };
 
 export type CommodityPriceFreshness = {
@@ -83,12 +117,15 @@ export type {
 
 const cache = officialCache as OfficialCache;
 const priceCache = commodityPriceCache as CommodityPriceCache;
+const marketCache = marketDataCache as MarketDataCache;
 
 export const dataFreshness: DataFreshness = {
   generatedAt: cache.generatedAt,
   expiresAt: cache.expiresAt,
   sourcePolicy: cache.sourcePolicy,
-  officialRecordCount: Object.keys(cache.records).length
+  officialRecordCount: Object.keys(cache.records).length,
+  marketRecordCount: Object.keys(marketCache.records).length,
+  marketGeneratedAt: marketCache.generatedAt
 };
 
 export const commodityPriceFreshness: CommodityPriceFreshness = {
@@ -104,16 +141,36 @@ export const commodityPrices: CommodityPrice[] = sampleCommodityPrices.map((pric
   return {
     ...price,
     price: cached?.price ?? price.price,
-    changePercent: cached?.changePercent ?? price.changePercent
+    changePercent: cached?.changePercent ?? price.changePercent,
+    quoteTime: cached?.quoteTime,
+    stale: cached?.stale,
+    source: cached?.source
   };
 });
 
 export { commodities };
 
-export const companies: Company[] = sampleCompanies.map((company) => ({
-  ...company,
-  ...(cache.records[company.slug]?.metrics ?? {})
-}));
+export const companies: Company[] = sampleCompanies.map((company) => {
+  const officialMetrics = cache.records[company.slug]?.metrics ?? {};
+  const marketMetrics = marketCache.records[company.slug]?.metrics ?? {};
+  const merged = {
+    ...company,
+    ...officialMetrics,
+    ...marketMetrics
+  };
+
+  // Real API hook: when a market data provider supplies daily price and shares,
+  // keep valuation ratios derived here so table rankings stay internally consistent.
+  const netDebt = typeof merged.netDebt === "number" ? merged.netDebt : 0;
+  if (typeof merged.marketCap === "number") {
+    merged.enterpriseValue = Math.round((merged.marketCap + netDebt) * 10) / 10;
+  }
+  if (typeof merged.enterpriseValue === "number" && typeof merged.ebitda === "number" && merged.ebitda > 0) {
+    merged.evEbitda = Math.round((merged.enterpriseValue / merged.ebitda) * 10) / 10;
+  }
+
+  return merged;
+});
 
 export function getCompanyBySlug(slug: string) {
   const company = companies.find((item) => item.slug === slug);
@@ -122,4 +179,8 @@ export function getCompanyBySlug(slug: string) {
 
 export function getOfficialRecord(slug: string) {
   return cache.records[slug] ?? null;
+}
+
+export function getMarketRecord(slug: string) {
+  return marketCache.records[slug] ?? null;
 }
