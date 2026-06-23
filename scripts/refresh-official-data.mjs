@@ -14,6 +14,10 @@ function nowIso() {
   return new Date().toISOString();
 }
 
+function todayKey() {
+  return nowIso().slice(0, 10);
+}
+
 async function readJson(filePath) {
   return JSON.parse(await fs.readFile(filePath, "utf8"));
 }
@@ -151,9 +155,9 @@ async function getTickerMap() {
 
 async function refresh() {
   const cache = await readJson(cachePath);
-  const generatedAt = cache.generatedAt ? Date.parse(cache.generatedAt) : 0;
+  const cacheDate = cache.generatedAt?.slice(0, 10);
 
-  if (!force && generatedAt && Date.now() - generatedAt < oneDayMs) {
+  if (!force && cacheDate === todayKey()) {
     console.log(`Official cache is still fresh: ${cache.generatedAt}`);
     return;
   }
@@ -211,7 +215,7 @@ async function refresh() {
     generatedAt: nowIso(),
     expiresAt: new Date(Date.now() + oneDayMs).toISOString(),
     sourcePolicy:
-      "Official/regulatory filings are refreshed at most once daily. Market-derived metrics remain mock or vendor-provided unless a licensed delayed market data provider is configured.",
+      "Official/regulatory filings are refreshed at most once per calendar day. Prefer SEC bulk files for broader universes and preserve the last cache if a source is unavailable.",
     records
   };
 

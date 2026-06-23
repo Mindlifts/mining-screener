@@ -360,12 +360,8 @@ export function InvestorDnaDashboard() {
                 ) : null}
               </div>
               <p className="mt-3 max-w-4xl text-sm leading-6 text-zinc-300">{modeConfig.explanation}</p>
-              <p className="mt-2 max-w-4xl text-xs leading-5 text-zinc-500">
-                Filing refresh: {dataFreshness.generatedAt ? `official cache generated ${dataFreshness.generatedAt}` : "official cache not populated yet"}.
-                {" "}
-                Market refresh: {dataFreshness.marketGeneratedAt ? `market cache generated ${dataFreshness.marketGeneratedAt} for ${dataFreshness.marketRecordCount} names` : "market cache not populated yet"}.
-                {" "}
-                Commodity tape: {commodityPriceFreshness.generatedAt ? `price cache generated ${commodityPriceFreshness.generatedAt}` : "static fallback"}.
+              <p className="mt-2 text-xs text-zinc-500">
+                Last updated: {dataFreshness.lastUpdatedDate}
               </p>
             </div>
             <div className="grid min-w-0 grid-cols-1 gap-2 text-xs sm:grid-cols-2">
