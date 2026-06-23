@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-23T14:21:44.269Z",
-  "expiresAt": "2026-06-24T14:21:44.269Z",
+  "generatedAt": "2026-06-23T14:57:43.650Z",
+  "expiresAt": "2026-06-24T14:57:43.650Z",
   "sourcePolicy": "Official/regulatory filings are refreshed at most once daily. Market-derived metrics remain mock or vendor-provided unless a licensed delayed market data provider is configured.",
   "records": {
     "pan-american-silver": {
@@ -8,10 +8,11 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000771992.json",
       "regulator": "SEC",
       "filedAt": "2026-02-18",
-      "refreshedAt": "2026-06-23T14:21:40.714Z",
+      "refreshedAt": "2026-06-23T14:57:35.374Z",
       "metrics": {
         "revenue": 2819,
-        "cash": 400
+        "cash": 400,
+        "sharesOutstanding": 421847046
       },
       "warnings": []
     },
@@ -20,10 +21,11 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001308648.json",
       "regulator": "SEC",
       "filedAt": "2026-03-31",
-      "refreshedAt": "2026-06-23T14:21:41.156Z",
+      "refreshedAt": "2026-06-23T14:57:35.794Z",
       "metrics": {
         "revenue": 560.6,
-        "cash": 125.6
+        "cash": 125.6,
+        "sharesOutstanding": 491322304
       },
       "warnings": []
     },
@@ -32,10 +34,11 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001277866.json",
       "regulator": "SEC",
       "filedAt": "2026-03-30",
-      "refreshedAt": "2026-06-23T14:21:41.715Z",
+      "refreshedAt": "2026-06-23T14:57:36.165Z",
       "metrics": {
         "revenue": 217.6,
-        "cash": 106.4
+        "cash": 106.4,
+        "sharesOutstanding": 262323863
       },
       "warnings": []
     },
@@ -44,10 +47,11 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000719413.json",
       "regulator": "SEC",
       "filedAt": "2026-05-05",
-      "refreshedAt": "2026-06-23T14:21:42.426Z",
+      "refreshedAt": "2026-06-23T14:57:36.948Z",
       "metrics": {
         "revenue": 500.8,
         "cash": 23.7,
+        "sharesOutstanding": 670712403,
         "netDebt": 509.6
       },
       "warnings": []
@@ -56,8 +60,11 @@
       "source": "SEC EDGAR companyfacts",
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001796073.json",
       "regulator": "SEC",
-      "refreshedAt": "2026-06-23T14:21:42.759Z",
-      "metrics": {},
+      "filedAt": "2025-07-18",
+      "refreshedAt": "2026-06-23T14:57:37.320Z",
+      "metrics": {
+        "sharesOutstanding": 298374460
+      },
       "warnings": [
         "No standard revenue fact found in SEC companyfacts.",
         "No standard cash fact found in SEC companyfacts."
@@ -67,8 +74,11 @@
       "source": "SEC EDGAR companyfacts",
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001009001.json",
       "regulator": "SEC",
-      "refreshedAt": "2026-06-23T14:21:43.145Z",
-      "metrics": {},
+      "filedAt": "2026-03-19",
+      "refreshedAt": "2026-06-23T14:57:37.720Z",
+      "metrics": {
+        "sharesOutstanding": 435457978
+      },
       "warnings": [
         "No standard revenue fact found in SEC companyfacts.",
         "No standard cash fact found in SEC companyfacts."
@@ -78,8 +88,11 @@
       "source": "SEC EDGAR companyfacts",
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001698535.json",
       "regulator": "SEC",
-      "refreshedAt": "2026-06-23T14:21:43.482Z",
-      "metrics": {},
+      "filedAt": "2026-03-04",
+      "refreshedAt": "2026-06-23T14:57:38.075Z",
+      "metrics": {
+        "sharesOutstanding": 659960072
+      },
       "warnings": [
         "No standard revenue fact found in SEC companyfacts.",
         "No standard cash fact found in SEC companyfacts."
@@ -89,11 +102,106 @@
       "source": "SEC EDGAR companyfacts",
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001063259.json",
       "regulator": "SEC",
-      "filedAt": "2018-03-09",
-      "refreshedAt": "2026-06-23T14:21:43.893Z",
+      "filedAt": "2026-03-30",
+      "refreshedAt": "2026-06-23T14:57:38.590Z",
       "metrics": {
         "revenue": 13.8,
-        "cash": 5.4
+        "cash": 5.4,
+        "sharesOutstanding": 901610950
+      },
+      "warnings": []
+    },
+    "freeport-mcmoran": {
+      "source": "SEC EDGAR companyfacts",
+      "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000831259.json",
+      "regulator": "SEC",
+      "filedAt": "2026-05-08",
+      "refreshedAt": "2026-06-23T14:57:39.432Z",
+      "metrics": {
+        "revenue": 5574,
+        "cash": 3824,
+        "sharesOutstanding": 1437559865,
+        "netDebt": 5555
+      },
+      "warnings": []
+    },
+    "southern-copper": {
+      "source": "SEC EDGAR companyfacts",
+      "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001001838.json",
+      "regulator": "SEC",
+      "filedAt": "2026-04-30",
+      "refreshedAt": "2026-06-23T14:57:40.042Z",
+      "metrics": {
+        "revenue": 3121.9,
+        "cash": 4304.6,
+        "sharesOutstanding": 826065041,
+        "netDebt": 2945.9
+      },
+      "warnings": []
+    },
+    "newmont": {
+      "source": "SEC EDGAR companyfacts",
+      "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001164727.json",
+      "regulator": "SEC",
+      "filedAt": "2026-04-23",
+      "refreshedAt": "2026-06-23T14:57:40.742Z",
+      "metrics": {
+        "revenue": 5010,
+        "cash": 4698,
+        "sharesOutstanding": 1067552764,
+        "netDebt": 1341
+      },
+      "warnings": []
+    },
+    "agnico-eagle": {
+      "source": "SEC EDGAR companyfacts",
+      "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002809.json",
+      "regulator": "SEC",
+      "filedAt": "2026-03-19",
+      "refreshedAt": "2026-06-23T14:57:41.228Z",
+      "metrics": {
+        "sharesOutstanding": 500046600
+      },
+      "warnings": []
+    },
+    "peabody-energy": {
+      "source": "SEC EDGAR companyfacts",
+      "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001064728.json",
+      "regulator": "SEC",
+      "filedAt": "2026-05-06",
+      "refreshedAt": "2026-06-23T14:57:42.150Z",
+      "metrics": {
+        "revenue": 937,
+        "cash": 575.3,
+        "sharesOutstanding": 121800000,
+        "netDebt": -532.1
+      },
+      "warnings": []
+    },
+    "core-natural-resources": {
+      "source": "SEC EDGAR companyfacts",
+      "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001710366.json",
+      "regulator": "SEC",
+      "filedAt": "2026-05-07",
+      "refreshedAt": "2026-06-23T14:57:42.671Z",
+      "metrics": {
+        "revenue": 1017.4,
+        "cash": 388.5,
+        "sharesOutstanding": 50407610,
+        "netDebt": -205
+      },
+      "warnings": []
+    },
+    "prairie-operating": {
+      "source": "SEC EDGAR companyfacts",
+      "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001162896.json",
+      "regulator": "SEC",
+      "filedAt": "2026-05-14",
+      "refreshedAt": "2026-06-23T14:57:43.236Z",
+      "metrics": {
+        "revenue": 13.6,
+        "cash": 0,
+        "sharesOutstanding": 97732173
       },
       "warnings": []
     },
@@ -101,8 +209,11 @@
       "source": "SEC EDGAR companyfacts",
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001017413.json",
       "regulator": "SEC",
-      "refreshedAt": "2026-06-23T14:21:44.269Z",
-      "metrics": {},
+      "filedAt": "2026-03-26",
+      "refreshedAt": "2026-06-23T14:57:43.650Z",
+      "metrics": {
+        "sharesOutstanding": 2081578000
+      },
       "warnings": [
         "No standard revenue fact found in SEC companyfacts.",
         "No standard cash fact found in SEC companyfacts."

@@ -1,0 +1,440 @@
+{
+  "generatedAt": "2026-06-23T14:57:52.626Z",
+  "expiresAt": "2026-06-24T14:57:52.626Z",
+  "sourcePolicy": "Daily delayed prices are refreshed at most once per day from Yahoo Finance chart data. Market cap is recalculated only when an official SEC shares-outstanding fact exists; otherwise the static universe value remains in use.",
+  "records": {
+    "pan-american-silver": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/PAAS?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:44.009Z",
+      "metrics": {
+        "sharePrice": 46.49,
+        "sharesOutstanding": 421847046,
+        "marketCap": 19613.8
+      },
+      "warnings": []
+    },
+    "first-majestic-silver": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/AG?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:44.225Z",
+      "metrics": {
+        "sharePrice": 16.7,
+        "sharesOutstanding": 491322304,
+        "marketCap": 8205.1
+      },
+      "warnings": []
+    },
+    "endeavour-silver": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/EXK?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:44.408Z",
+      "metrics": {
+        "sharePrice": 8.06,
+        "sharesOutstanding": 262323863,
+        "marketCap": 2113
+      },
+      "warnings": []
+    },
+    "cameco": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/CCJ?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:44.633Z",
+      "metrics": {
+        "sharePrice": 109.08,
+        "sharesOutstanding": 435457978,
+        "marketCap": 47501.9
+      },
+      "warnings": []
+    },
+    "nexgen-energy": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/NXE?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:44.848Z",
+      "metrics": {
+        "sharePrice": 10.48,
+        "sharesOutstanding": 659960072,
+        "marketCap": 6916.4
+      },
+      "warnings": []
+    },
+    "denison-mines": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/DNN?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:45.101Z",
+      "metrics": {
+        "sharePrice": 3.28,
+        "sharesOutstanding": 901610950,
+        "marketCap": 2957.6
+      },
+      "warnings": []
+    },
+    "freeport-mcmoran": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/FCX?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:45.443Z",
+      "metrics": {
+        "sharePrice": 64.49,
+        "sharesOutstanding": 1437559865,
+        "marketCap": 92708.2
+      },
+      "warnings": []
+    },
+    "ivanhoe-mines": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/IVN.TO?range=5d&interval=1d",
+      "currency": "CAD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:45.754Z",
+      "metrics": {
+        "sharePrice": 11.08
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "southern-copper": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/SCCO?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:46.015Z",
+      "metrics": {
+        "sharePrice": 179.16,
+        "sharesOutstanding": 826065041,
+        "marketCap": 147997.8
+      },
+      "warnings": []
+    },
+    "newmont": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/NEM?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:46.242Z",
+      "metrics": {
+        "sharePrice": 97.83,
+        "sharesOutstanding": 1067552764,
+        "marketCap": 104438.7
+      },
+      "warnings": []
+    },
+    "agnico-eagle": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/AEM?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:46.479Z",
+      "metrics": {
+        "sharePrice": 161.87,
+        "sharesOutstanding": 500046600,
+        "marketCap": 80942.5
+      },
+      "warnings": []
+    },
+    "barrick-gold": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/GOLD?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:46.728Z",
+      "metrics": {
+        "sharePrice": 41.99
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "peabody-energy": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/BTU?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:46.945Z",
+      "metrics": {
+        "sharePrice": 23.95,
+        "sharesOutstanding": 121800000,
+        "marketCap": 2917.1
+      },
+      "warnings": []
+    },
+    "core-natural-resources": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/CNR?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:47.158Z",
+      "metrics": {
+        "sharePrice": 82.25,
+        "sharesOutstanding": 50407610,
+        "marketCap": 4145.8
+      },
+      "warnings": []
+    },
+    "whitehaven-coal": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/WHC.AX?range=5d&interval=1d",
+      "currency": "AUD",
+      "quoteTime": "2026-06-23T00:00:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:47.362Z",
+      "metrics": {
+        "sharePrice": 8.25
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "hecla-mining": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/HL?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:47.623Z",
+      "metrics": {
+        "sharePrice": 15.13,
+        "sharesOutstanding": 670712403,
+        "marketCap": 10147.9
+      },
+      "warnings": []
+    },
+    "vizsla-silver": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/VZLA?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:47.818Z",
+      "metrics": {
+        "sharePrice": 3.38,
+        "sharesOutstanding": 298374460,
+        "marketCap": 1010
+      },
+      "warnings": []
+    },
+    "silver-mountain-resources": {
+      "source": "Yahoo Finance delayed chart",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/AGMR.V?range=5d&interval=1d",
+      "currency": "USD",
+      "refreshedAt": "2026-06-23T14:57:48.005Z",
+      "metrics": {},
+      "warnings": [
+        "404 Not Found for AGMR.V"
+      ]
+    },
+    "excellon-resources": {
+      "source": "Yahoo Finance delayed chart",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/EXN.TO?range=5d&interval=1d",
+      "currency": "USD",
+      "refreshedAt": "2026-06-23T14:57:48.208Z",
+      "metrics": {},
+      "warnings": [
+        "404 Not Found for EXN.TO"
+      ]
+    },
+    "abrasilver-resource": {
+      "source": "Yahoo Finance delayed chart",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/ABRA.V?range=5d&interval=1d",
+      "currency": "USD",
+      "refreshedAt": "2026-06-23T14:57:48.411Z",
+      "metrics": {},
+      "warnings": [
+        "404 Not Found for ABRA.V"
+      ]
+    },
+    "tudor-gold": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/TUD.V?range=5d&interval=1d",
+      "currency": "CAD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:48.602Z",
+      "metrics": {
+        "sharePrice": 0.83
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "gogold-resources": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/GGD.TO?range=5d&interval=1d",
+      "currency": "CAD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:48.796Z",
+      "metrics": {
+        "sharePrice": 3.3
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "paladin-energy": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/PDN.AX?range=5d&interval=1d",
+      "currency": "AUD",
+      "quoteTime": "2026-06-23T00:00:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:49.062Z",
+      "metrics": {
+        "sharePrice": 9.39
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "stallion-uranium": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/STUD.V?range=5d&interval=1d",
+      "currency": "CAD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:49.270Z",
+      "metrics": {
+        "sharePrice": 0.29
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "lotus-resources": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/LOT.AX?range=5d&interval=1d",
+      "currency": "AUD",
+      "quoteTime": "2026-06-23T00:00:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:49.545Z",
+      "metrics": {
+        "sharePrice": 0.66
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "eq-resources": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/EQR.AX?range=5d&interval=1d",
+      "currency": "AUD",
+      "quoteTime": "2026-06-23T00:00:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:49.736Z",
+      "metrics": {
+        "sharePrice": 0.26
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "lynas-rare-earths": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/LYC.AX?range=5d&interval=1d",
+      "currency": "AUD",
+      "quoteTime": "2026-06-23T00:00:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:49.914Z",
+      "metrics": {
+        "sharePrice": 18.59
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "mkango-resources": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/MKA.V?range=5d&interval=1d",
+      "currency": "CAD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:50.136Z",
+      "metrics": {
+        "sharePrice": 0.86
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "larvotto-resources": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/LRV.AX?range=5d&interval=1d",
+      "currency": "AUD",
+      "quoteTime": "2026-06-23T00:00:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:50.320Z",
+      "metrics": {
+        "sharePrice": 1.28
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "prairie-operating": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/PROP?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:50.512Z",
+      "metrics": {
+        "sharePrice": 0.66,
+        "sharesOutstanding": 97732173,
+        "marketCap": 64.1
+      },
+      "warnings": []
+    },
+    "canadian-natural-resources": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/CNQ?range=5d&interval=1d",
+      "currency": "USD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:50.728Z",
+      "metrics": {
+        "sharePrice": 40.84,
+        "sharesOutstanding": 2081578000,
+        "marketCap": 85011.6
+      },
+      "warnings": []
+    },
+    "arc-resources": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/ARX.TO?range=5d&interval=1d",
+      "currency": "CAD",
+      "quoteTime": "2026-06-23T13:30:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:50.962Z",
+      "metrics": {
+        "sharePrice": 30.35
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "sandfire-resources": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/SFR.AX?range=5d&interval=1d",
+      "currency": "AUD",
+      "quoteTime": "2026-06-23T00:00:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:51.172Z",
+      "metrics": {
+        "sharePrice": 19.93
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    },
+    "aeris-resources": {
+      "source": "Yahoo Finance delayed chart + official share count when available",
+      "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/AIS.AX?range=5d&interval=1d",
+      "currency": "AUD",
+      "quoteTime": "2026-06-23T00:00:00.000Z",
+      "refreshedAt": "2026-06-23T14:57:51.389Z",
+      "metrics": {
+        "sharePrice": 0.4
+      },
+      "warnings": [
+        "Market cap not recalculated because no official shares outstanding value is available."
+      ]
+    }
+  }
+}

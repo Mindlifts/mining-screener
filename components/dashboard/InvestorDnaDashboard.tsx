@@ -333,7 +333,7 @@ export function InvestorDnaDashboard() {
                 <p className="mt-1 font-mono text-zinc-50">{rows.length}</p>
               </div>
               <div className="min-w-0 border border-zincLine bg-zincPanel px-3 py-2">
-                <p className="text-zinc-500">Data</p>
+                <p className="text-zinc-500">Filing Data</p>
                 <p className="mt-1 truncate font-mono text-caution">
                   {dataFreshness.officialRecordCount > 0 ? `${dataFreshness.officialRecordCount} official` : "Mock fallback"}
                 </p>
@@ -361,9 +361,9 @@ export function InvestorDnaDashboard() {
               </div>
               <p className="mt-3 max-w-4xl text-sm leading-6 text-zinc-300">{modeConfig.explanation}</p>
               <p className="mt-2 max-w-4xl text-xs leading-5 text-zinc-500">
-                Data refresh: {dataFreshness.generatedAt ? `official cache generated ${dataFreshness.generatedAt}` : "official cache not populated yet"}.
+                Filing refresh: {dataFreshness.generatedAt ? `official cache generated ${dataFreshness.generatedAt}` : "official cache not populated yet"}.
                 {" "}
-                {dataFreshness.sourcePolicy}
+                Market refresh: {dataFreshness.marketGeneratedAt ? `market cache generated ${dataFreshness.marketGeneratedAt} for ${dataFreshness.marketRecordCount} names` : "market cache not populated yet"}.
                 {" "}
                 Commodity tape: {commodityPriceFreshness.generatedAt ? `price cache generated ${commodityPriceFreshness.generatedAt}` : "static fallback"}.
               </p>
@@ -372,13 +372,19 @@ export function InvestorDnaDashboard() {
               {commodityPrices.map((price) => (
                 <div key={price.commodity} className="min-w-0 border border-zincLine bg-zinc-950 px-3 py-2">
                   <p className="truncate text-zinc-500">{price.commodity}</p>
-                  <p className="mt-1 font-mono text-zinc-50">{price.price.toLocaleString("en-US")}</p>
+                  <p className="mt-1 font-mono text-zinc-50">
+                    {price.price.toLocaleString("en-US", { maximumFractionDigits: 2 })}
+                  </p>
                   <p className={`mt-1 font-mono ${price.changePercent >= 0 ? "text-terminalGreen" : "text-red-300"}`}>
                     {price.changePercent > 0 ? "+" : ""}
                     {price.changePercent}%
                   </p>
-                  <p className="mt-2 truncate text-[11px] text-zinc-600">
-                    {commodityPriceFreshness.cachedPriceCount > 0 ? "Commodity cache" : "Static fallback"}
+                  <p className={`mt-2 truncate text-[11px] ${price.stale ? "text-caution" : "text-zinc-600"}`}>
+                    {price.stale
+                      ? `Stale ${price.quoteTime?.slice(0, 10) ?? "quote"}`
+                      : commodityPriceFreshness.cachedPriceCount > 0
+                        ? "Daily cache"
+                        : "Static fallback"}
                   </p>
                 </div>
               ))}
