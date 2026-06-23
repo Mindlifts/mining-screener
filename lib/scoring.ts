@@ -195,6 +195,8 @@ function commodityMargin(company: Company) {
   if (company.commodity === "Silver") return company.aisc === null ? 0.3 : (29.42 - company.aisc) / 29.42;
   if (company.commodity === "Copper") return company.aisc === null ? 0.35 : (4.52 - company.aisc) / 4.52;
   if (company.commodity === "Uranium") return company.aisc === null ? 0.4 : (86.25 - company.aisc) / 86.25;
+  if (company.commodity === "Rare Earths") return company.aisc === null ? 0.3 : (58 - company.aisc) / 58;
+  if (company.commodity === "Oil & Gas") return company.aisc === null ? 0.28 : (82 - company.aisc) / 82;
   return company.aisc === null ? 0.25 : (138 - company.aisc) / 138;
 }
 
@@ -270,7 +272,7 @@ export function scoreCompany(
     company.macroCycleScore * 0.34 +
       company.commodityCycleScore * 0.3 +
       company.realRatesSensitivity * 0.22 +
-      (company.commodity === "Gold" || company.commodity === "Silver" || company.commodity === "Copper" ? 10 : 0) +
+      (company.commodity === "Gold" || company.commodity === "Silver" || company.commodity === "Copper" || company.commodity === "Rare Earths" ? 10 : 0) +
       company.commodityLeverage * 0.04
   );
   const contrarian = clampScore(
