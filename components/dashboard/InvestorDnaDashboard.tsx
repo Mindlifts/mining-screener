@@ -57,7 +57,7 @@ function ShellCard({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <section className={`rounded-lg border border-zincLine bg-zincPanel/85 ${className}`}>{children}</section>;
+  return <section className={`w-full max-w-full overflow-hidden rounded-lg border border-zincLine bg-zincPanel/85 ${className}`}>{children}</section>;
 }
 
 function metricValue(company: Company, score: EnrichedCompany["score"], key: SortKey) {
@@ -172,11 +172,11 @@ function CustomWeightPanel({
     <ShellCard className="p-4">
       <h2 className="text-sm font-semibold text-zinc-50">Custom Weight Builder</h2>
       <p className="mt-1 text-xs text-zinc-500">Adjust factor weights to build a personalized investor DNA ranking.</p>
-      <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-7">
+      <div className="mt-4 grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7">
         {customFactors.map((factor) => (
-          <label key={factor.key} className="rounded border border-zincLine bg-zinc-950/70 p-3">
-            <span className="flex items-center justify-between gap-2 text-xs">
-              <span className="uppercase tracking-wide text-zinc-500">{factor.label}</span>
+          <label key={factor.key} className="min-w-0 rounded border border-zincLine bg-zinc-950/70 p-3">
+            <span className="flex min-w-0 items-center justify-between gap-2 text-xs">
+              <span className="truncate uppercase tracking-wide text-zinc-500">{factor.label}</span>
               <span className="font-mono text-zinc-100">{weights[factor.key]}</span>
             </span>
             <input
@@ -256,11 +256,11 @@ export function InvestorDnaDashboard() {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-100">
-      <div className="mx-auto flex w-full max-w-[1540px] flex-col gap-4 px-3 py-3 sm:px-5 lg:px-6">
+    <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-zinc-950 text-zinc-100">
+      <div className="mx-auto flex w-full max-w-[1540px] flex-col gap-4 overflow-hidden px-3 py-3 sm:px-5 lg:px-6">
         <header className="space-y-4 border-b border-zincLine pb-4">
-          <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
-            <div>
+          <div className="flex min-w-0 flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
+            <div className="min-w-0">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-terminalGreen">
                 Version 3 · Investor DNA Platform
               </p>
@@ -268,18 +268,18 @@ export function InvestorDnaDashboard() {
                 Mining Framework Screener
               </h1>
             </div>
-            <div className="grid grid-cols-3 gap-2 text-xs xl:min-w-[460px]">
-              <div className="border border-zincLine bg-zincPanel px-3 py-2">
+            <div className="grid w-full min-w-0 grid-cols-1 gap-2 text-xs sm:grid-cols-3 xl:max-w-[460px]">
+              <div className="min-w-0 border border-zincLine bg-zincPanel px-3 py-2">
                 <p className="text-zinc-500">Universe</p>
                 <p className="mt-1 font-mono text-zinc-50">{companies.length} names</p>
               </div>
-              <div className="border border-zincLine bg-zincPanel px-3 py-2">
+              <div className="min-w-0 border border-zincLine bg-zincPanel px-3 py-2">
                 <p className="text-zinc-500">Visible</p>
                 <p className="mt-1 font-mono text-zinc-50">{rows.length}</p>
               </div>
-              <div className="border border-zincLine bg-zincPanel px-3 py-2">
+              <div className="min-w-0 border border-zincLine bg-zincPanel px-3 py-2">
                 <p className="text-zinc-500">Data</p>
-                <p className="mt-1 font-mono text-caution">Mock API-ready</p>
+                <p className="mt-1 truncate font-mono text-caution">Mock API-ready</p>
               </div>
             </div>
           </div>
@@ -287,8 +287,8 @@ export function InvestorDnaDashboard() {
         </header>
 
         <ShellCard className="p-4 transition-all duration-300">
-          <div className="grid gap-4 xl:grid-cols-[1fr_380px] xl:items-center">
-            <div>
+          <div className="grid min-w-0 grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(280px,380px)] xl:items-center">
+            <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="rounded border border-terminalGreen/40 bg-terminalGreen/10 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-terminalGreen">
                   {activeMode}
@@ -304,10 +304,10 @@ export function InvestorDnaDashboard() {
               </div>
               <p className="mt-3 max-w-4xl text-sm leading-6 text-zinc-300">{modeConfig.explanation}</p>
             </div>
-            <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="grid min-w-0 grid-cols-1 gap-2 text-xs sm:grid-cols-2">
               {commodityPrices.map((price) => (
-                <div key={price.commodity} className="border border-zincLine bg-zinc-950 px-3 py-2">
-                  <p className="text-zinc-500">{price.commodity}</p>
+                <div key={price.commodity} className="min-w-0 border border-zincLine bg-zinc-950 px-3 py-2">
+                  <p className="truncate text-zinc-500">{price.commodity}</p>
                   <p className="mt-1 font-mono text-zinc-50">{price.price.toLocaleString("en-US")}</p>
                   <p className={`mt-1 font-mono ${price.changePercent >= 0 ? "text-terminalGreen" : "text-red-300"}`}>
                     {price.changePercent > 0 ? "+" : ""}
@@ -322,8 +322,8 @@ export function InvestorDnaDashboard() {
         {activeMode === "Custom" ? <CustomWeightPanel weights={customWeights} onChange={setCustomWeights} /> : null}
 
         <ShellCard className="sticky top-0 z-20 p-3 shadow-glow lg:static lg:shadow-none">
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
-            <label className="sm:col-span-2">
+          <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-5">
+            <label className="min-w-0 md:col-span-2">
               <span className="mb-1 block text-xs uppercase tracking-wide text-zinc-500">Search</span>
               <input
                 value={search}
@@ -332,7 +332,7 @@ export function InvestorDnaDashboard() {
                 className="h-10 w-full rounded border border-zincLine bg-zinc-950 px-3 text-sm text-zinc-100 outline-none ring-terminalGreen/40 transition placeholder:text-zinc-600 focus:ring-2"
               />
             </label>
-            <label>
+            <label className="min-w-0">
               <span className="mb-1 block text-xs uppercase tracking-wide text-zinc-500">Commodity</span>
               <select
                 value={commodity}
@@ -345,7 +345,7 @@ export function InvestorDnaDashboard() {
                 ))}
               </select>
             </label>
-            <label>
+            <label className="min-w-0">
               <span className="mb-1 block text-xs uppercase tracking-wide text-zinc-500">Stage</span>
               <select
                 value={stage}
@@ -357,7 +357,7 @@ export function InvestorDnaDashboard() {
                 <option>Developer</option>
               </select>
             </label>
-            <label>
+            <label className="min-w-0">
               <span className="mb-1 block text-xs uppercase tracking-wide text-zinc-500">Exchange</span>
               <select
                 value={exchange}
@@ -372,8 +372,8 @@ export function InvestorDnaDashboard() {
           </div>
         </ShellCard>
 
-        <section className="grid gap-4 xl:grid-cols-[1fr_360px]">
-          <div className="space-y-3">
+        <section className="grid min-w-0 grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(300px,360px)]">
+          <div className="min-w-0 space-y-3">
             <MobileScreenerCards
               rows={rows}
               activeMode={activeMode}
@@ -401,7 +401,7 @@ export function InvestorDnaDashboard() {
             </div>
           </div>
 
-          <aside className="space-y-4">
+          <aside className="min-w-0 space-y-4">
             <OpportunityPanel
               rows={topRows}
               title={modeConfig.topListTitle}

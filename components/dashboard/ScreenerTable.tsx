@@ -22,8 +22,8 @@ export function ScorePill({ value, strong = false }: { value: number; strong?: b
   const tone = value >= 75 ? "bg-terminalGreen" : value >= 55 ? "bg-caution" : "bg-red-400";
 
   return (
-    <div className="flex items-center justify-end gap-2">
-      <div className={`${strong ? "w-20" : "w-14"} h-1.5 overflow-hidden rounded-full bg-zinc-800`}>
+    <div className="flex min-w-0 items-center justify-end gap-2">
+      <div className={`${strong ? "w-16 sm:w-20" : "w-12 sm:w-14"} h-1.5 shrink-0 overflow-hidden rounded-full bg-zinc-800`}>
         <div className={`h-full ${tone} transition-all duration-300`} style={{ width: `${value}%` }} />
       </div>
       <span className={`${strong ? "text-zinc-50" : "text-zinc-200"} w-8 text-right font-mono`}>{value}</span>
@@ -50,9 +50,9 @@ function SortButton({
     <button
       type="button"
       onClick={() => onSort(sortKey)}
-      className="flex w-full items-center justify-end gap-1 text-right font-medium uppercase tracking-wide text-zinc-500 hover:text-zinc-100"
+      className="flex w-full min-w-0 items-center justify-end gap-1 text-right font-medium uppercase tracking-wide text-zinc-500 hover:text-zinc-100"
     >
-      <span>{label}</span>
+      <span className="truncate">{label}</span>
       <span className="w-3 text-zinc-400">{isActive ? (direction === "asc" ? "↑" : "↓") : ""}</span>
     </button>
   );
@@ -60,8 +60,8 @@ function SortButton({
 
 export function CompanyCell({ company }: { company: Company }) {
   return (
-    <div className="max-w-[230px]">
-      <Link href={`/companies/${company.slug}`} className="font-medium text-zinc-50 hover:text-terminalGreen">
+    <div className="min-w-0 max-w-[230px]">
+      <Link href={`/companies/${company.slug}`} className="block truncate font-medium text-zinc-50 hover:text-terminalGreen">
         {company.company}
       </Link>
       <p className="mt-1 font-mono text-[11px] text-caution">
@@ -85,8 +85,8 @@ export function ScreenerTable({
   onSort: (key: SortKey) => void;
 }) {
   return (
-    <section className="overflow-hidden rounded-lg border border-zincLine bg-zincPanel/85 transition-all duration-300">
-      <div className="overflow-x-auto">
+    <section className="w-full max-w-full overflow-hidden rounded-lg border border-zincLine bg-zincPanel/85 transition-all duration-300">
+      <div className="max-w-full overflow-x-auto">
         <table className="w-full min-w-[1120px] border-collapse text-xs">
           <thead>
             <tr className="border-b border-zincLine bg-zinc-950/80 text-zinc-500">
