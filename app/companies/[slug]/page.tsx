@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { CompanyDetail } from "@/components/CompanyDetail";
-import { companies, getCompanyBySlug } from "@/lib/data";
+import { companies, getCompanyBySlug } from "@/data/mining-universe";
 
 export function generateStaticParams() {
   return companies.map((company) => ({

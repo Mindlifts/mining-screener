@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Company } from "@/lib/data";
+import type { Company } from "@/data/mining-universe";
 import { scoreCompany } from "@/lib/scoring";
 
 const moneyFormatter = new Intl.NumberFormat("en-US", {
@@ -160,7 +160,9 @@ export function CompanyDetail({ company }: { company: Company }) {
                 <ScoreRow label="Balance Sheet" value={score.balanceSheet} />
                 <ScoreRow label="Cost" value={score.cost} />
                 <ScoreRow label="Jurisdiction" value={score.jurisdiction} />
-                <ScoreRow label="Insider" value={score.insider} />
+                <ScoreRow label="Torque" value={score.torque} />
+                <ScoreRow label="Management" value={score.management} />
+                <ScoreRow label="Macro" value={score.macro} />
               </div>
             </Card>
           </div>
