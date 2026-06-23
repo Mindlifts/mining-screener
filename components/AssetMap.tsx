@@ -11,6 +11,7 @@ import {
 } from "react-simple-maps";
 import countries from "world-atlas/countries-110m.json";
 import {
+  assetDataFreshness,
   assetInvestorModes,
   miningAssets,
   type AssetInvestorMode,
@@ -85,12 +86,15 @@ function AssetDetail({
 
       <div className="grid min-w-0 grid-cols-2 gap-px bg-zincLine">
         <div className="min-w-0 bg-zincPanel p-3">
-          <p className="text-[10px] uppercase tracking-wide text-zinc-500">{mode}</p>
+          <p className="truncate text-[10px] uppercase tracking-wide text-zinc-500">{mode} · calculated</p>
           <p className="mt-1 font-mono text-2xl text-terminalGreen">{score}</p>
         </div>
         <div className="min-w-0 bg-zincPanel p-3">
           <p className="text-[10px] uppercase tracking-wide text-zinc-500">Market cap</p>
           <p className="mt-1 truncate font-mono text-lg text-zinc-50">{formatMarketCap(asset.marketCap)}</p>
+          <p className="mt-1 truncate text-[10px] text-zinc-600">
+            {asset.marketCapQuality?.origin ?? "fallback"} · {asset.marketCapQuality?.confidence ?? "low"}
+          </p>
         </div>
       </div>
 
@@ -115,6 +119,10 @@ function AssetDetail({
           <dd className="truncate text-zinc-100">{asset.jurisdiction}</dd>
         </div>
         <div className="flex min-w-0 items-center justify-between gap-3">
+          <dt className="text-zinc-500">Map precision</dt>
+          <dd className="truncate capitalize text-zinc-100">{asset.coordinatePrecision}</dd>
+        </div>
+        <div className="flex min-w-0 items-center justify-between gap-3">
           <dt className="text-zinc-500">Risk</dt>
           <dd className={`rounded border px-2 py-0.5 text-[11px] font-semibold uppercase ${riskClass(asset.riskLevel)}`}>
             {asset.riskLevel}
@@ -127,16 +135,39 @@ function AssetDetail({
         <p className="mt-2 text-sm leading-6 text-zinc-200">{asset.keyCatalyst}</p>
       </div>
 
-      {asset.companySlug ? (
-        <div className="border-t border-zincLine p-4">
+      <div className="border-t border-zincLine p-4">
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-zinc-500">Official asset source</p>
+        <a
+          href={asset.source.url}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-2 block break-words text-xs leading-5 text-terminalGreen hover:text-zinc-50"
+        >
+          {asset.source.name}
+        </a>
+        <p className="mt-1 text-[10px] text-zinc-600">
+          {asset.source.documentType.replaceAll("-", " ")} · verified {asset.source.lastVerified}
+        </p>
+      </div>
+
+      <div className="border-t border-zincLine p-4">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1">
           <Link
             href={`/companies/${asset.companySlug}`}
             className="block w-full rounded border border-terminalGreen/50 bg-terminalGreen/10 px-3 py-2 text-center text-xs font-semibold uppercase tracking-wide text-terminalGreen transition hover:bg-terminalGreen/15"
           >
             Open company research
           </Link>
+          <a
+            href={asset.source.url}
+            target="_blank"
+            rel="noreferrer"
+            className="block w-full rounded border border-zincLine px-3 py-2 text-center text-xs font-semibold uppercase tracking-wide text-zinc-300 transition hover:border-zinc-500 hover:text-zinc-50"
+          >
+            Open official source
+          </a>
         </div>
-      ) : null}
+      </div>
     </article>
   );
 }
@@ -337,6 +368,9 @@ export function AssetMap() {
             <span className="rounded border border-zincLine bg-zinc-950/90 px-2 py-1 font-mono text-[10px] text-zinc-400 backdrop-blur">
               {filteredAssets.length} ASSETS
             </span>
+            <span className="rounded border border-terminalGreen/30 bg-terminalGreen/10 px-2 py-1 font-mono text-[10px] text-terminalGreen backdrop-blur">
+              OFFICIAL SOURCES
+            </span>
             <span className="rounded border border-zincLine bg-zinc-950/90 px-2 py-1 font-mono text-[10px] text-zinc-400 backdrop-blur">
               SIZE = MKT CAP + SCORE
             </span>
@@ -501,7 +535,10 @@ export function AssetMap() {
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-terminalGreen">Asset intelligence</p>
                 <h2 className="mt-3 text-xl font-semibold text-zinc-50">Select a mine to open its field brief.</h2>
                 <p className="mt-3 text-sm leading-6 text-zinc-400">
-                  Marker size blends company market capitalization with the active investor framework score.
+                  Marker size blends daily cached market capitalization with the active calculated investor-framework score.
+                </p>
+                <p className="mt-3 text-xs leading-5 text-zinc-500">
+                  Asset names, locations, stages, and catalysts are tied to issuer or regulator sources.
                 </p>
               </div>
               <div className="space-y-3 border-t border-zincLine pt-4 text-xs text-zinc-500">
@@ -565,6 +602,10 @@ export function AssetMap() {
           </div>
         </div>
       ) : null}
+
+      <p className="px-1 text-[11px] leading-5 text-zinc-600">
+        Asset coverage verified {assetDataFreshness.lastVerified}. Coordinates marked district or regional are approximate display points, not operational navigation coordinates.
+      </p>
     </>
   );
 }

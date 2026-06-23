@@ -40,6 +40,9 @@ export function MapTooltip({
         <dt>Risk</dt><dd className="text-zinc-100">{asset.riskLevel}</dd>
         <dt>Catalyst</dt><dd className="line-clamp-2 text-zinc-100">{asset.keyCatalyst}</dd>
       </dl>
+      <p className="mt-3 truncate border-t border-zincLine pt-2 text-[10px] text-zinc-600">
+        Source: {asset.source.name}
+      </p>
     </div>
   );
 }

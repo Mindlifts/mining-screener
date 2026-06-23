@@ -10,6 +10,7 @@ export type DataCategory =
   | "balanceSheet"
   | "production"
   | "reservesResources"
+  | "assetLocations"
   | "insiderOwnership"
   | "commodityPrices"
   | "macro";
