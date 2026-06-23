@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { getMarketRecord, getOfficialRecord, type Company } from "@/data/screener-data";
+import { getMarketRecord, getMetricQuality, getOfficialRecord, type Company } from "@/data/screener-data";
+import { toDisplayDate } from "@/lib/dataCache";
 import { scoreCompany } from "@/lib/scoring";
 
 const moneyFormatter = new Intl.NumberFormat("en-US", {
@@ -44,11 +45,23 @@ function Card({
   );
 }
 
-function Metric({ label, value }: { label: string; value: string }) {
+function Metric({ label, value, quality }: { label: string; value: string; quality?: ReturnType<typeof getMetricQuality> }) {
   return (
     <div className="border-b border-zincLine py-3 last:border-0">
-      <p className="text-xs uppercase tracking-wide text-zinc-500">{label}</p>
+      <div className="flex min-w-0 items-center justify-between gap-2">
+        <p className="truncate text-xs uppercase tracking-wide text-zinc-500">{label}</p>
+        {quality ? (
+          <span className="shrink-0 rounded border border-zincLine px-1.5 py-0.5 text-[10px] uppercase text-zinc-500">
+            {quality.origin} · {quality.confidence}
+          </span>
+        ) : null}
+      </div>
       <p className="mt-1 break-words font-mono text-base text-zinc-50">{value}</p>
+      {quality ? (
+        <p className="mt-1 truncate text-[11px] text-zinc-600">
+          {quality.source} · {toDisplayDate(quality.lastUpdated)}
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -132,14 +145,14 @@ export function CompanyDetail({ company }: { company: Company }) {
         <section className="grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(280px,340px)]">
           <div className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">
             <Card title="Valuation Snapshot">
-              <Metric label="Market Cap" value={formatMoney(company.marketCap)} />
-              <Metric label="Share Price" value={company.sharePrice === undefined ? "N/A" : `$${numberFormatter.format(company.sharePrice)}`} />
-              <Metric label="Shares Outstanding" value={formatShares(company.sharesOutstanding)} />
-              <Metric label="Enterprise Value" value={formatMoney(company.enterpriseValue)} />
-              <Metric label="Revenue" value={formatMoney(company.revenue)} />
-              <Metric label="EBITDA" value={formatMoney(company.ebitda)} />
-              <Metric label="Free Cash Flow" value={company.freeCashFlow === undefined ? "N/A" : formatMoney(company.freeCashFlow)} />
-              <Metric label="Dividend Yield" value={formatPercent(company.dividendYield)} />
+              <Metric label="Market Cap" value={formatMoney(company.marketCap)} quality={getMetricQuality(company.slug, "marketCap")} />
+              <Metric label="Share Price" value={company.sharePrice === undefined ? "N/A" : `$${numberFormatter.format(company.sharePrice)}`} quality={getMetricQuality(company.slug, "sharePrice")} />
+              <Metric label="Shares Outstanding" value={formatShares(company.sharesOutstanding)} quality={getMetricQuality(company.slug, "sharesOutstanding")} />
+              <Metric label="Enterprise Value" value={formatMoney(company.enterpriseValue)} quality={getMetricQuality(company.slug, "enterpriseValue")} />
+              <Metric label="Revenue" value={formatMoney(company.revenue)} quality={getMetricQuality(company.slug, "revenue")} />
+              <Metric label="EBITDA" value={formatMoney(company.ebitda)} quality={getMetricQuality(company.slug, "ebitda")} />
+              <Metric label="Free Cash Flow" value={company.freeCashFlow === undefined ? "N/A" : formatMoney(company.freeCashFlow)} quality={getMetricQuality(company.slug, "freeCashFlow")} />
+              <Metric label="Dividend Yield" value={formatPercent(company.dividendYield)} quality={getMetricQuality(company.slug, "dividendYield")} />
             </Card>
 
             <Card title="Production Profile">

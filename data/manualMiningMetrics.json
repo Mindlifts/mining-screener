@@ -1,0 +1,37 @@
+{
+  "lastUpdated": "2026-06-23",
+  "sourcePolicy": "Manual fallback for mining-specific metrics that are not reliably available from structured free APIs. Update from issuer filings, annual reports, technical reports, and exchange announcements.",
+  "records": {
+    "first-majestic-silver": {
+      "production": {
+        "value": 26.9,
+        "unit": "Moz AgEq",
+        "source": "Manual mining metrics fallback",
+        "sourceUrl": "https://www.firstmajestic.com/investors/news-releases/",
+        "lastUpdated": "2026-06-23",
+        "confidence": "medium",
+        "origin": "manual"
+      },
+      "aisc": {
+        "value": 19.7,
+        "unit": "USD/oz AgEq",
+        "source": "Manual mining metrics fallback",
+        "sourceUrl": "https://www.firstmajestic.com/investors/news-releases/",
+        "lastUpdated": "2026-06-23",
+        "confidence": "medium",
+        "origin": "manual",
+        "warning": "Replace with issuer annual report or quarterly MD&A value before production use."
+      },
+      "reserveLife": {
+        "value": 7,
+        "unit": "years",
+        "source": "Manual mining metrics fallback",
+        "sourceUrl": "https://www.firstmajestic.com/investors/financial-reports/",
+        "lastUpdated": "2026-06-23",
+        "confidence": "low",
+        "origin": "manual",
+        "warning": "Reserve life is model-derived and should be reconciled to reserves/resources tables."
+      }
+    }
+  }
+}

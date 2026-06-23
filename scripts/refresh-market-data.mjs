@@ -27,6 +27,10 @@ function nowIso() {
   return new Date().toISOString();
 }
 
+function todayKey() {
+  return nowIso().slice(0, 10);
+}
+
 async function readJson(filePath) {
   return JSON.parse(await fs.readFile(filePath, "utf8"));
 }
@@ -128,9 +132,9 @@ function roundPrice(value) {
 
 async function refresh() {
   const marketCache = await readJsonIfExists(marketCachePath, { generatedAt: null, records: {} });
-  const generatedAt = marketCache.generatedAt ? Date.parse(marketCache.generatedAt) : 0;
+  const cacheDate = marketCache.generatedAt?.slice(0, 10);
 
-  if (!force && generatedAt && Date.now() - generatedAt < oneDayMs) {
+  if (!force && cacheDate === todayKey()) {
     console.log(`Market cache is still fresh: ${marketCache.generatedAt}`);
     return;
   }
@@ -233,7 +237,7 @@ async function refresh() {
         generatedAt: generated,
         expiresAt: new Date(Date.now() + oneDayMs).toISOString(),
         sourcePolicy:
-          "Daily delayed prices are refreshed at most once per day from Yahoo Finance chart data. Market cap is recalculated only when an official SEC shares-outstanding fact exists; otherwise the static universe value remains in use.",
+          "Daily market cache refreshes at most once per calendar day. Yahoo chart data is a clearly marked fallback until Alpha Vantage, FMP, or another terms-safe provider is configured. Direct source values should be preferred over calculated values.",
         records: marketRecords
       },
       null,
@@ -248,7 +252,7 @@ async function refresh() {
         generatedAt: generated,
         expiresAt: new Date(Date.now() + oneDayMs).toISOString(),
         sourcePolicy:
-          "Commodity tiles use delayed futures/alternative symbols where free chart data is available. Stale alternative symbols are retained with quote timestamps and should be replaced with licensed commodity feeds for production use.",
+          "Commodity cache refreshes at most once per calendar day. Current values use fallback futures/alternative symbols where free chart data is available; replace with Alpha Vantage, FRED, exchange, or specialist vendor feeds for production use.",
         records: commodityRecords
       },
       null,
