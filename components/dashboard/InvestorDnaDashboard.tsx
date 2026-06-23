@@ -10,6 +10,7 @@ import {
   type DevelopmentStage
 } from "@/data/mining-universe";
 import { ModeNavigation } from "@/components/dashboard/ModeNavigation";
+import { InvestorAvatar } from "@/components/dashboard/InvestorAvatar";
 import { MobileScreenerCards } from "@/components/dashboard/MobileScreenerCards";
 import {
   CompanyCell,
@@ -181,14 +182,19 @@ function CustomWeightPanel({
             Adjust factor weights to build a personalized investor DNA ranking.
           </p>
         </div>
-        <div className="min-w-0 rounded border border-terminalGreen/40 bg-terminalGreen/10 p-3">
+        <div className="min-w-0 rounded border border-terminalGreen/40 bg-terminalGreen/10 p-3 transition-all duration-300">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-terminalGreen">Closest investor style</p>
-          <div className="mt-2 flex min-w-0 items-end justify-between gap-3">
-            <div className="min-w-0">
+          <div className="mt-3 flex min-w-0 items-center justify-between gap-4">
+            <InvestorAvatar
+              key={closestMatch.mode}
+              mode={closestMatch.mode}
+              matchPercent={closestMatch.matchPercent}
+            />
+            <div className="min-w-0 flex-1 text-right">
               <p className="truncate text-lg font-semibold text-zinc-50">{closestMatch.mode}</p>
               <p className="mt-1 truncate text-xs text-zinc-400">{closestMatch.shortLabel} DNA</p>
+              <p className="mt-3 shrink-0 font-mono text-2xl text-terminalGreen">{closestMatch.matchPercent}%</p>
             </div>
-            <p className="shrink-0 font-mono text-2xl text-terminalGreen">{closestMatch.matchPercent}%</p>
           </div>
         </div>
       </div>
@@ -214,13 +220,25 @@ function CustomWeightPanel({
 
       <div className="mt-4 grid min-w-0 grid-cols-1 gap-2 md:grid-cols-5">
         {matches.map((match) => (
-          <div key={match.mode} className="min-w-0 rounded border border-zincLine bg-zinc-950/70 p-3">
-            <div className="flex min-w-0 items-center justify-between gap-2">
-              <span className="truncate text-xs font-semibold text-zinc-100">{match.mode}</span>
-              <span className="shrink-0 font-mono text-xs text-zinc-400">{match.matchPercent}%</span>
-            </div>
-            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-zinc-800">
-              <div className="h-full bg-terminalGreen transition-all duration-300" style={{ width: `${match.matchPercent}%` }} />
+          <div
+            key={match.mode}
+            className={`min-w-0 rounded border p-3 transition-all duration-300 ${
+              match.mode === closestMatch.mode
+                ? "border-terminalGreen/50 bg-terminalGreen/10"
+                : "border-zincLine bg-zinc-950/70"
+            }`}
+          >
+            <div className="flex min-w-0 items-center gap-3">
+              <InvestorAvatar mode={match.mode} size="sm" matchPercent={match.matchPercent} />
+              <div className="min-w-0 flex-1">
+                <div className="flex min-w-0 items-center justify-between gap-2">
+                  <span className="truncate text-xs font-semibold text-zinc-100">{match.mode}</span>
+                  <span className="shrink-0 font-mono text-xs text-zinc-400">{match.matchPercent}%</span>
+                </div>
+                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-zinc-800">
+                  <div className="h-full bg-terminalGreen transition-all duration-500" style={{ width: `${match.matchPercent}%` }} />
+                </div>
+              </div>
             </div>
           </div>
         ))}
