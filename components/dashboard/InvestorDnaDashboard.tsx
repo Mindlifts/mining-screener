@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   commodities,
   commodityPrices,
+  commodityPriceFreshness,
   companies,
   dataFreshness,
   type Commodity,
@@ -363,6 +364,8 @@ export function InvestorDnaDashboard() {
                 Data refresh: {dataFreshness.generatedAt ? `official cache generated ${dataFreshness.generatedAt}` : "official cache not populated yet"}.
                 {" "}
                 {dataFreshness.sourcePolicy}
+                {" "}
+                Commodity tape: {commodityPriceFreshness.generatedAt ? `price cache generated ${commodityPriceFreshness.generatedAt}` : "static fallback"}.
               </p>
             </div>
             <div className="grid min-w-0 grid-cols-1 gap-2 text-xs sm:grid-cols-2">
@@ -373,6 +376,9 @@ export function InvestorDnaDashboard() {
                   <p className={`mt-1 font-mono ${price.changePercent >= 0 ? "text-terminalGreen" : "text-red-300"}`}>
                     {price.changePercent > 0 ? "+" : ""}
                     {price.changePercent}%
+                  </p>
+                  <p className="mt-2 truncate text-[11px] text-zinc-600">
+                    {commodityPriceFreshness.cachedPriceCount > 0 ? "Commodity cache" : "Static fallback"}
                   </p>
                 </div>
               ))}
