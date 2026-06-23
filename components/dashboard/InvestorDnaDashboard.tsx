@@ -28,6 +28,7 @@ import {
 import {
   defaultCustomWeights,
   getInvestorModeConfig,
+  getInvestorStyleMatches,
   scoreCompanies,
   type InvestorMode,
   type ScoreFactor,
@@ -168,10 +169,30 @@ function CustomWeightPanel({
   weights: ScoreWeights;
   onChange: (weights: ScoreWeights) => void;
 }) {
+  const matches = getInvestorStyleMatches(weights);
+  const closestMatch = matches[0];
+
   return (
     <ShellCard className="p-4">
-      <h2 className="text-sm font-semibold text-zinc-50">Custom Weight Builder</h2>
-      <p className="mt-1 text-xs text-zinc-500">Adjust factor weights to build a personalized investor DNA ranking.</p>
+      <div className="grid min-w-0 grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(280px,360px)]">
+        <div className="min-w-0">
+          <h2 className="text-sm font-semibold text-zinc-50">Custom Weight Builder</h2>
+          <p className="mt-1 text-xs text-zinc-500">
+            Adjust factor weights to build a personalized investor DNA ranking.
+          </p>
+        </div>
+        <div className="min-w-0 rounded border border-terminalGreen/40 bg-terminalGreen/10 p-3">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-terminalGreen">Closest investor style</p>
+          <div className="mt-2 flex min-w-0 items-end justify-between gap-3">
+            <div className="min-w-0">
+              <p className="truncate text-lg font-semibold text-zinc-50">{closestMatch.mode}</p>
+              <p className="mt-1 truncate text-xs text-zinc-400">{closestMatch.shortLabel} DNA</p>
+            </div>
+            <p className="shrink-0 font-mono text-2xl text-terminalGreen">{closestMatch.matchPercent}%</p>
+          </div>
+        </div>
+      </div>
+
       <div className="mt-4 grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-7">
         {customFactors.map((factor) => (
           <label key={factor.key} className="min-w-0 rounded border border-zincLine bg-zinc-950/70 p-3">
@@ -188,6 +209,20 @@ function CustomWeightPanel({
               className="mt-3 w-full accent-[#9de58b]"
             />
           </label>
+        ))}
+      </div>
+
+      <div className="mt-4 grid min-w-0 grid-cols-1 gap-2 md:grid-cols-5">
+        {matches.map((match) => (
+          <div key={match.mode} className="min-w-0 rounded border border-zincLine bg-zinc-950/70 p-3">
+            <div className="flex min-w-0 items-center justify-between gap-2">
+              <span className="truncate text-xs font-semibold text-zinc-100">{match.mode}</span>
+              <span className="shrink-0 font-mono text-xs text-zinc-400">{match.matchPercent}%</span>
+            </div>
+            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-zinc-800">
+              <div className="h-full bg-terminalGreen transition-all duration-300" style={{ width: `${match.matchPercent}%` }} />
+            </div>
+          </div>
         ))}
       </div>
     </ShellCard>
