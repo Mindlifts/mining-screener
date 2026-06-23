@@ -31,7 +31,7 @@ export default function AssetMapPage() {
             </div>
             <div className="min-w-0 bg-zincPanel px-3 py-2">
               <p className="truncate text-zinc-500">Status</p>
-              <p className="mt-1 font-mono text-caution">Mock</p>
+              <p className="mt-1 font-mono text-terminalGreen">Sourced</p>
             </div>
           </div>
         </header>

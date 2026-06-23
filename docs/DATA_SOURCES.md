@@ -20,6 +20,7 @@ This document compares practical free and low-cost sources for a daily mining in
 | Enterprise value | FMP enterprise value endpoint | Free tier / low-cost | Once daily | Medium | Prefer direct EV. Calculate only if direct EV is missing and debt/cash/share data are reliable. |
 | Balance sheet | SEC EDGAR, FMP, Alpha Vantage | Free / free tier | Filing-driven or daily cache | High to medium | SEC is preferred for US/SEC filers; provider APIs help non-US tickers. |
 | Production, AISC, reserves/resources | Company filings, annual reports, technical reports | Free | Manual review | High when sourced | Keep in `data/manualMiningMetrics.json` until a filings parser is built. |
+| Mine names, stages and locations | Issuer project pages, technical reports, regulator filings | Free | Filing-driven/manual review | High to medium | Store source URL and verification date; label district or regional coordinates as approximate. |
 | Insider ownership | SEC Forms 3/4/5, SEDAR+/issuer circulars, FMP insider endpoints | Free / free tier | Filing-driven | Medium | Hard to normalize globally. Start manual/API hybrid. |
 | Commodity prices | Alpha Vantage commodity endpoints, exchange/vendor feeds | Free tier / paid | Once daily | Medium | Gold/silver/copper easier than uranium/coal. Uranium and coal often need paid/specialist sources. |
 | Macro data | FRED API | Free | Once daily | High | Use for real rates, CPI, yields, USD, recession indicators. |
@@ -66,6 +67,15 @@ Recommendation: SEC first for US/SEC filers, provider APIs for TSX/TSXV/ASX gaps
 - Store manually reviewed values with source URL, date, confidence, and reviewer notes.
 
 Recommendation: keep these in `data/manualMiningMetrics.json` for now.
+
+### Asset Map
+
+- `data/assets.ts` contains one primary operating, development, exploration, or energy asset for every company in the current screener universe.
+- Asset identity, country, jurisdiction, stage, and catalyst context must cite an issuer page, issuer report, technical report, exchange announcement, or regulator filing.
+- Company market capitalization is not duplicated in the asset dataset. It is joined from the normalized daily company cache.
+- Investor-mode scores and jurisdiction-risk bands are research-model outputs, not official company data, and the UI labels them accordingly.
+- Site coordinates are used when an official disclosure provides a sufficiently precise location. District and regional points are explicitly labelled approximate and are intended only for world-map visualization.
+- Broken or moved issuer URLs should fall back to the issuer's official filing library or the relevant regulator record, never to an unofficial aggregator.
 
 ### Insider Ownership
 

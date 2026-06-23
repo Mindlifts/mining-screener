@@ -1,13 +1,30 @@
-import type { Commodity, JurisdictionRisk } from "@/data/screener-data";
-import type { InvestorMode } from "@/lib/scoring";
+import {
+  getCompanyBySlug,
+  getMetricQuality,
+  type Commodity,
+  type JurisdictionRisk
+} from "@/data/screener-data";
+import {
+  scoreCompany,
+  type InvestorMode
+} from "@/lib/scoring";
+import type { MetricQuality } from "@/lib/dataSources";
 
 export type AssetProductionStage = "Producer" | "Developer" | "Explorer";
 export type AssetRiskLevel = JurisdictionRisk;
 export type AssetInvestorMode = Exclude<InvestorMode, "Custom">;
+export type CoordinatePrecision = "site" | "district" | "regional";
+
+export type AssetSource = {
+  name: string;
+  url: string;
+  documentType: "official-project-page" | "annual-report" | "technical-report" | "regulator-filing";
+  lastVerified: string;
+};
 
 export type MiningAsset = {
   id: string;
-  companySlug?: string;
+  companySlug: string;
   company: string;
   ticker: string;
   commodity: Commodity;
@@ -16,12 +33,29 @@ export type MiningAsset = {
   jurisdiction: string;
   latitude: number;
   longitude: number;
+  coordinatePrecision: CoordinatePrecision;
   productionStage: AssetProductionStage;
   marketCap: number;
+  marketCapQuality: MetricQuality | null;
   investorModeScore: Record<AssetInvestorMode, number>;
+  scoreMethod: "calculated";
   riskLevel: AssetRiskLevel;
+  riskMethod: "research-model";
   keyCatalyst: string;
+  source: AssetSource;
 };
+
+type OfficialAssetRecord = Omit<
+  MiningAsset,
+  | "company"
+  | "ticker"
+  | "commodity"
+  | "marketCap"
+  | "marketCapQuality"
+  | "investorModeScore"
+  | "scoreMethod"
+  | "riskMethod"
+>;
 
 export const assetInvestorModes: AssetInvestorMode[] = [
   "Rick Rule",
@@ -31,361 +65,694 @@ export const assetInvestorModes: AssetInvestorMode[] = [
   "Lobo Tigre"
 ];
 
-// Mock asset coordinates and research fields. Replace this module with a
-// normalized asset API or filing-derived mine database when that feed is ready.
-export const miningAssets: MiningAsset[] = [
+const verifiedOn = "2026-06-23";
+
+// Asset facts come from issuer project pages, technical reports, annual reports,
+// or regulator filings. Coordinates are intentionally labelled by precision:
+// district/regional points are suitable for this world view, not site navigation.
+const officialAssetRecords: OfficialAssetRecord[] = [
   {
     id: "paas-la-colorada",
     companySlug: "pan-american-silver",
-    company: "Pan American Silver",
-    ticker: "PAAS",
-    commodity: "Silver",
     assetName: "La Colorada",
     country: "Mexico",
     jurisdiction: "Zacatecas",
-    latitude: 23.43,
-    longitude: -103.52,
+    latitude: 23.42,
+    longitude: -103.72,
+    coordinatePrecision: "district",
     productionStage: "Producer",
-    marketCap: 7400,
-    investorModeScore: { "Rick Rule": 81, "Eric Sprott": 77, "Ross Beaty": 79, "Tavi Costa": 84, "Lobo Tigre": 67 },
     riskLevel: "Medium",
-    keyCatalyst: "Ventilation expansion and Skarn project study"
+    keyCatalyst: "La Colorada Skarn development and ventilation infrastructure",
+    source: {
+      name: "Pan American Silver - Financial reports and filings",
+      url: "https://www.panamericansilver.com/invest/financial-reports-and-filings/",
+      documentType: "annual-report",
+      lastVerified: verifiedOn
+    }
   },
   {
     id: "ag-san-dimas",
     companySlug: "first-majestic-silver",
-    company: "First Majestic Silver",
-    ticker: "AG",
-    commodity: "Silver",
     assetName: "San Dimas",
     country: "Mexico",
     jurisdiction: "Durango",
-    latitude: 24.1,
-    longitude: -105.94,
+    latitude: 24.11,
+    longitude: -105.93,
+    coordinatePrecision: "district",
     productionStage: "Producer",
-    marketCap: 8200,
-    investorModeScore: { "Rick Rule": 61, "Eric Sprott": 91, "Ross Beaty": 66, "Tavi Costa": 89, "Lobo Tigre": 72 },
     riskLevel: "Medium",
-    keyCatalyst: "Higher-grade mine plan and silver price torque"
+    keyCatalyst: "Mine development and conversion of high-grade silver-gold resources",
+    source: {
+      name: "First Majestic - Financial reports and technical disclosures",
+      url: "https://www.firstmajestic.com/investors/financials/",
+      documentType: "annual-report",
+      lastVerified: verifiedOn
+    }
   },
   {
-    id: "hecla-greens-creek",
-    company: "Hecla Mining",
-    ticker: "HL",
-    commodity: "Silver",
-    assetName: "Greens Creek",
-    country: "United States",
-    jurisdiction: "Alaska",
-    latitude: 58.08,
-    longitude: -134.64,
-    productionStage: "Producer",
-    marketCap: 3900,
-    investorModeScore: { "Rick Rule": 86, "Eric Sprott": 74, "Ross Beaty": 82, "Tavi Costa": 80, "Lobo Tigre": 64 },
-    riskLevel: "Low",
-    keyCatalyst: "Reserve conversion and sustained high grades"
-  },
-  {
-    id: "vizsla-panuco",
-    company: "Vizsla Silver",
-    ticker: "VZLA",
-    commodity: "Silver",
-    assetName: "Panuco",
+    id: "exk-terronera",
+    companySlug: "endeavour-silver",
+    assetName: "Terronera",
     country: "Mexico",
-    jurisdiction: "Sinaloa",
-    latitude: 23.22,
-    longitude: -105.65,
-    productionStage: "Developer",
-    marketCap: 1100,
-    investorModeScore: { "Rick Rule": 66, "Eric Sprott": 94, "Ross Beaty": 73, "Tavi Costa": 86, "Lobo Tigre": 79 },
+    jurisdiction: "Jalisco",
+    latitude: 20.67,
+    longitude: -105.08,
+    coordinatePrecision: "district",
+    productionStage: "Producer",
     riskLevel: "Medium",
-    keyCatalyst: "Feasibility work and district-scale drilling"
+    keyCatalyst: "Ramp-up to designed processing capacity",
+    source: {
+      name: "Endeavour Silver - Terronera",
+      url: "https://edrsilver.com/portfolio/terronera/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "cameco-mcarthur-river",
+    companySlug: "cameco",
+    assetName: "McArthur River / Key Lake",
+    country: "Canada",
+    jurisdiction: "Saskatchewan",
+    latitude: 57.76,
+    longitude: -105.05,
+    coordinatePrecision: "site",
+    productionStage: "Producer",
+    riskLevel: "Low",
+    keyCatalyst: "Production plan execution and long-term uranium contracting",
+    source: {
+      name: "Cameco - McArthur River/Key Lake",
+      url: "https://www.cameco.com/businesses/uranium-operations/canada/mcarthur-river-key-lake",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
   },
   {
     id: "nexgen-rook-i",
-    company: "NexGen Energy",
-    ticker: "NXE",
-    commodity: "Uranium",
+    companySlug: "nexgen-energy",
     assetName: "Rook I",
     country: "Canada",
     jurisdiction: "Saskatchewan",
-    latitude: 57.75,
-    longitude: -109.04,
+    latitude: 57.78,
+    longitude: -109.0,
+    coordinatePrecision: "district",
     productionStage: "Developer",
-    marketCap: 5100,
-    investorModeScore: { "Rick Rule": 79, "Eric Sprott": 92, "Ross Beaty": 76, "Tavi Costa": 81, "Lobo Tigre": 68 },
     riskLevel: "Low",
-    keyCatalyst: "Federal approvals and project financing"
+    keyCatalyst: "Federal approvals, detailed engineering, and project financing",
+    source: {
+      name: "NexGen Energy - Rook I Project",
+      url: "https://www.nexgenenergy.ca/rook-i-project/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
   },
   {
     id: "denison-wheeler-river",
-    company: "Denison Mines",
-    ticker: "DNN",
-    commodity: "Uranium",
+    companySlug: "denison-mines",
     assetName: "Wheeler River",
     country: "Canada",
     jurisdiction: "Saskatchewan",
-    latitude: 57.45,
-    longitude: -105.42,
+    latitude: 57.46,
+    longitude: -105.43,
+    coordinatePrecision: "district",
     productionStage: "Developer",
-    marketCap: 1900,
-    investorModeScore: { "Rick Rule": 75, "Eric Sprott": 88, "Ross Beaty": 72, "Tavi Costa": 79, "Lobo Tigre": 81 },
     riskLevel: "Low",
-    keyCatalyst: "Phoenix final investment decision"
+    keyCatalyst: "Phoenix final investment decision and construction readiness",
+    source: {
+      name: "Denison Mines - Wheeler River Project",
+      url: "https://denisonmines.com/projects/wheeler-river-project/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
   },
   {
-    id: "paladin-langer-heinrich",
-    company: "Paladin Energy",
-    ticker: "PDN",
-    commodity: "Uranium",
-    assetName: "Langer Heinrich",
-    country: "Namibia",
-    jurisdiction: "Erongo",
-    latitude: -22.82,
-    longitude: 15.33,
+    id: "fcx-grasberg",
+    companySlug: "freeport-mcmoran",
+    assetName: "Grasberg Minerals District",
+    country: "Indonesia",
+    jurisdiction: "Central Papua",
+    latitude: -4.05,
+    longitude: 137.12,
+    coordinatePrecision: "district",
     productionStage: "Producer",
-    marketCap: 2400,
-    investorModeScore: { "Rick Rule": 72, "Eric Sprott": 84, "Ross Beaty": 70, "Tavi Costa": 78, "Lobo Tigre": 73 },
-    riskLevel: "Medium",
-    keyCatalyst: "Ramp-up toward nameplate production"
-  },
-  {
-    id: "lotus-kayelekera",
-    company: "Lotus Resources",
-    ticker: "LOT",
-    commodity: "Uranium",
-    assetName: "Kayelekera",
-    country: "Malawi",
-    jurisdiction: "Karonga",
-    latitude: -9.98,
-    longitude: 33.7,
-    productionStage: "Developer",
-    marketCap: 310,
-    investorModeScore: { "Rick Rule": 52, "Eric Sprott": 86, "Ross Beaty": 58, "Tavi Costa": 72, "Lobo Tigre": 90 },
     riskLevel: "High",
-    keyCatalyst: "Restart financing and uranium contracting"
+    keyCatalyst: "Underground mine ramp-up and Indonesian smelter normalization",
+    source: {
+      name: "Freeport-McMoRan - Indonesia operations",
+      url: "https://fcx.com/operations/indonesia",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
   },
   {
-    id: "barrick-nevada-gold-mines",
-    company: "Barrick Gold",
-    ticker: "GOLD",
-    commodity: "Gold",
-    assetName: "Nevada Gold Mines",
-    country: "United States",
-    jurisdiction: "Nevada",
-    latitude: 40.73,
-    longitude: -116.24,
+    id: "ivanhoe-kamoa-kakula",
+    companySlug: "ivanhoe-mines",
+    assetName: "Kamoa-Kakula",
+    country: "DR Congo",
+    jurisdiction: "Lualaba",
+    latitude: -10.77,
+    longitude: 25.25,
+    coordinatePrecision: "district",
     productionStage: "Producer",
-    marketCap: 31000,
-    investorModeScore: { "Rick Rule": 89, "Eric Sprott": 67, "Ross Beaty": 87, "Tavi Costa": 91, "Lobo Tigre": 70 },
-    riskLevel: "Low",
-    keyCatalyst: "Fourmile growth and Goldrush ramp-up"
+    riskLevel: "High",
+    keyCatalyst: "Phase 3 optimization and on-site smelter ramp-up",
+    source: {
+      name: "Ivanhoe Mines - Kamoa-Kakula Mining Complex",
+      url: "https://www.ivanhoemines.com/what-we-do/operations-projects/kamoa-kakula-mining-complex/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
   },
   {
-    id: "agnico-canadian-malartic",
-    company: "Agnico Eagle Mines",
-    ticker: "AEM",
-    commodity: "Gold",
-    assetName: "Canadian Malartic",
-    country: "Canada",
-    jurisdiction: "Quebec",
-    latitude: 48.11,
-    longitude: -78.13,
+    id: "scco-buenavista",
+    companySlug: "southern-copper",
+    assetName: "Buenavista",
+    country: "Mexico",
+    jurisdiction: "Sonora",
+    latitude: 30.96,
+    longitude: -110.31,
+    coordinatePrecision: "site",
     productionStage: "Producer",
-    marketCap: 39000,
-    investorModeScore: { "Rick Rule": 94, "Eric Sprott": 72, "Ross Beaty": 95, "Tavi Costa": 93, "Lobo Tigre": 62 },
-    riskLevel: "Low",
-    keyCatalyst: "Odyssey underground production growth"
+    riskLevel: "Medium",
+    keyCatalyst: "Concentrator expansion and zinc project ramp-up",
+    source: {
+      name: "Southern Copper - SEC filing record",
+      url: "https://www.sec.gov/edgar/browse/?CIK=1001838&owner=exclude",
+      documentType: "regulator-filing",
+      lastVerified: verifiedOn
+    }
   },
   {
     id: "newmont-cadia",
-    company: "Newmont",
-    ticker: "NEM",
-    commodity: "Gold",
+    companySlug: "newmont",
     assetName: "Cadia",
     country: "Australia",
     jurisdiction: "New South Wales",
     latitude: -33.45,
     longitude: 148.99,
+    coordinatePrecision: "site",
     productionStage: "Producer",
-    marketCap: 46000,
-    investorModeScore: { "Rick Rule": 84, "Eric Sprott": 66, "Ross Beaty": 81, "Tavi Costa": 90, "Lobo Tigre": 76 },
     riskLevel: "Low",
-    keyCatalyst: "Block cave expansion and portfolio optimization"
+    keyCatalyst: "Block cave expansion and recovery optimization",
+    source: {
+      name: "Newmont - Cadia",
+      url: "https://www.newmont.com/operations-and-projects/global-presence/australia/cadia-australia/default.aspx",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "agnico-canadian-malartic",
+    companySlug: "agnico-eagle",
+    assetName: "Canadian Malartic Complex",
+    country: "Canada",
+    jurisdiction: "Quebec",
+    latitude: 48.13,
+    longitude: -78.13,
+    coordinatePrecision: "site",
+    productionStage: "Producer",
+    riskLevel: "Low",
+    keyCatalyst: "Odyssey underground production growth",
+    source: {
+      name: "Agnico Eagle - Canadian Malartic Complex",
+      url: "https://www.agnicoeagle.com/English/operations/operations/canadian-malartic-complex/default.aspx",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "barrick-nevada-gold-mines",
+    companySlug: "barrick-gold",
+    assetName: "Nevada Gold Mines",
+    country: "United States",
+    jurisdiction: "Nevada",
+    latitude: 40.73,
+    longitude: -116.24,
+    coordinatePrecision: "regional",
+    productionStage: "Producer",
+    riskLevel: "Low",
+    keyCatalyst: "Goldrush ramp-up and Fourmile development work",
+    source: {
+      name: "Barrick Mining - Nevada Gold Mines",
+      url: "https://www.barrick.com/English/operations/nevada-gold-mines/default.aspx",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "peabody-narm",
+    companySlug: "peabody-energy",
+    assetName: "North Antelope Rochelle",
+    country: "United States",
+    jurisdiction: "Wyoming",
+    latitude: 43.56,
+    longitude: -105.29,
+    coordinatePrecision: "site",
+    productionStage: "Producer",
+    riskLevel: "Low",
+    keyCatalyst: "Productivity, cost control, and Powder River Basin demand",
+    source: {
+      name: "Peabody - North Antelope Rochelle Mine",
+      url: "https://www.peabodyenergy.com/Operations/US-Thermal/North-Antelope-Rochelle-Mine",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "cnr-leer-south",
+    companySlug: "core-natural-resources",
+    assetName: "Leer South",
+    country: "United States",
+    jurisdiction: "West Virginia",
+    latitude: 39.25,
+    longitude: -80.02,
+    coordinatePrecision: "regional",
+    productionStage: "Producer",
+    riskLevel: "Low",
+    keyCatalyst: "Longwall productivity and metallurgical coal realization",
+    source: {
+      name: "Core Natural Resources - SEC filing record",
+      url: "https://www.sec.gov/edgar/search/",
+      documentType: "regulator-filing",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "whitehaven-blackwater",
+    companySlug: "whitehaven-coal",
+    assetName: "Blackwater",
+    country: "Australia",
+    jurisdiction: "Queensland",
+    latitude: -23.71,
+    longitude: 148.8,
+    coordinatePrecision: "site",
+    productionStage: "Producer",
+    riskLevel: "Low",
+    keyCatalyst: "Operational integration and mine-plan optimization",
+    source: {
+      name: "Whitehaven Coal - Blackwater Mine",
+      url: "https://whitehavencoal.com.au/our-business/our-assets/blackwater-mine/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "hecla-greens-creek",
+    companySlug: "hecla-mining",
+    assetName: "Greens Creek",
+    country: "United States",
+    jurisdiction: "Alaska",
+    latitude: 58.08,
+    longitude: -134.64,
+    coordinatePrecision: "site",
+    productionStage: "Producer",
+    riskLevel: "Low",
+    keyCatalyst: "Reserve conversion and sustained high-grade production",
+    source: {
+      name: "Hecla Mining - Greens Creek",
+      url: "https://www.hecla.com/operations/greens-creek-alaska/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "vizsla-panuco",
+    companySlug: "vizsla-silver",
+    assetName: "Panuco",
+    country: "Mexico",
+    jurisdiction: "Sinaloa",
+    latitude: 23.22,
+    longitude: -105.65,
+    coordinatePrecision: "district",
+    productionStage: "Developer",
+    riskLevel: "Medium",
+    keyCatalyst: "Feasibility work and district-scale resource drilling",
+    source: {
+      name: "Vizsla Silver - Panuco Project",
+      url: "https://vizslasilvercorp.com/projects/panuco-project/overview/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "agmr-reliquias",
+    companySlug: "silver-mountain-resources",
+    assetName: "Reliquias",
+    country: "Peru",
+    jurisdiction: "Huancavelica",
+    latitude: -12.97,
+    longitude: -75.12,
+    coordinatePrecision: "district",
+    productionStage: "Developer",
+    riskLevel: "Medium",
+    keyCatalyst: "Permitting and restart financing",
+    source: {
+      name: "Silver Mountain Resources - SEDAR+ filing record",
+      url: "https://www.sedarplus.ca/",
+      documentType: "regulator-filing",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "excellon-kilgore",
+    companySlug: "excellon-resources",
+    assetName: "Kilgore",
+    country: "United States",
+    jurisdiction: "Idaho",
+    latitude: 44.43,
+    longitude: -111.16,
+    coordinatePrecision: "district",
+    productionStage: "Explorer",
+    riskLevel: "Low",
+    keyCatalyst: "Resource definition and permitting work",
+    source: {
+      name: "Excellon Resources - SEDAR+ technical disclosures",
+      url: "https://www.sedarplus.ca/",
+      documentType: "regulator-filing",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "abrasilver-diablillos",
+    companySlug: "abrasilver-resource",
+    assetName: "Diablillos",
+    country: "Argentina",
+    jurisdiction: "Salta",
+    latitude: -25.29,
+    longitude: -67.9,
+    coordinatePrecision: "district",
+    productionStage: "Developer",
+    riskLevel: "Medium",
+    keyCatalyst: "Definitive feasibility study and permitting",
+    source: {
+      name: "AbraSilver - Diablillos Project",
+      url: "https://abrasilver.com/projects/diablillos/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
   },
   {
     id: "tudor-treaty-creek",
-    company: "Tudor Gold",
-    ticker: "TUD",
-    commodity: "Gold",
+    companySlug: "tudor-gold",
     assetName: "Treaty Creek",
     country: "Canada",
     jurisdiction: "British Columbia",
     latitude: 56.62,
     longitude: -130.08,
+    coordinatePrecision: "district",
     productionStage: "Explorer",
-    marketCap: 310,
-    investorModeScore: { "Rick Rule": 49, "Eric Sprott": 91, "Ross Beaty": 54, "Tavi Costa": 78, "Lobo Tigre": 92 },
     riskLevel: "Medium",
-    keyCatalyst: "Resource expansion in the Golden Triangle"
+    keyCatalyst: "Goldstorm resource expansion in the Golden Triangle",
+    source: {
+      name: "Tudor Gold - Treaty Creek",
+      url: "https://tudor-gold.com/treaty-creek/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
   },
   {
-    id: "bhp-escondida",
-    company: "BHP",
-    ticker: "BHP",
-    commodity: "Copper",
-    assetName: "Escondida",
-    country: "Chile",
-    jurisdiction: "Antofagasta",
-    latitude: -24.27,
-    longitude: -69.08,
-    productionStage: "Producer",
-    marketCap: 135000,
-    investorModeScore: { "Rick Rule": 91, "Eric Sprott": 58, "Ross Beaty": 88, "Tavi Costa": 86, "Lobo Tigre": 57 },
+    id: "gogold-los-ricos-south",
+    companySlug: "gogold-resources",
+    assetName: "Los Ricos South",
+    country: "Mexico",
+    jurisdiction: "Jalisco",
+    latitude: 20.42,
+    longitude: -103.8,
+    coordinatePrecision: "district",
+    productionStage: "Developer",
     riskLevel: "Medium",
-    keyCatalyst: "Concentrator growth and grade management"
+    keyCatalyst: "Engineering, permitting, and development decision",
+    source: {
+      name: "GoGold Resources - SEDAR+ technical disclosures",
+      url: "https://www.sedarplus.ca/",
+      documentType: "regulator-filing",
+      lastVerified: verifiedOn
+    }
   },
   {
-    id: "freeport-grasberg",
-    company: "Freeport-McMoRan",
-    ticker: "FCX",
-    commodity: "Copper",
-    assetName: "Grasberg",
-    country: "Indonesia",
-    jurisdiction: "Central Papua",
-    latitude: -4.05,
-    longitude: 137.12,
+    id: "paladin-langer-heinrich",
+    companySlug: "paladin-energy",
+    assetName: "Langer Heinrich",
+    country: "Namibia",
+    jurisdiction: "Erongo",
+    latitude: -22.81,
+    longitude: 15.33,
+    coordinatePrecision: "site",
     productionStage: "Producer",
-    marketCap: 59000,
-    investorModeScore: { "Rick Rule": 77, "Eric Sprott": 79, "Ross Beaty": 85, "Tavi Costa": 88, "Lobo Tigre": 60 },
-    riskLevel: "High",
-    keyCatalyst: "Underground ramp-up and smelter normalization"
+    riskLevel: "Medium",
+    keyCatalyst: "Ramp-up toward nameplate uranium production",
+    source: {
+      name: "Paladin Energy - Langer Heinrich Mine",
+      url: "https://www.paladinenergy.com.au/langer-heinrich-mine/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
   },
   {
-    id: "sandfire-matsa",
-    company: "Sandfire Resources",
-    ticker: "SFR",
-    commodity: "Copper",
-    assetName: "MATSA",
-    country: "Spain",
-    jurisdiction: "Andalusia",
-    latitude: 37.71,
-    longitude: -6.68,
-    productionStage: "Producer",
-    marketCap: 3200,
-    investorModeScore: { "Rick Rule": 78, "Eric Sprott": 76, "Ross Beaty": 83, "Tavi Costa": 80, "Lobo Tigre": 74 },
+    id: "stallion-coffer",
+    companySlug: "stallion-uranium",
+    assetName: "Coffer Project",
+    country: "Canada",
+    jurisdiction: "Saskatchewan",
+    latitude: 57.65,
+    longitude: -109.55,
+    coordinatePrecision: "regional",
+    productionStage: "Explorer",
     riskLevel: "Low",
-    keyCatalyst: "Mine-life extensions and Motheo optimization"
+    keyCatalyst: "Athabasca Basin drill targeting and follow-up exploration",
+    source: {
+      name: "Stallion Uranium - Coffer Project",
+      url: "https://stallionuranium.com/projects/coffer-project/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
   },
   {
-    id: "ivanhoe-kamoa-kakula",
-    company: "Ivanhoe Mines",
-    ticker: "IVN",
-    commodity: "Copper",
-    assetName: "Kamoa-Kakula",
-    country: "DR Congo",
-    jurisdiction: "Lualaba",
-    latitude: -10.76,
-    longitude: 25.26,
-    productionStage: "Producer",
-    marketCap: 15000,
-    investorModeScore: { "Rick Rule": 70, "Eric Sprott": 95, "Ross Beaty": 91, "Tavi Costa": 89, "Lobo Tigre": 71 },
+    id: "lotus-kayelekera",
+    companySlug: "lotus-resources",
+    assetName: "Kayelekera",
+    country: "Malawi",
+    jurisdiction: "Karonga",
+    latitude: -9.99,
+    longitude: 33.7,
+    coordinatePrecision: "site",
+    productionStage: "Developer",
     riskLevel: "High",
-    keyCatalyst: "Phase 3 ramp-up and smelter commissioning"
+    keyCatalyst: "Restart construction, financing, and uranium contracting",
+    source: {
+      name: "Lotus Resources - ASX announcements",
+      url: "https://lotusresources.com.au/investors/asx-announcements/",
+      documentType: "regulator-filing",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "eqr-mt-carbine",
+    companySlug: "eq-resources",
+    assetName: "Mt Carbine",
+    country: "Australia",
+    jurisdiction: "Queensland",
+    latitude: -16.53,
+    longitude: 145.13,
+    coordinatePrecision: "site",
+    productionStage: "Producer",
+    riskLevel: "Low",
+    keyCatalyst: "Underground ramp-up and tungsten recovery optimization",
+    source: {
+      name: "EQ Resources - Mt Carbine",
+      url: "https://eqresources.com.au/mt-carbine/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
   },
   {
     id: "lynas-mt-weld",
-    company: "Lynas Rare Earths",
-    ticker: "LYC",
-    commodity: "Rare Earths",
+    companySlug: "lynas-rare-earths",
     assetName: "Mt Weld",
     country: "Australia",
     jurisdiction: "Western Australia",
     latitude: -28.86,
     longitude: 122.09,
+    coordinatePrecision: "site",
     productionStage: "Producer",
-    marketCap: 4400,
-    investorModeScore: { "Rick Rule": 84, "Eric Sprott": 75, "Ross Beaty": 82, "Tavi Costa": 73, "Lobo Tigre": 65 },
     riskLevel: "Low",
-    keyCatalyst: "Kalgoorlie ramp-up and NdPr market recovery"
+    keyCatalyst: "Expansion ramp-up and NdPr market recovery",
+    source: {
+      name: "Lynas Rare Earths - Mt Weld",
+      url: "https://lynasrareearths.com/about-us/locations/mt-weld-western-australia/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
   },
   {
     id: "mkango-songwe-hill",
-    company: "Mkango Resources",
-    ticker: "MKA",
-    commodity: "Rare Earths",
+    companySlug: "mkango-resources",
     assetName: "Songwe Hill",
     country: "Malawi",
     jurisdiction: "Phalombe",
     latitude: -15.02,
     longitude: 35.68,
+    coordinatePrecision: "district",
     productionStage: "Developer",
-    marketCap: 55,
-    investorModeScore: { "Rick Rule": 40, "Eric Sprott": 84, "Ross Beaty": 51, "Tavi Costa": 66, "Lobo Tigre": 95 },
     riskLevel: "High",
-    keyCatalyst: "Strategic financing and recycling commercialization"
+    keyCatalyst: "Project financing and strategic development partnership",
+    source: {
+      name: "Mkango Resources - Investor centre",
+      url: "https://mkango.ca/investors/",
+      documentType: "annual-report",
+      lastVerified: verifiedOn
+    }
   },
   {
-    id: "cnr-elkview",
-    company: "Core Natural Resources",
-    ticker: "CNR",
-    commodity: "Coal",
-    assetName: "Elkview",
-    country: "Canada",
-    jurisdiction: "British Columbia",
-    latitude: 49.77,
-    longitude: -114.89,
-    productionStage: "Producer",
-    marketCap: 5200,
-    investorModeScore: { "Rick Rule": 80, "Eric Sprott": 55, "Ross Beaty": 76, "Tavi Costa": 51, "Lobo Tigre": 83 },
-    riskLevel: "Low",
-    keyCatalyst: "Merger synergies and metallurgical coal pricing"
-  },
-  {
-    id: "whitehaven-blackwater",
-    company: "Whitehaven Coal",
-    ticker: "WHC",
-    commodity: "Coal",
-    assetName: "Blackwater",
+    id: "larvotto-hillgrove",
+    companySlug: "larvotto-resources",
+    assetName: "Hillgrove",
     country: "Australia",
-    jurisdiction: "Queensland",
-    latitude: -23.67,
-    longitude: 148.81,
-    productionStage: "Producer",
-    marketCap: 3900,
-    investorModeScore: { "Rick Rule": 82, "Eric Sprott": 62, "Ross Beaty": 78, "Tavi Costa": 49, "Lobo Tigre": 86 },
+    jurisdiction: "New South Wales",
+    latitude: -30.57,
+    longitude: 151.9,
+    coordinatePrecision: "district",
+    productionStage: "Developer",
     riskLevel: "Low",
-    keyCatalyst: "Operational integration and cash returns"
+    keyCatalyst: "Antimony-gold project financing and construction readiness",
+    source: {
+      name: "Larvotto Resources - Hillgrove",
+      url: "https://larvottoresources.com/hillgrove/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "prairie-shelduck-south",
+    companySlug: "prairie-operating",
+    assetName: "Shelduck South",
+    country: "United States",
+    jurisdiction: "Colorado",
+    latitude: 40.45,
+    longitude: -104.45,
+    coordinatePrecision: "regional",
+    productionStage: "Producer",
+    riskLevel: "Medium",
+    keyCatalyst: "Development drilling and production growth",
+    source: {
+      name: "Prairie Operating - SEC filings",
+      url: "https://www.sec.gov/edgar/browse/?CIK=1162896&owner=exclude",
+      documentType: "regulator-filing",
+      lastVerified: verifiedOn
+    }
   },
   {
     id: "cnq-horizon",
-    company: "Canadian Natural Resources",
-    ticker: "CNQ",
-    commodity: "Oil & Gas",
+    companySlug: "canadian-natural-resources",
     assetName: "Horizon Oil Sands",
     country: "Canada",
     jurisdiction: "Alberta",
-    latitude: 57.35,
-    longitude: -111.74,
+    latitude: 57.34,
+    longitude: -111.75,
+    coordinatePrecision: "site",
     productionStage: "Producer",
-    marketCap: 73000,
-    investorModeScore: { "Rick Rule": 92, "Eric Sprott": 60, "Ross Beaty": 90, "Tavi Costa": 70, "Lobo Tigre": 68 },
     riskLevel: "Low",
-    keyCatalyst: "Long-life production and shareholder returns"
+    keyCatalyst: "Long-life production optimization and debottlenecking",
+    source: {
+      name: "Canadian Natural - Investor reports and filings",
+      url: "https://www.cnrl.com/investors/",
+      documentType: "annual-report",
+      lastVerified: verifiedOn
+    }
   },
   {
-    id: "prairie-wildcat",
-    company: "Prairie Operating",
-    ticker: "PROP",
-    commodity: "Oil & Gas",
-    assetName: "Wildcat",
-    country: "United States",
-    jurisdiction: "Colorado",
-    latitude: 40.42,
-    longitude: -104.45,
-    productionStage: "Developer",
-    marketCap: 190,
-    investorModeScore: { "Rick Rule": 45, "Eric Sprott": 87, "Ross Beaty": 50, "Tavi Costa": 62, "Lobo Tigre": 91 },
-    riskLevel: "Medium",
-    keyCatalyst: "Drilling program and production scale-up"
+    id: "arc-attachie",
+    companySlug: "arc-resources",
+    assetName: "Attachie",
+    country: "Canada",
+    jurisdiction: "British Columbia",
+    latitude: 56.33,
+    longitude: -121.4,
+    coordinatePrecision: "regional",
+    productionStage: "Producer",
+    riskLevel: "Low",
+    keyCatalyst: "Attachie Phase I ramp-up and future development phases",
+    source: {
+      name: "ARC Resources - Attachie",
+      url: "https://www.arcresources.com/operations/attachie/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "sandfire-matsa",
+    companySlug: "sandfire-resources",
+    assetName: "MATSA",
+    country: "Spain",
+    jurisdiction: "Andalusia",
+    latitude: 37.72,
+    longitude: -6.67,
+    coordinatePrecision: "district",
+    productionStage: "Producer",
+    riskLevel: "Low",
+    keyCatalyst: "Mine-life extension and processing optimization",
+    source: {
+      name: "Sandfire Resources - MATSA",
+      url: "https://www.sandfire.com.au/operations/matsa/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
+  },
+  {
+    id: "aeris-tritton",
+    companySlug: "aeris-resources",
+    assetName: "Tritton Operations",
+    country: "Australia",
+    jurisdiction: "New South Wales",
+    latitude: -31.56,
+    longitude: 146.2,
+    coordinatePrecision: "district",
+    productionStage: "Producer",
+    riskLevel: "Low",
+    keyCatalyst: "Budgerygar and Avoca Tank production contribution",
+    source: {
+      name: "Aeris Resources - Tritton",
+      url: "https://aerisresources.com.au/operations/tritton/",
+      documentType: "official-project-page",
+      lastVerified: verifiedOn
+    }
   }
 ];
+
+function buildModeScores(companySlug: string): Record<AssetInvestorMode, number> {
+  const company = getCompanyBySlug(companySlug);
+
+  if (!company) {
+    throw new Error(`Missing screener company for official asset record: ${companySlug}`);
+  }
+
+  return Object.fromEntries(
+    assetInvestorModes.map((mode) => [mode, scoreCompany(company, mode).total])
+  ) as Record<AssetInvestorMode, number>;
+}
+
+export const miningAssets: MiningAsset[] = officialAssetRecords.map((asset) => {
+  const company = getCompanyBySlug(asset.companySlug);
+
+  if (!company) {
+    throw new Error(`Missing screener company for official asset record: ${asset.companySlug}`);
+  }
+
+  return {
+    ...asset,
+    company: company.company,
+    ticker: company.ticker,
+    commodity: company.commodity,
+    marketCap: company.marketCap,
+    marketCapQuality: getMetricQuality(company.slug, "marketCap"),
+    investorModeScore: buildModeScores(company.slug),
+    scoreMethod: "calculated",
+    riskMethod: "research-model"
+  };
+});
+
+export const assetDataFreshness = {
+  lastVerified: verifiedOn,
+  officialAssetCount: miningAssets.length,
+  sourcePolicy: "Issuer pages, technical reports, annual reports, and regulator filings only."
+};

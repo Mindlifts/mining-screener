@@ -40,7 +40,7 @@ export const dataSourceRegistry: DataSourceDefinition[] = [
   {
     id: "company-filings",
     name: "Company filings and annual reports",
-    categories: ["production", "reservesResources", "insiderOwnership"],
+    categories: ["production", "reservesResources", "assetLocations", "insiderOwnership"],
     cost: "free",
     status: "manual",
     updateCadence: "manual-review",
