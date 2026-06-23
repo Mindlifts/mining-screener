@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 
 const navigation = [
   { href: "/", label: "Screener" },
-  { href: "/asset-map", label: "Asset Map" }
+  { href: "/asset-map", label: "Asset Map" },
+  { href: "/investment-cases", label: "Investment Cases" }
 ];
 
 export function AppNavigation() {

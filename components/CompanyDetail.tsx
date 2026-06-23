@@ -3,6 +3,7 @@ import { getMarketRecord, getMetricQuality, getOfficialRecord, type Company } fr
 import { toDisplayDate } from "@/lib/dataCache";
 import { scoreCompany } from "@/lib/scoring";
 import { AppNavigation } from "@/components/AppNavigation";
+import { getInvestmentCase } from "@/data/investment-cases";
 
 const moneyFormatter = new Intl.NumberFormat("en-US", {
   notation: "compact",
@@ -97,15 +98,26 @@ export function CompanyDetail({ company }: { company: Company }) {
   const score = scoreCompany(company);
   const officialRecord = getOfficialRecord(company.slug);
   const marketRecord = getMarketRecord(company.slug);
+  const investmentCase = getInvestmentCase(company.slug);
 
   return (
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-zinc-950 text-zinc-100">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 overflow-hidden px-3 py-3 sm:px-5 lg:px-6">
         <AppNavigation />
         <header className="border-b border-zincLine pb-4">
-          <Link href="/" className="text-xs font-semibold uppercase tracking-wide text-terminalGreen hover:text-zinc-50">
-            Back to screener
-          </Link>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link href="/" className="text-xs font-semibold uppercase tracking-wide text-terminalGreen hover:text-zinc-50">
+              Back to screener
+            </Link>
+            {investmentCase ? (
+              <Link
+                href={`/investment-cases/${investmentCase.slug}`}
+                className="rounded border border-caution/40 bg-caution/10 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-caution hover:border-caution"
+              >
+                Open investment case
+              </Link>
+            ) : null}
+          </div>
           <div className="mt-4 flex min-w-0 flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
             <div className="min-w-0">
               <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
