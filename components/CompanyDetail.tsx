@@ -33,7 +33,7 @@ function Card({
   className?: string;
 }) {
   return (
-    <section className={`rounded-lg border border-zincLine bg-zincPanel/85 p-4 ${className}`}>
+    <section className={`w-full max-w-full overflow-hidden rounded-lg border border-zincLine bg-zincPanel/85 p-4 ${className}`}>
       <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-400">{title}</h2>
       <div className="mt-4">{children}</div>
     </section>
@@ -44,7 +44,7 @@ function Metric({ label, value }: { label: string; value: string }) {
   return (
     <div className="border-b border-zincLine py-3 last:border-0">
       <p className="text-xs uppercase tracking-wide text-zinc-500">{label}</p>
-      <p className="mt-1 font-mono text-base text-zinc-50">{value}</p>
+      <p className="mt-1 break-words font-mono text-base text-zinc-50">{value}</p>
     </div>
   );
 }
@@ -64,8 +64,8 @@ function ScoreRow({ label, value }: { label: string; value: number }) {
 
   return (
     <div>
-      <div className="flex items-center justify-between text-xs">
-        <span className="uppercase tracking-wide text-zinc-500">{label}</span>
+      <div className="flex min-w-0 items-center justify-between gap-3 text-xs">
+        <span className="truncate uppercase tracking-wide text-zinc-500">{label}</span>
         <span className="font-mono text-zinc-100">{value}</span>
       </div>
       <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-zinc-800">
@@ -79,30 +79,30 @@ export function CompanyDetail({ company }: { company: Company }) {
   const score = scoreCompany(company);
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-100">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-3 py-3 sm:px-5 lg:px-6">
+    <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-zinc-950 text-zinc-100">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 overflow-hidden px-3 py-3 sm:px-5 lg:px-6">
         <header className="border-b border-zincLine pb-4">
           <Link href="/" className="text-xs font-semibold uppercase tracking-wide text-terminalGreen hover:text-zinc-50">
             Back to screener
           </Link>
-          <div className="mt-4 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-            <div>
+          <div className="mt-4 flex min-w-0 flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+            <div className="min-w-0">
               <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
                 {company.commodity} · {company.stage} · {company.exchange}
               </p>
-              <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-50">{company.company}</h1>
+              <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight text-zinc-50">{company.company}</h1>
               <p className="mt-2 font-mono text-sm text-caution">{company.ticker}</p>
             </div>
-            <div className="grid grid-cols-3 gap-2 text-xs sm:min-w-[460px]">
-              <div className="border border-zincLine bg-zincPanel px-3 py-2">
+            <div className="grid w-full min-w-0 grid-cols-1 gap-2 text-xs sm:grid-cols-3 lg:max-w-[460px]">
+              <div className="min-w-0 border border-zincLine bg-zincPanel px-3 py-2">
                 <p className="text-zinc-500">Total Score</p>
                 <p className="mt-1 font-mono text-xl text-terminalGreen">{score.total}</p>
               </div>
-              <div className="border border-zincLine bg-zincPanel px-3 py-2">
+              <div className="min-w-0 border border-zincLine bg-zincPanel px-3 py-2">
                 <p className="text-zinc-500">EV/EBITDA</p>
                 <p className="mt-1 font-mono text-xl text-zinc-50">{formatMultiple(company.evEbitda)}</p>
               </div>
-              <div className="border border-zincLine bg-zincPanel px-3 py-2">
+              <div className="min-w-0 border border-zincLine bg-zincPanel px-3 py-2">
                 <p className="text-zinc-500">FCF Yield</p>
                 <p className="mt-1 font-mono text-xl text-zinc-50">{formatPercent(company.fcfYield)}</p>
               </div>
@@ -110,8 +110,8 @@ export function CompanyDetail({ company }: { company: Company }) {
           </div>
         </header>
 
-        <section className="grid gap-4 lg:grid-cols-[1fr_340px]">
-          <div className="grid gap-4 md:grid-cols-2">
+        <section className="grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(280px,340px)]">
+          <div className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">
             <Card title="Valuation Snapshot">
               <Metric label="Market Cap" value={formatMoney(company.marketCap)} />
               <Metric label="Enterprise Value" value={formatMoney(company.enterpriseValue)} />
@@ -167,7 +167,7 @@ export function CompanyDetail({ company }: { company: Company }) {
             </Card>
           </div>
 
-          <aside className="space-y-4">
+          <aside className="min-w-0 space-y-4">
             <Card title="Bull Case">
               <ThesisList items={company.bullCase} />
             </Card>

@@ -14,9 +14,9 @@ function Panel({
   subtitle?: string;
 }) {
   return (
-    <section className="rounded-lg border border-zincLine bg-zincPanel/85 p-4">
-      <div className="flex items-start justify-between gap-3">
-        <div>
+    <section className="w-full max-w-full overflow-hidden rounded-lg border border-zincLine bg-zincPanel/85 p-4">
+      <div className="flex min-w-0 items-start justify-between gap-3">
+        <div className="min-w-0">
           <h2 className="text-sm font-semibold text-zinc-50">{title}</h2>
           {subtitle ? <p className="mt-1 text-xs text-zinc-500">{subtitle}</p> : null}
         </div>
@@ -44,13 +44,13 @@ export function OpportunityPanel({
       <div className="space-y-3">
         {topRows.map(({ company, score }) => (
           <div key={company.slug} className="border-b border-zincLine pb-3 last:border-0 last:pb-0">
-            <div className="flex items-center justify-between gap-3">
-              <Link href={`/companies/${company.slug}`} className="text-sm font-medium text-zinc-100 hover:text-terminalGreen">
-                {company.ticker}
-              </Link>
-              <span className="font-mono text-sm text-caution">{score.total}</span>
-            </div>
-            <p className="mt-1 text-xs text-zinc-500">
+                    <div className="flex min-w-0 items-center justify-between gap-3">
+                      <Link href={`/companies/${company.slug}`} className="block min-w-0 truncate text-sm font-medium text-zinc-100 hover:text-terminalGreen">
+                        {company.ticker}
+                      </Link>
+                      <span className="shrink-0 font-mono text-sm text-caution">{score.total}</span>
+                    </div>
+                    <p className="mt-1 break-words text-xs text-zinc-500">
               {activeMode === "Eric Sprott"
                 ? `${score.torque} torque · ${score.catalysts} catalysts · ${formatPercent(company.insiderOwnership)} insider`
                 : activeMode === "Ross Beaty"
@@ -91,8 +91,8 @@ export function ConsensusPanel({
 
   return (
     <Panel title="Investor Consensus" subtitle="Average score across every investor DNA mode.">
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[360px] text-xs">
+      <div className="max-w-full overflow-x-auto">
+        <table className="w-full min-w-full text-xs">
           <thead className="text-zinc-500">
             <tr className="border-b border-zincLine">
               <th className="pb-2 text-left font-medium uppercase tracking-wide">Name</th>
@@ -104,7 +104,7 @@ export function ConsensusPanel({
             {consensus.map(({ company, average, leader }) => (
               <tr key={company.slug} className="border-b border-zincLine/80 last:border-0">
                 <td className="py-2">
-                  <Link href={`/companies/${company.slug}`} className="font-medium text-zinc-100 hover:text-terminalGreen">
+                  <Link href={`/companies/${company.slug}`} className="block max-w-[120px] truncate font-medium text-zinc-100 hover:text-terminalGreen">
                     {company.ticker}
                   </Link>
                   <p className="mt-0.5 text-[11px] text-zinc-500">{company.commodity}</p>
@@ -125,16 +125,16 @@ export function ComparisonPanel({ rows }: { rows: EnrichedCompany[] }) {
 
   return (
     <Panel title="Company Comparison" subtitle="Current top three names under the active filter and ranking.">
-      <div className="grid gap-3 sm:grid-cols-3 xl:grid-cols-1">
+      <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-3 xl:grid-cols-1">
         {compared.map(({ company, score }) => (
-          <div key={company.slug} className="rounded border border-zincLine bg-zinc-950/70 p-3">
-            <div className="flex items-center justify-between gap-2">
-              <Link href={`/companies/${company.slug}`} className="text-sm font-semibold text-zinc-50 hover:text-terminalGreen">
+          <div key={company.slug} className="min-w-0 rounded border border-zincLine bg-zinc-950/70 p-3">
+            <div className="flex min-w-0 items-center justify-between gap-2">
+              <Link href={`/companies/${company.slug}`} className="block min-w-0 truncate text-sm font-semibold text-zinc-50 hover:text-terminalGreen">
                 {company.ticker}
               </Link>
-              <span className="font-mono text-sm text-terminalGreen">{score.total}</span>
+              <span className="shrink-0 font-mono text-sm text-terminalGreen">{score.total}</span>
             </div>
-            <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] text-zinc-500">
+            <div className="mt-3 grid min-w-0 grid-cols-1 gap-1 text-[11px] text-zinc-500 sm:grid-cols-2">
               <span>EV/EBITDA</span>
               <span className="text-right font-mono text-zinc-200">{formatMultiple(company.evEbitda)}</span>
               <span>FCF Yield</span>

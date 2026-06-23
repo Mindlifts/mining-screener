@@ -76,11 +76,11 @@ function DetailGrid({ row }: { row: EnrichedCompany }) {
   ];
 
   return (
-    <div className="mt-4 grid grid-cols-2 gap-2 border-t border-zincLine pt-4 text-xs">
+    <div className="mt-4 grid grid-cols-1 gap-2 border-t border-zincLine pt-4 text-xs sm:grid-cols-2">
       {details.map(([label, value]) => (
-        <div key={label} className="rounded border border-zincLine bg-zinc-950/70 p-2">
-          <p className="uppercase tracking-wide text-zinc-500">{label}</p>
-          <p className="mt-1 font-mono text-zinc-100">{value}</p>
+        <div key={label} className="min-w-0 rounded border border-zincLine bg-zinc-950/70 p-2">
+          <p className="truncate uppercase tracking-wide text-zinc-500">{label}</p>
+          <p className="mt-1 break-words font-mono text-zinc-100">{value}</p>
         </div>
       ))}
     </div>
@@ -111,13 +111,13 @@ export function MobileScreenerCards({
   const hasMore = visibleCount < rows.length;
 
   return (
-    <section className="space-y-3 lg:hidden">
-      <div className="flex items-center justify-between gap-3">
-        <div>
+    <section className="w-full max-w-full space-y-3 overflow-hidden lg:hidden">
+      <div className="flex min-w-0 items-center justify-between gap-3">
+        <div className="min-w-0">
           <h2 className="text-base font-semibold text-zinc-50">Mobile screener</h2>
           <p className="mt-1 text-xs text-zinc-500">Compact cards sorted by {primaryLabel}.</p>
         </div>
-        <span className="border border-zincLine px-3 py-1 font-mono text-xs text-zinc-400">{rows.length} rows</span>
+        <span className="shrink-0 border border-zincLine px-3 py-1 font-mono text-xs text-zinc-400">{rows.length} rows</span>
       </div>
 
       <div className="space-y-3">
@@ -126,8 +126,8 @@ export function MobileScreenerCards({
           const isExpanded = expandedSlug === company.slug;
 
           return (
-            <article key={company.slug} className="rounded-lg border border-zincLine bg-zincPanel/85 p-4">
-              <div className="flex items-start justify-between gap-3">
+            <article key={company.slug} className="w-full max-w-full overflow-hidden rounded-lg border border-zincLine bg-zincPanel/85 p-4">
+              <div className="flex min-w-0 items-start justify-between gap-3">
                 <div className="min-w-0">
                   <Link href={`/companies/${company.slug}`} className="block truncate text-base font-semibold text-zinc-50">
                     {company.company}
@@ -135,7 +135,7 @@ export function MobileScreenerCards({
                   <p className="mt-1 font-mono text-xs text-caution">
                     {company.ticker} · {company.exchange} · {company.commodity}
                   </p>
-                  <p className="mt-1 text-xs text-zinc-500">
+                  <p className="mt-1 truncate text-xs text-zinc-500">
                     {company.stage} · {company.jurisdiction}
                   </p>
                 </div>
@@ -145,11 +145,11 @@ export function MobileScreenerCards({
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-2">
+              <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {ModeMetrics({ row, activeMode }).map(([label, value]) => (
-                  <div key={label} className="rounded border border-zincLine bg-zinc-950/70 p-2">
-                    <p className="text-[11px] uppercase tracking-wide text-zinc-500">{label}</p>
-                    <p className="mt-1 font-mono text-sm text-zinc-100">{value}</p>
+                  <div key={label} className="min-w-0 rounded border border-zincLine bg-zinc-950/70 p-2">
+                    <p className="truncate text-[11px] uppercase tracking-wide text-zinc-500">{label}</p>
+                    <p className="mt-1 break-words font-mono text-sm text-zinc-100">{value}</p>
                   </div>
                 ))}
               </div>
