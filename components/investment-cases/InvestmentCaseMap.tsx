@@ -96,12 +96,16 @@ export function InvestmentCaseMap({ assets }: { assets: InvestmentCaseAsset[] })
           <div className="min-w-0 bg-zincPanel p-3">
             <p className="text-[10px] uppercase text-zinc-500">Reserve life</p>
             <p className="mt-1 truncate font-mono text-sm text-zinc-100">{selected.reserveLife}</p>
+            {selected.reserveLifeCalculated ? <p className="mt-1 text-[9px] uppercase text-caution">Calculated ratio</p> : null}
           </div>
           <div className="col-span-2 min-w-0 bg-zincPanel p-3">
             <p className="text-[10px] uppercase text-zinc-500">Production</p>
             <p className="mt-1 break-words font-mono text-sm text-zinc-100">{selected.production}</p>
           </div>
         </div>
+        <p className="mt-4 text-[10px] uppercase tracking-wide text-zinc-600">
+          Corporate presentation · PDF page {selected.sourcePage}
+        </p>
         <div className="mt-5 flex flex-wrap gap-2">
           {assets.map((asset) => (
             <button

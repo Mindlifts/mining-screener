@@ -5,49 +5,73 @@
   "ticker": "AG",
   "exchange": "NYSE",
   "logo": "/brands/first-majestic.png",
-  "commodityExposure": ["Silver", "Gold"],
-  "score": 72,
-  "thesis": "A high-torque silver producer where stronger free cash flow and a broader operating base could convert commodity upside into disproportionate equity returns.",
-  "asOf": "2026-06-23",
-  "dataStatus": "placeholder",
+  "commodityExposure": ["Silver", "Gold", "Lead", "Zinc", "Copper"],
+  "score": 76,
+  "thesis": "A four-mine North American silver platform combining 66% silver revenue exposure, record cash generation, district-scale exploration and a funded path toward renewed gold production at Jerritt Canyon.",
+  "asOf": "2026-05-11",
+  "dataStatus": "official-presentation",
+  "source": {
+    "title": "First Majestic Silver Corporate Presentation - May 2026",
+    "url": "https://www.firstmajestic.com/_resources/presentation/corporate-presentation.pdf?v=062308",
+    "published": "2026-05"
+  },
   "whyItMatters": [
     {
       "label": "Silver leverage",
-      "value": "High",
-      "detail": "Equity sensitivity rises quickly when silver expands above the cost base.",
-      "progress": 91,
-      "tone": "positive"
+      "value": "66%",
+      "detail": "Share of year-to-date 2026 revenue from silver; 94% of revenue is from precious metals.",
+      "progress": 94,
+      "tone": "positive",
+      "sourcePage": 4
     },
     {
-      "label": "Production scale",
-      "value": "31–33 Moz",
-      "detail": "Illustrative annual silver-equivalent production range.",
-      "progress": 74,
-      "tone": "neutral"
+      "label": "Production platform",
+      "value": "4 mines",
+      "detail": "Four producing underground mines in Mexico, including a 70% interest in Los Gatos.",
+      "progress": 82,
+      "tone": "positive",
+      "sourcePage": 8
     },
     {
-      "label": "Reserve base",
-      "value": "7 years",
-      "detail": "Placeholder reserve-life estimate pending technical-report mapping.",
-      "progress": 58,
-      "tone": "caution"
+      "label": "Silver reserves",
+      "value": "101.1 Moz",
+      "detail": "Attributable proven-and-probable silver reserves effective December 31, 2025.",
+      "progress": 78,
+      "tone": "positive",
+      "sourcePage": 39
     },
     {
-      "label": "Jurisdiction quality",
-      "value": "Mixed",
-      "detail": "Established mining regions offset by Mexico policy and tax complexity.",
-      "progress": 62,
-      "tone": "caution"
+      "label": "Jurisdiction footprint",
+      "value": "350k+ ha",
+      "detail": "Mining claims across Mexico and Nevada, concentrated in established mining districts.",
+      "progress": 72,
+      "tone": "neutral",
+      "sourcePage": 8
     },
     {
-      "label": "Growth potential",
-      "value": "Strong",
-      "detail": "Mine optimization, portfolio integration, and restart optionality.",
-      "progress": 84,
-      "tone": "positive"
+      "label": "Growth runway",
+      "value": "266 km",
+      "detail": "Approximately 266,000 metres of exploration planned across the portfolio in 2026.",
+      "progress": 88,
+      "tone": "positive",
+      "sourcePage": 11
     }
   ],
   "assets": [
+    {
+      "name": "Los Gatos",
+      "country": "Mexico",
+      "jurisdiction": "Chihuahua",
+      "commodity": "Silver / Zinc / Lead / Gold / Copper",
+      "stage": "Producing",
+      "latitude": 27.57,
+      "longitude": -106.31,
+      "production": "4.8-5.4 Moz attributable silver guidance",
+      "reserveLife": "~6.9 years",
+      "reserveLifeCalculated": true,
+      "description": "A 70%-owned, low-cost underground silver mine with 103,000 hectares and 61,000 metres of 2026 exploration planned.",
+      "sourcePage": 16
+    },
     {
       "name": "San Dimas",
       "country": "Mexico",
@@ -56,9 +80,11 @@
       "stage": "Producing",
       "latitude": 24.11,
       "longitude": -105.93,
-      "production": "Illustrative 13.5 Moz AgEq",
-      "reserveLife": "6 years",
-      "description": "Core underground silver-gold operation and a major source of operating leverage."
+      "production": "4.0-4.4 Moz silver and 49-55 koz gold guidance",
+      "reserveLife": "~5.5 years",
+      "reserveLifeCalculated": true,
+      "description": "A 72,000-hectare underground district with 117,000 metres of 2026 drilling and the new Coronado vein.",
+      "sourcePage": 24
     },
     {
       "name": "Santa Elena",
@@ -68,9 +94,11 @@
       "stage": "Producing",
       "latitude": 30.03,
       "longitude": -110.17,
-      "production": "Illustrative 9.0 Moz AgEq",
-      "reserveLife": "5 years",
-      "description": "Underground operation with exploration and processing optimization potential."
+      "production": "1.3-1.5 Moz silver and 64-71 koz gold guidance",
+      "reserveLife": "~8.0 years",
+      "reserveLifeCalculated": true,
+      "description": "A 102,000-hectare operation with Navidad and Santo Nino discoveries and 78,000 metres of planned drilling.",
+      "sourcePage": 19
     },
     {
       "name": "La Encantada",
@@ -80,9 +108,11 @@
       "stage": "Producing",
       "latitude": 28.68,
       "longitude": -102.55,
-      "production": "Illustrative 3.2 Moz Ag",
-      "reserveLife": "4 years",
-      "description": "Silver-focused operation where throughput and grade discipline drive margins."
+      "production": "2.8-3.1 Moz silver guidance",
+      "reserveLife": "~10.7 years",
+      "reserveLifeCalculated": true,
+      "description": "A pure-silver producer where improved ore flow lifted 2025 production 32% year over year.",
+      "sourcePage": 27
     },
     {
       "name": "Jerritt Canyon",
@@ -92,209 +122,252 @@
       "stage": "Care and maintenance",
       "latitude": 40.93,
       "longitude": -116.12,
-      "production": "No current production",
-      "reserveLife": "Restart study",
-      "description": "Gold restart optionality with meaningful execution and capital requirements."
+      "production": "Restart targeted for H2 2027",
+      "reserveLife": "4.1 Moz M&I resource",
+      "description": "A Nevada gold project with a $75M restart plan and one of only three roasters in the state.",
+      "sourcePage": 29
     }
   ],
   "production": [
     {
-      "label": "Annual production",
-      "value": "26.9 Moz",
-      "detail": "Illustrative consolidated production baseline.",
-      "progress": 78,
-      "tone": "neutral"
-    },
-    {
-      "label": "Silver equivalent",
-      "value": "31–33 Moz",
-      "detail": "Placeholder forward range for presentation design.",
+      "label": "2026 silver guidance",
+      "value": "13.0-14.4 Moz",
+      "detail": "Consolidated silver production guidance across Los Gatos, Santa Elena, San Dimas and La Encantada.",
       "progress": 86,
-      "tone": "positive"
+      "tone": "positive",
+      "sourcePage": 10
     },
     {
-      "label": "YoY growth",
-      "value": "+18%",
-      "detail": "Illustrative growth case, not company guidance.",
-      "progress": 68,
-      "tone": "positive"
+      "label": "2026 gold guidance",
+      "value": "116-129 koz",
+      "detail": "Consolidated gold production guidance, primarily from Santa Elena and San Dimas.",
+      "progress": 78,
+      "tone": "neutral",
+      "sourcePage": 10
     },
     {
-      "label": "Reserve life",
-      "value": "7 years",
-      "detail": "Portfolio-level placeholder estimate.",
-      "progress": 58,
-      "tone": "caution"
+      "label": "Q1 silver production",
+      "value": "3.5 Moz",
+      "detail": "Equal to 26% of the midpoint of 2026 silver guidance.",
+      "progress": 76,
+      "tone": "positive",
+      "sourcePage": 12
+    },
+    {
+      "label": "P&P silver reserves",
+      "value": "101.1 Moz",
+      "detail": "Attributable proven-and-probable silver reserves as of December 31, 2025.",
+      "progress": 82,
+      "tone": "positive",
+      "sourcePage": 39
     }
   ],
   "scenarios": [
     {
       "name": "Bull case",
-      "headline": "Silver breaks higher while operating execution compounds the move.",
+      "headline": "Silver leverage combines with record cash generation and portfolio expansion.",
       "probability": "25%",
-      "target": "2.3x upside",
+      "target": "High upside",
       "tone": "positive",
+      "sourcePages": [4, 12, 13, 34],
       "points": [
-        "Silver sustains a structurally higher price regime.",
-        "Core mines deliver stronger grades and lower unit costs.",
-        "Portfolio integration expands production and mine life.",
-        "Restart optionality gains strategic value without stressing the balance sheet."
+        "Historical equity beta of approximately 2-3x to silver remains intact.",
+        "Los Gatos and Santa Elena expansion projects lift production and margins.",
+        "Approximately 266,000 metres of drilling converts district-scale exploration into reserves.",
+        "Jerritt Canyon returns to production in H2 2027 without weakening liquidity."
       ]
     },
     {
       "name": "Base case",
-      "headline": "Cash generation improves, but valuation remains tied to execution.",
+      "headline": "2026 guidance is delivered while free cash flow funds exploration and growth.",
       "probability": "50%",
-      "target": "35% upside",
+      "target": "Execution case",
       "tone": "neutral",
+      "sourcePages": [10, 11, 13, 31],
       "points": [
-        "Silver remains constructive but volatile.",
-        "Production meets the mid-range operating plan.",
-        "Free cash flow funds measured growth and debt reduction.",
-        "Multiple expansion is gradual rather than immediate."
+        "Silver production lands within the 13.0-14.4 Moz guidance range.",
+        "Consolidated AISC remains within $26.15-$27.91 per AgEq ounce.",
+        "The $213-$236M capital program is funded from operating cash flow and liquidity.",
+        "The balance sheet supports exploration, dividends and measured expansion."
       ]
     },
     {
       "name": "Bear case",
-      "headline": "Cost inflation and softer silver expose the operating leverage.",
+      "headline": "Operating leverage reverses if metal prices weaken or costs exceed guidance.",
       "probability": "25%",
-      "target": "40% downside",
+      "target": "Downside risk",
       "tone": "negative",
+      "sourcePages": [2, 10, 31, 38],
       "points": [
-        "Silver retraces while energy and labor costs stay elevated.",
-        "Grades or recoveries underperform at a core operation.",
-        "Mexico tax or regulatory friction absorbs management attention.",
-        "Growth capital competes with balance-sheet repair."
+        "Silver and gold prices retreat from the assumptions embedded in 2026 guidance.",
+        "AISC exceeds guidance at higher-cost operations such as La Encantada.",
+        "Mexico tax proceedings create a larger or longer-lived financial overhang.",
+        "Jerritt Canyon restart capital or timing moves beyond the announced plan."
       ]
     }
   ],
   "financials": [
     {
       "label": "Market cap",
-      "value": "$8.2B",
-      "detail": "Placeholder presentation value; map to daily market cache.",
-      "tone": "neutral"
+      "value": "$12.0B",
+      "detail": "Company-disclosed market capitalization at the May 11, 2026 market close.",
+      "tone": "neutral",
+      "sourcePage": 32
     },
     {
-      "label": "Enterprise value",
-      "value": "$8.5B",
-      "detail": "Placeholder; replace with normalized direct-source EV.",
-      "tone": "neutral"
+      "label": "Treasury",
+      "value": "$1.13B",
+      "detail": "$985M cash plus $144M of restricted cash at March 31, 2026.",
+      "tone": "positive",
+      "sourcePage": 31
     },
     {
-      "label": "EV / EBITDA",
-      "value": "9.4x",
-      "detail": "Illustrative multiple pending presentation-data adapter.",
-      "tone": "caution"
+      "label": "Q1 EBITDA",
+      "value": "$307M",
+      "detail": "Up 192% year over year, representing a 64% EBITDA margin on revenue.",
+      "tone": "positive",
+      "sourcePage": 12
     },
     {
-      "label": "FCF yield",
-      "value": "3.8%",
-      "detail": "Uses current dashboard research baseline.",
-      "tone": "positive"
+      "label": "Q1 free cash flow",
+      "value": "$224M",
+      "detail": "Operating cash flow less sustaining capital expenditure.",
+      "tone": "positive",
+      "sourcePage": 13
     },
     {
-      "label": "Net debt",
-      "value": "$450M",
-      "detail": "Illustrative normalized balance-sheet value.",
-      "tone": "caution"
+      "label": "Net cash",
+      "value": "~$580M",
+      "detail": "Calculated from $985M cash less $405M disclosed convertible debentures; excludes restricted cash and other adjustments.",
+      "tone": "positive",
+      "sourcePage": 31,
+      "calculated": true
     }
   ],
   "rickRule": [
     {
       "label": "Survival score",
-      "value": "62",
-      "detail": "Cycle resilience and financing risk.",
-      "progress": 62,
-      "tone": "caution"
+      "value": "84",
+      "detail": "$983M available liquidity and record Q1 cash generation materially strengthen cycle resilience.",
+      "progress": 84,
+      "tone": "positive",
+      "sourcePage": 31,
+      "calculated": true
     },
     {
       "label": "Asset quality",
-      "value": "71",
-      "detail": "Scale, mine life, and operating relevance.",
-      "progress": 71,
-      "tone": "neutral"
+      "value": "82",
+      "detail": "Four producing underground mines plus large district land packages and Nevada restart optionality.",
+      "progress": 82,
+      "tone": "positive",
+      "sourcePage": 14,
+      "calculated": true
     },
     {
       "label": "Jurisdiction",
-      "value": "62",
-      "detail": "Mexico concentration with Nevada optionality.",
-      "progress": 62,
-      "tone": "caution"
+      "value": "68",
+      "detail": "Established Mexico and Nevada districts offset by the active Mexico tax dispute.",
+      "progress": 68,
+      "tone": "neutral",
+      "sourcePage": 38,
+      "calculated": true
     },
     {
       "label": "Valuation",
-      "value": "68",
-      "detail": "Margin of safety versus normalized silver assumptions.",
-      "progress": 68,
-      "tone": "neutral"
+      "value": "65",
+      "detail": "Calculated research score using the disclosed $12B market capitalization and Q1 cash-generation profile.",
+      "progress": 65,
+      "tone": "neutral",
+      "sourcePage": 32,
+      "calculated": true
     }
   ],
   "ericSprott": [
     {
       "label": "Torque score",
-      "value": "88",
-      "detail": "Sensitivity to a rising silver price.",
-      "progress": 88,
-      "tone": "positive"
+      "value": "93",
+      "detail": "Approximately 2-3x historical beta to silver and 66% silver revenue exposure.",
+      "progress": 93,
+      "tone": "positive",
+      "sourcePage": 4,
+      "calculated": true
     },
     {
       "label": "Silver leverage",
-      "value": "91",
-      "detail": "Direct precious-metals operating exposure.",
-      "progress": 91,
-      "tone": "positive"
+      "value": "94",
+      "detail": "66% silver revenue exposure and 94% total precious-metals revenue exposure.",
+      "progress": 94,
+      "tone": "positive",
+      "sourcePage": 4,
+      "calculated": true
     },
     {
       "label": "Growth score",
-      "value": "79",
-      "detail": "Organic optimization plus portfolio optionality.",
-      "progress": 79,
-      "tone": "positive"
+      "value": "88",
+      "detail": "Los Gatos, Santa Elena throughput, 266 km of exploration and Jerritt Canyon create multiple growth vectors.",
+      "progress": 88,
+      "tone": "positive",
+      "sourcePage": 34,
+      "calculated": true
     },
     {
       "label": "Catalyst score",
-      "value": "84",
-      "detail": "Multiple operational and commodity-driven triggers.",
-      "progress": 84,
-      "tone": "positive"
+      "value": "91",
+      "detail": "Portfolio expansion, reserve growth, discoveries and a targeted H2 2027 Jerritt restart.",
+      "progress": 91,
+      "tone": "positive",
+      "sourcePage": 34,
+      "calculated": true
     }
   ],
   "timeline": [
     {
       "year": "2004",
-      "title": "First producing asset",
+      "title": "Operating platform begins",
       "category": "Milestone",
-      "description": "The company begins its transition from exploration concept to operating silver producer.",
-      "status": "complete"
+      "description": "The company highlights 22 years of proven operations and growth in its May 2026 presentation.",
+      "status": "complete",
+      "sourcePage": 4
     },
     {
       "year": "2018",
-      "title": "San Dimas acquisition",
+      "title": "San Dimas joins the portfolio",
       "category": "Acquisition",
-      "description": "A transformational transaction adds a cornerstone underground silver-gold operation.",
-      "status": "complete"
+      "description": "San Dimas becomes a cornerstone silver-gold operation with a 72,000-hectare district position.",
+      "status": "complete",
+      "sourcePage": 24
     },
     {
       "year": "2021",
       "title": "Jerritt Canyon acquired",
       "category": "Acquisition",
-      "description": "Nevada gold exposure adds strategic processing infrastructure and restart optionality.",
-      "status": "complete"
+      "description": "Nevada gold exposure adds a large resource base and strategic refractory processing infrastructure.",
+      "status": "complete",
+      "sourcePage": 29
     },
     {
       "year": "2025",
-      "title": "Portfolio expansion",
-      "category": "Expansion",
-      "description": "Illustrative integration milestone broadens the production and reserve platform.",
-      "status": "current"
+      "title": "Los Gatos expands the platform",
+      "category": "Acquisition",
+      "description": "The 70%-owned Los Gatos mine adds low-cost silver production and a 103,000-hectare district.",
+      "status": "complete",
+      "sourcePage": 16
     },
     {
-      "year": "2026+",
-      "title": "Cash flow inflection",
+      "year": "Q1 2026",
+      "title": "Record cash generation",
+      "category": "Milestone",
+      "description": "Revenue reached $477M, EBITDA $307M, operating cash flow $311M and free cash flow $224M.",
+      "status": "current",
+      "sourcePage": 12
+    },
+    {
+      "year": "H2 2027",
+      "title": "Jerritt Canyon restart target",
       "category": "Catalyst",
-      "description": "Higher silver prices, mine optimization, and disciplined capital allocation could reshape returns.",
-      "status": "future"
+      "description": "The company announced a $75M restart plan targeting renewed gold production in the second half of 2027.",
+      "status": "future",
+      "sourcePage": 29
     }
   ],
   "risks": [
@@ -303,28 +376,32 @@
       "probability": 3,
       "impact": 4,
       "level": "High",
-      "mitigation": "Diversification, active tax management, and disciplined capital deployment."
+      "mitigation": "The company is pursuing domestic challenges and two separate NAFTA arbitration proceedings concerning Mexico tax matters.",
+      "sourcePage": 38
     },
     {
       "name": "Operational",
       "probability": 3,
-      "impact": 3,
-      "level": "Medium",
-      "mitigation": "Multiple producing assets, development discipline, and grade-control investment."
+      "impact": 4,
+      "level": "High",
+      "mitigation": "Four producing mines diversify operations, while 2026 guidance and mine-level cost ranges provide measurable execution benchmarks.",
+      "sourcePage": 10
     },
     {
       "name": "Commodity price",
       "probability": 4,
       "impact": 5,
       "level": "High",
-      "mitigation": "Liquidity, cost control, and staged growth capital."
+      "mitigation": "Strong liquidity and precious-metals diversification provide a cushion, but high silver beta remains central to the thesis.",
+      "sourcePage": 4
     },
     {
       "name": "Balance sheet",
       "probability": 2,
-      "impact": 4,
+      "impact": 3,
       "level": "Medium",
-      "mitigation": "Free-cash-flow retention and measured restart spending."
+      "mitigation": "$983M of available liquidity and record cash flow support the capital program and announced restart plan.",
+      "sourcePage": 31
     }
   ]
 }
