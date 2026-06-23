@@ -42,6 +42,13 @@ export type ModeConfig = {
   weights: ScoreWeights;
 };
 
+export type InvestorStyleMatch = {
+  mode: Exclude<InvestorMode, "Custom">;
+  shortLabel: string;
+  matchPercent: number;
+  distance: number;
+};
+
 export const defaultCustomWeights: ScoreWeights = {
   survival: 18,
   torque: 16,
@@ -188,6 +195,31 @@ function normalizeWeights(weights: ScoreWeights) {
   return Object.fromEntries(
     Object.entries(weights).map(([key, value]) => [key, value / total])
   ) as Record<ScoreFactor, number>;
+}
+
+export function getInvestorStyleMatches(weights: ScoreWeights): InvestorStyleMatch[] {
+  const normalizedCustom = normalizeWeights(weights);
+  const maxDistance = Math.sqrt(2);
+
+  return investorModes
+    .filter((mode): mode is ModeConfig & { mode: Exclude<InvestorMode, "Custom"> } => mode.mode !== "Custom")
+    .map((mode) => {
+      const normalizedMode = normalizeWeights(mode.weights);
+      const distance = Math.sqrt(
+        Object.keys(normalizedCustom).reduce((sum, key) => {
+          const factor = key as ScoreFactor;
+          return sum + Math.pow(normalizedCustom[factor] - normalizedMode[factor], 2);
+        }, 0)
+      );
+
+      return {
+        mode: mode.mode,
+        shortLabel: mode.shortLabel,
+        distance,
+        matchPercent: clampScore((1 - distance / maxDistance) * 100)
+      };
+    })
+    .sort((a, b) => b.matchPercent - a.matchPercent);
 }
 
 function commodityMargin(company: Company) {
