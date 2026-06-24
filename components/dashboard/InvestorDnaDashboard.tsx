@@ -44,6 +44,9 @@ import {
   formatPercent
 } from "@/components/dashboard/formatters";
 import { AppNavigation } from "@/components/AppNavigation";
+import { AbsurdMetricBadge } from "@/components/absurd/AbsurdMetricBadge";
+import { calculateAbsurdMetrics } from "@/lib/absurdMetrics";
+import type { AbsurdMetricId } from "@/types/absurdMetrics";
 
 const customFactors: Array<{ key: ScoreFactor; label: string }> = [
   { key: "survival", label: "Survival" },
@@ -66,12 +69,15 @@ function ShellCard({
 }
 
 function metricValue(company: Company, score: EnrichedCompany["score"], key: SortKey) {
+  if (typeof key === "string" && key.startsWith("absurd:")) {
+    return Number.NEGATIVE_INFINITY;
+  }
   if (key in score) return score[key as keyof typeof score];
   const value = company[key as keyof Company];
   return typeof value === "number" ? value : Number.NEGATIVE_INFINITY;
 }
 
-function getColumns(activeMode: InvestorMode): Column[] {
+function getModeColumns(activeMode: InvestorMode): Column[] {
   const modeConfig = getInvestorModeConfig(activeMode);
   const primaryColumn: Column = {
     key: modeConfig.primaryScore,
@@ -164,6 +170,50 @@ function getColumns(activeMode: InvestorMode): Column[] {
     { key: "macro", label: "Macro", align: "right", render: ({ score }) => <ScorePill value={score.macro} /> },
     { key: "catalysts", label: "Catalysts", align: "right", render: ({ score }) => <ScorePill value={score.catalysts} /> }
   ];
+}
+
+const absurdColumns: Column[] = [
+  {
+    key: "absurd:sleeping-giant",
+    label: "Sleeping Giant",
+    align: "right",
+    render: ({ absurd }) => absurd["sleeping-giant"] ? <AbsurdMetricBadge metric={absurd["sleeping-giant"]} compact /> : "—"
+  },
+  {
+    key: "absurd:ceo-sleep",
+    label: "CEO Sleep",
+    align: "right",
+    render: ({ absurd }) => absurd["ceo-sleep"] ? <AbsurdMetricBadge metric={absurd["ceo-sleep"]} compact /> : "—"
+  },
+  {
+    key: "absurd:road-to-starbucks",
+    label: "Starbucks",
+    align: "right",
+    render: ({ absurd }) => <span className="font-mono">{absurd["road-to-starbucks"]?.score ?? "—"}</span>
+  },
+  {
+    key: "absurd:things-must-go-right",
+    label: "Miracles",
+    align: "right",
+    render: ({ absurd }) => <span className="font-mono">{absurd["things-must-go-right"]?.label ?? "—"}</span>
+  },
+  {
+    key: "absurd:hype-liability",
+    label: "Hype",
+    align: "right",
+    render: ({ absurd }) => <span className="font-mono">{absurd["hype-liability"]?.score ?? "—"}</span>
+  },
+  {
+    key: "absurd:double-without-news",
+    label: "Double?",
+    align: "right",
+    render: ({ absurd }) => <span className="font-mono">{absurd["double-without-news"]?.label ?? "—"}</span>
+  }
+];
+
+function getColumns(activeMode: InvestorMode, showAbsurd: boolean): Column[] {
+  const columns = getModeColumns(activeMode);
+  return showAbsurd ? [...columns, ...absurdColumns] : columns;
 }
 
 function CustomWeightPanel({
@@ -259,6 +309,13 @@ export function InvestorDnaDashboard() {
   const [sortKey, setSortKey] = useState<SortKey>("survival");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
   const [customWeights, setCustomWeights] = useState<ScoreWeights>(defaultCustomWeights);
+  const [showAbsurd, setShowAbsurd] = useState(false);
+  const [giantOnly, setGiantOnly] = useState(false);
+  const [comfortableOnly, setComfortableOnly] = useState(false);
+  const [simpleOnly, setSimpleOnly] = useState(false);
+  const [lowHypeOnly, setLowHypeOnly] = useState(false);
+  const [roadReadyOnly, setRoadReadyOnly] = useState(false);
+  const [doubleYesOnly, setDoubleYesOnly] = useState(false);
 
   const modeConfig = getInvestorModeConfig(activeMode);
 
@@ -272,10 +329,15 @@ export function InvestorDnaDashboard() {
   }, [activeMode]);
 
   const scoredCompanies = useMemo(
-    () => scoreCompanies(companies, activeMode, customWeights),
+    () => scoreCompanies(companies, activeMode, customWeights).map((row) => ({
+      ...row,
+      absurd: Object.fromEntries(
+        calculateAbsurdMetrics(row.company).map((metric) => [metric.id, metric])
+      ) as EnrichedCompany["absurd"]
+    })),
     [activeMode, customWeights]
   );
-  const columns = useMemo(() => getColumns(activeMode), [activeMode]);
+  const columns = useMemo(() => getColumns(activeMode, showAbsurd), [activeMode, showAbsurd]);
   const exchanges = useMemo(
     () => ["All", ...Array.from(new Set(companies.map((company) => company.exchange))).sort()],
     []
@@ -290,12 +352,25 @@ export function InvestorDnaDashboard() {
       .filter(({ company }) => (exchange === "All" ? true : company.exchange === exchange))
       .filter(({ company }) => (query ? `${company.company} ${company.ticker}`.toLowerCase().includes(query) : true))
       .filter(({ score }) => (modeConfig.minBalanceSheet ? score.balanceSheet >= modeConfig.minBalanceSheet : true))
+      .filter(({ absurd }) => !giantOnly || (absurd["sleeping-giant"]?.score ?? 0) > 75)
+      .filter(({ absurd }) => !comfortableOnly || ["Comfortable", "Baby sleep"].includes(absurd["ceo-sleep"]?.label ?? ""))
+      .filter(({ absurd }) => !simpleOnly || (absurd["things-must-go-right"]?.score ?? 100) <= 29)
+      .filter(({ absurd }) => !lowHypeOnly || (absurd["hype-liability"]?.score ?? 100) <= 30)
+      .filter(({ absurd }) => !roadReadyOnly || (absurd["road-to-starbucks"]?.score ?? 0) > 70)
+      .filter(({ absurd }) => !doubleYesOnly || absurd["double-without-news"]?.label === "Yes")
       .sort((a, b) => {
-        const left = metricValue(a.company, a.score, sortKey);
-        const right = metricValue(b.company, b.score, sortKey);
+        const absurdId = typeof sortKey === "string" && sortKey.startsWith("absurd:")
+          ? sortKey.slice(7) as AbsurdMetricId
+          : null;
+        const left = absurdId
+          ? (a.absurd[absurdId]?.score ?? (sortDirection === "asc" ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY))
+          : metricValue(a.company, a.score, sortKey);
+        const right = absurdId
+          ? (b.absurd[absurdId]?.score ?? (sortDirection === "asc" ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY))
+          : metricValue(b.company, b.score, sortKey);
         return sortDirection === "asc" ? left - right : right - left;
       });
-  }, [commodity, exchange, modeConfig.minBalanceSheet, scoredCompanies, search, sortDirection, sortKey, stage]);
+  }, [comfortableOnly, commodity, doubleYesOnly, exchange, giantOnly, lowHypeOnly, modeConfig.minBalanceSheet, roadReadyOnly, scoredCompanies, search, simpleOnly, sortDirection, sortKey, stage]);
 
   const topRows = rows
     .slice()
@@ -308,7 +383,15 @@ export function InvestorDnaDashboard() {
     }
 
     setSortKey(nextKey);
-    setSortDirection(nextKey === "netDebt" || nextKey === "evResource" || nextKey === "evEbitda" ? "asc" : "desc");
+    setSortDirection(
+      nextKey === "netDebt" ||
+        nextKey === "evResource" ||
+        nextKey === "evEbitda" ||
+        nextKey === "absurd:hype-liability" ||
+        nextKey === "absurd:things-must-go-right"
+        ? "asc"
+        : "desc"
+    );
   }
 
   return (
@@ -440,6 +523,30 @@ export function InvestorDnaDashboard() {
                 ))}
               </select>
             </label>
+          </div>
+          <div className="mt-3 flex max-w-full gap-2 overflow-x-auto border-t border-zincLine pt-3">
+            <label className="flex shrink-0 items-center gap-2 rounded border border-caution/40 bg-caution/5 px-3 py-2 text-xs text-caution">
+              <input type="checkbox" checked={showAbsurd} onChange={(event) => setShowAbsurd(event.target.checked)} className="accent-[#f4c167]" />
+              Absurd columns
+            </label>
+            {[
+              ["Sleeping Giant > 75", giantOnly, setGiantOnly],
+              ["CEO comfortable+", comfortableOnly, setComfortableOnly],
+              ["Miracles <= 2", simpleOnly, setSimpleOnly],
+              ["Low hype", lowHypeOnly, setLowHypeOnly],
+              ["Starbucks > 70", roadReadyOnly, setRoadReadyOnly],
+              ["Double = Yes", doubleYesOnly, setDoubleYesOnly]
+            ].map(([label, checked, setter]) => (
+              <label key={String(label)} className="flex shrink-0 items-center gap-2 rounded border border-zincLine px-3 py-2 text-xs text-zinc-400">
+                <input
+                  type="checkbox"
+                  checked={checked as boolean}
+                  onChange={(event) => (setter as React.Dispatch<React.SetStateAction<boolean>>)(event.target.checked)}
+                  className="accent-[#9de58b]"
+                />
+                {String(label)}
+              </label>
+            ))}
           </div>
         </ShellCard>
 

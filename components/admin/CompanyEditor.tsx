@@ -13,6 +13,7 @@ import type {
   CompanyTag,
   InvestorUniverse
 } from "@/types/company";
+import { AbsurdMetricsAdminEditor } from "@/components/admin/AbsurdMetricsAdminEditor";
 
 function MultiSelect<T extends string>({
   label,
@@ -193,6 +194,8 @@ export function CompanyEditor({
             className="mt-2 h-10 w-full rounded border border-zincLine bg-zinc-950 px-3 text-sm text-zinc-100 outline-none placeholder:text-zinc-700 focus:border-terminalGreen/60"
           />
         </label>
+
+        <AbsurdMetricsAdminEditor company={company} onChange={onChange} />
       </div>
     </aside>
   );

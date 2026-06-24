@@ -84,3 +84,16 @@ Admin V1 stores edits in browser local storage and can export a replacement
 `data/companies.json` file. It does not write to the repository or a database.
 Replace the environment gate and local drafts with authenticated, audited
 database writes before deploying admin access.
+
+---
+
+## Absurd But True Mining Metrics
+
+The `/absurd-metrics` section provides evidence-aware shorthand for takeover
+appeal, financing runway, infrastructure, institutional comfort, mine-building
+experience, promotion risk, resource conversion, project complexity, valuation
+asymmetry, and the headline Sleeping Giant coefficient.
+
+The engine lives in `lib/absurdMetrics.ts`. Missing inputs lower confidence and
+are displayed in the UI. Analyst assumptions, manual inputs, overrides, metric
+modes, disabled metrics, and composite weights are managed through Admin V1.

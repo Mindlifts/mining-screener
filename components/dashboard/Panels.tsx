@@ -3,6 +3,7 @@ import type { Company } from "@/data/mining-universe";
 import { investorModes, scoreCompany, type InvestorMode, type ScoreWeights } from "@/lib/scoring";
 import { formatMultiple, formatPercent } from "@/components/dashboard/formatters";
 import type { EnrichedCompany } from "@/components/dashboard/ScreenerTable";
+import { AbsurdMetricBadge } from "@/components/absurd/AbsurdMetricBadge";
 
 function Panel({
   title,
@@ -126,7 +127,7 @@ export function ComparisonPanel({ rows }: { rows: EnrichedCompany[] }) {
   return (
     <Panel title="Company Comparison" subtitle="Current top three names under the active filter and ranking.">
       <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-3 xl:grid-cols-1">
-        {compared.map(({ company, score }) => (
+        {compared.map(({ company, score, absurd }) => (
           <div key={company.slug} className="min-w-0 rounded border border-zincLine bg-zinc-950/70 p-3">
             <div className="flex min-w-0 items-center justify-between gap-2">
               <Link href={`/companies/${company.slug}`} className="block min-w-0 truncate text-sm font-semibold text-zinc-50 hover:text-terminalGreen">
@@ -143,6 +144,17 @@ export function ComparisonPanel({ rows }: { rows: EnrichedCompany[] }) {
               <span className="text-right font-mono text-zinc-200">{score.survival}</span>
               <span>Torque</span>
               <span className="text-right font-mono text-zinc-200">{score.torque}</span>
+            </div>
+            <div className="mt-3 border-t border-zincLine pt-3">
+              {absurd["sleeping-giant"] ? (
+                <AbsurdMetricBadge metric={absurd["sleeping-giant"]} compact />
+              ) : null}
+              <p className="mt-2 text-[11px] text-zinc-600">
+                Biggest red flag: {absurd["things-must-go-right"]?.label ?? "Insufficient data"}
+              </p>
+              <p className="mt-1 text-[11px] text-zinc-600">
+                Asymmetric setup: {absurd["double-without-news"]?.label ?? "Insufficient data"}
+              </p>
             </div>
           </div>
         ))}
