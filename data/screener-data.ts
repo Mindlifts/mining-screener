@@ -7,14 +7,13 @@ import type { MetricQuality } from "@/lib/dataSources";
 import {
   commodities,
   commodityPrices as sampleCommodityPrices,
-  companies as sampleCompanies,
-  getCompanyBySlug as getSampleCompanyBySlug,
   type Commodity,
   type CommodityPrice,
   type Company,
   type DevelopmentStage,
   type JurisdictionRisk
 } from "@/data/mining-universe";
+import { getVisibleCompanies, getVisibleCompanyBySlug } from "@/lib/universe";
 
 type OfficialMetricPatch = Partial<
   Pick<
@@ -181,7 +180,7 @@ export const commodityPrices: CommodityPrice[] = sampleCommodityPrices.map((pric
 
 export { commodities };
 
-export const companies: Company[] = sampleCompanies.map((company) => {
+export const companies: Company[] = getVisibleCompanies().map((company) => {
   const officialMetrics = cache.records[company.slug]?.metrics ?? {};
   const marketMetrics = marketCache.records[company.slug]?.metrics ?? {};
   const hasDirectEnterpriseValue = marketMetrics.enterpriseValue !== undefined || officialMetrics.enterpriseValue !== undefined;
@@ -211,7 +210,7 @@ export const companies: Company[] = sampleCompanies.map((company) => {
 
 export function getCompanyBySlug(slug: string) {
   const company = companies.find((item) => item.slug === slug);
-  return company ?? getSampleCompanyBySlug(slug);
+  return company ?? getVisibleCompanyBySlug(slug);
 }
 
 export function getOfficialRecord(slug: string) {

@@ -719,36 +719,33 @@ const officialAssetRecords: OfficialAssetRecord[] = [
   }
 ];
 
-function buildModeScores(companySlug: string): Record<AssetInvestorMode, number> {
-  const company = getCompanyBySlug(companySlug);
-
-  if (!company) {
-    throw new Error(`Missing screener company for official asset record: ${companySlug}`);
-  }
-
+function buildModeScores(
+  company: NonNullable<ReturnType<typeof getCompanyBySlug>>
+): Record<AssetInvestorMode, number> {
   return Object.fromEntries(
     assetInvestorModes.map((mode) => [mode, scoreCompany(company, mode).total])
   ) as Record<AssetInvestorMode, number>;
 }
 
-export const miningAssets: MiningAsset[] = officialAssetRecords.map((asset) => {
+export const miningAssets: MiningAsset[] = officialAssetRecords.flatMap((asset) => {
   const company = getCompanyBySlug(asset.companySlug);
 
+  // Universe controls apply to public asset surfaces as well as the screener.
   if (!company) {
-    throw new Error(`Missing screener company for official asset record: ${asset.companySlug}`);
+    return [];
   }
 
-  return {
+  return [{
     ...asset,
     company: company.company,
     ticker: company.ticker,
     commodity: company.commodity,
     marketCap: company.marketCap,
     marketCapQuality: getMetricQuality(company.slug, "marketCap"),
-    investorModeScore: buildModeScores(company.slug),
+    investorModeScore: buildModeScores(company),
     scoreMethod: "calculated",
     riskMethod: "research-model"
-  };
+  }];
 });
 
 export const assetDataFreshness = {
