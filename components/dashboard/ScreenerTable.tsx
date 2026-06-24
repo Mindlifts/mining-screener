@@ -1,13 +1,16 @@
 import Link from "next/link";
 import type { Company } from "@/data/mining-universe";
 import type { CompanyScore } from "@/lib/scoring";
+import type { AbsurdMetricId, AbsurdMetricResult } from "@/types/absurdMetrics";
 
 export type EnrichedCompany = {
   company: Company;
   score: CompanyScore;
+  absurd: Partial<Record<AbsurdMetricId, AbsurdMetricResult>>;
 };
 
-export type SortKey = keyof CompanyScore | keyof Company;
+export type AbsurdSortKey = `absurd:${AbsurdMetricId}`;
+export type SortKey = keyof CompanyScore | keyof Company | AbsurdSortKey;
 
 export type SortDirection = "asc" | "desc";
 

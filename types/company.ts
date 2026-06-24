@@ -98,4 +98,6 @@ export type Company = {
   notes: string;
   sourceUrl: string;
   lastUpdated: string;
+  absurdMetrics?: AbsurdMetricCompanyConfig;
 };
+import type { AbsurdMetricCompanyConfig } from "@/types/absurdMetrics";

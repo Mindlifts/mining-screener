@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import type { CompanyScore, InvestorMode } from "@/lib/scoring";
 import { formatMoney, formatMultiple, formatNumber, formatPercent } from "@/components/dashboard/formatters";
 import { ScorePill, type EnrichedCompany } from "@/components/dashboard/ScreenerTable";
+import { AbsurdMetricBadge } from "@/components/absurd/AbsurdMetricBadge";
 
 function ModeMetrics({ row, activeMode }: { row: EnrichedCompany; activeMode: InvestorMode }) {
   const { company, score } = row;
@@ -138,6 +139,11 @@ export function MobileScreenerCards({
                   <p className="mt-1 truncate text-xs text-zinc-500">
                     {company.stage} · {company.jurisdiction}
                   </p>
+                  {row.absurd["sleeping-giant"] ? (
+                    <div className="mt-2">
+                      <AbsurdMetricBadge metric={row.absurd["sleeping-giant"]} compact />
+                    </div>
+                  ) : null}
                 </div>
                 <div className="shrink-0 text-right">
                   <p className="text-[11px] uppercase tracking-wide text-zinc-500">{primaryLabel}</p>

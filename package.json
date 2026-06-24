@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:absurd": "node --test --experimental-strip-types tests/absurdMetrics.test.ts",
     "refresh:data": "node scripts/refresh-official-data.mjs && node scripts/refresh-market-data.mjs",
     "refresh:data:force": "node scripts/refresh-official-data.mjs --force && node scripts/refresh-market-data.mjs --force",
     "refresh:official": "node scripts/refresh-official-data.mjs",

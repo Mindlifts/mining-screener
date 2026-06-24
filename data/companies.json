@@ -68,7 +68,36 @@
     ],
     "notes": "",
     "sourceUrl": "https://www.sec.gov/edgar/browse/?CIK=771992",
-    "lastUpdated": "2026-06-24"
+    "lastUpdated": "2026-06-24",
+    "absurdMetrics": {
+      "manualInputs": {
+        "infrastructureQuality": 82,
+        "permittingStatus": "operating",
+        "esgSocialRisk": "medium",
+        "buildersCount": 5,
+        "technicalExecutivesCount": 3,
+        "totalKeyPeople": 10,
+        "hypeKeywordCount": 4,
+        "announcementCount": 10,
+        "metallurgyRisk": "low",
+        "studyLevel": "operating",
+        "metalPriceIncreaseNeeded": false,
+        "financingNeeded": false,
+        "permitPending": false,
+        "metallurgyUnresolved": false,
+        "infrastructureMissing": false,
+        "politicalRisk": true,
+        "capexBlowoutRisk": true,
+        "peerEvEbitda": 9,
+        "cashFlowAtSpotPositive": true,
+        "investorAttentionScore": 82
+      },
+      "adminNotes": {
+        "road-to-starbucks": "Sample qualitative infrastructure score. Replace with asset-level distance data.",
+        "shovel-density": "Sample team classification for UI validation; verify against current management biographies.",
+        "hype-liability": "Sample announcement review, not a complete text corpus."
+      }
+    }
   },
   {
     "slug": "first-majestic-silver",
@@ -138,7 +167,36 @@
     ],
     "notes": "",
     "sourceUrl": "https://www.sec.gov/edgar/search/",
-    "lastUpdated": "2026-06-24"
+    "lastUpdated": "2026-06-24",
+    "absurdMetrics": {
+      "manualInputs": {
+        "infrastructureQuality": 74,
+        "permittingStatus": "operating",
+        "esgSocialRisk": "medium",
+        "buildersCount": 3,
+        "technicalExecutivesCount": 3,
+        "totalKeyPeople": 9,
+        "hypeKeywordCount": 7,
+        "announcementCount": 10,
+        "metallurgyRisk": "low",
+        "studyLevel": "operating",
+        "metalPriceIncreaseNeeded": false,
+        "financingNeeded": false,
+        "permitPending": false,
+        "metallurgyUnresolved": false,
+        "infrastructureMissing": false,
+        "politicalRisk": true,
+        "capexBlowoutRisk": false,
+        "peerEvEbitda": 8,
+        "cashFlowAtSpotPositive": true,
+        "investorAttentionScore": 76
+      },
+      "adminNotes": {
+        "road-to-starbucks": "Sample portfolio-level infrastructure score; mine-level distances are still missing.",
+        "shovel-density": "Sample human-reviewed count for feature demonstration.",
+        "hype-liability": "Sample keyword count for feature demonstration."
+      }
+    }
   },
   {
     "slug": "endeavour-silver",
@@ -351,7 +409,37 @@
     ],
     "notes": "",
     "sourceUrl": "https://www.sec.gov/edgar/search/",
-    "lastUpdated": "2026-06-24"
+    "lastUpdated": "2026-06-24",
+    "absurdMetrics": {
+      "manualInputs": {
+        "quarterlyCashBurn": 18,
+        "nextFinancingNeedMonths": 24,
+        "infrastructureQuality": 68,
+        "permittingStatus": "advanced",
+        "esgSocialRisk": "medium",
+        "buildersCount": 2,
+        "technicalExecutivesCount": 4,
+        "totalKeyPeople": 10,
+        "hypeKeywordCount": 9,
+        "announcementCount": 12,
+        "metallurgyRisk": "low",
+        "studyLevel": "DFS",
+        "metalPriceIncreaseNeeded": false,
+        "financingNeeded": true,
+        "permitPending": true,
+        "metallurgyUnresolved": false,
+        "infrastructureMissing": true,
+        "politicalRisk": false,
+        "capexBlowoutRisk": true,
+        "cashFlowAtSpotPositive": false,
+        "investorAttentionScore": 74
+      },
+      "adminNotes": {
+        "ceo-sleep": "Sample quarterly burn assumption for UI testing. Replace with latest cash-flow statement and committed project spend.",
+        "road-to-starbucks": "Sample qualitative infrastructure score; no distance dataset is connected.",
+        "things-must-go-right": "Sample project checklist for demonstration and requires analyst confirmation."
+      }
+    }
   },
   {
     "slug": "denison-mines",

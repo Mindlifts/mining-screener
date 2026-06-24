@@ -4,6 +4,9 @@ import { toDisplayDate } from "@/lib/dataCache";
 import { scoreCompany } from "@/lib/scoring";
 import { AppNavigation } from "@/components/AppNavigation";
 import { getInvestmentCase } from "@/data/investment-cases";
+import { AbsurdMetricGrid } from "@/components/absurd/AbsurdMetricGrid";
+import { AbsurdMetricRadarChart } from "@/components/absurd/AbsurdMetricRadarChart";
+import { calculateAbsurdMetrics } from "@/lib/absurdMetrics";
 
 const moneyFormatter = new Intl.NumberFormat("en-US", {
   notation: "compact",
@@ -99,6 +102,8 @@ export function CompanyDetail({ company }: { company: Company }) {
   const officialRecord = getOfficialRecord(company.slug);
   const marketRecord = getMarketRecord(company.slug);
   const investmentCase = getInvestmentCase(company.slug);
+  const absurdMetrics = calculateAbsurdMetrics(company);
+  const showAdminNotes = process.env.ADMIN_ENABLED === "true";
 
   return (
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-zinc-950 text-zinc-100">
@@ -117,6 +122,12 @@ export function CompanyDetail({ company }: { company: Company }) {
                 Open investment case
               </Link>
             ) : null}
+            <Link
+              href="#absurd-metrics"
+              className="rounded border border-zincLine px-2 py-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 hover:border-caution/50 hover:text-caution"
+            >
+              Absurd Metrics
+            </Link>
           </div>
           <div className="mt-4 flex min-w-0 flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
             <div className="min-w-0">
@@ -227,6 +238,27 @@ export function CompanyDetail({ company }: { company: Company }) {
               <ThesisList items={company.keyCatalysts} />
             </Card>
           </aside>
+        </section>
+
+        <section id="absurd-metrics" className="scroll-mt-6 border-t border-zincLine pt-8">
+          <div className="max-w-3xl">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-caution">
+              Absurd, but evidence-aware
+            </p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-50">
+              Absurd Metrics
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-zinc-500">
+              Memorable shorthand for financing, infrastructure, execution, promotion and asymmetric value. Missing inputs are shown on each card and reduce confidence.
+            </p>
+          </div>
+          <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_340px]">
+            <AbsurdMetricGrid
+              metrics={absurdMetrics}
+              adminNotes={showAdminNotes ? company.absurdMetrics?.adminNotes : undefined}
+            />
+            <AbsurdMetricRadarChart metrics={absurdMetrics} />
+          </div>
         </section>
       </div>
     </main>
