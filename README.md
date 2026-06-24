@@ -72,3 +72,15 @@ Build a professional-grade mining research tool similar to:
 * News integration
 * Company profile pages
 * Backtesting tools
+
+---
+
+## Admin V1
+
+The company universe manager is available at `/admin` when the server environment
+contains `ADMIN_ENABLED=true`.
+
+Admin V1 stores edits in browser local storage and can export a replacement
+`data/companies.json` file. It does not write to the repository or a database.
+Replace the environment gate and local drafts with authenticated, audited
+database writes before deploying admin access.
