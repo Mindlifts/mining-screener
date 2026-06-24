@@ -13,6 +13,10 @@ import type { InvestmentCaseAsset } from "@/data/investment-cases/types";
 
 export function InvestmentCaseMap({ assets }: { assets: InvestmentCaseAsset[] }) {
   const [selected, setSelected] = useState<InvestmentCaseAsset>(assets[0]);
+  const latitudeRange = Math.max(...assets.map((asset) => asset.latitude)) - Math.min(...assets.map((asset) => asset.latitude));
+  const broadPortfolio = latitudeRange > 30;
+  const mapCenter: [number, number] = broadPortfolio ? [-78, 1] : [-108, 31];
+  const mapScale = broadPortfolio ? 210 : 520;
 
   return (
     <div className="grid min-w-0 grid-cols-1 overflow-hidden rounded-lg border border-zincLine bg-[#080a0e] lg:grid-cols-[minmax(0,1fr)_320px]">
@@ -22,13 +26,13 @@ export function InvestmentCaseMap({ assets }: { assets: InvestmentCaseAsset[] })
         </div>
         <ComposableMap
           projection="geoMercator"
-          projectionConfig={{ center: [-108, 31], scale: 520 }}
+          projectionConfig={{ center: mapCenter, scale: mapScale }}
           width={900}
           height={520}
           className="block h-full min-h-[360px] w-full max-w-full bg-[radial-gradient(circle_at_40%_45%,rgba(70,79,94,0.25),transparent_58%)]"
-          aria-label="First Majestic asset map"
+          aria-label="Investment case asset map"
         >
-          <ZoomableGroup center={[-108, 31]} zoom={1} minZoom={1} maxZoom={4}>
+          <ZoomableGroup center={mapCenter} zoom={1} minZoom={1} maxZoom={4}>
             <Geographies geography={countries}>
               {({ geographies }) => geographies.map((geography) => (
                 <Geography

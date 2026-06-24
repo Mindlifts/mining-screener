@@ -157,6 +157,12 @@ function riskPosition(risk: InvestmentCaseRisk) {
 export function InvestmentCaseTemplate({ data }: { data: InvestmentCaseData }) {
   const [activeTimeline, setActiveTimeline] = useState(data.timeline.findIndex((event) => event.status === "current"));
   const currentEvent = data.timeline[Math.max(0, activeTimeline)];
+  const [publishedYear, publishedMonth] = data.source.published.split("-");
+  const publishedLabel = new Intl.DateTimeFormat("en", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC"
+  }).format(new Date(Date.UTC(Number(publishedYear), Number(publishedMonth) - 1, 1)));
 
   return (
     <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-zinc-950 text-zinc-100">
@@ -169,7 +175,7 @@ export function InvestmentCaseTemplate({ data }: { data: InvestmentCaseData }) {
         <div className="relative mx-auto grid w-full max-w-[1540px] grid-cols-1 items-center gap-6 px-5 py-6 sm:gap-8 sm:py-8 lg:min-h-[620px] lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-10 lg:px-8 lg:py-20">
           <div className="min-w-0">
             <div className="inline-flex items-center gap-2 rounded border border-caution/40 bg-caution/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-caution">
-              Official May 2026 corporate presentation
+              Official {publishedLabel} investor presentation
             </div>
             <div className="mt-4 flex min-w-0 flex-col gap-4 sm:mt-10 sm:flex-row sm:items-center sm:gap-6">
               <div className="grid h-20 w-36 shrink-0 place-items-center overflow-hidden rounded-lg border border-zincLine bg-zinc-950 p-3 shadow-glow sm:h-28 sm:w-44">
@@ -328,7 +334,7 @@ export function InvestmentCaseTemplate({ data }: { data: InvestmentCaseData }) {
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-terminalGreen">Primary source</p>
             <p className="mt-1 max-w-3xl text-xs leading-5 text-zinc-600">
-              Operating, reserve, guidance, liquidity and catalyst facts are mapped from First Majestic&apos;s May 2026 corporate presentation. Investor scores, scenarios and reserve ratios are Mining Intelligence calculations and are labelled as such.
+              Operating, reserve, guidance, liquidity and catalyst facts are mapped from {data.company}&apos;s official presentation. Investor scores, scenarios and derived values are Mining Intelligence calculations and are labelled as such.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">

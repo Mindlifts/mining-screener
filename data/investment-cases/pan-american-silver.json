@@ -1,0 +1,456 @@
+{
+  "slug": "pan-american-silver",
+  "companySlug": "pan-american-silver",
+  "company": "Pan American Silver",
+  "ticker": "PAAS",
+  "exchange": "NYSE / TSX",
+  "logo": "/brands/pan-american-silver.png",
+  "commodityExposure": ["Silver", "Gold", "Zinc", "Lead", "Copper"],
+  "score": 86,
+  "thesis": "A ten-mine Americas platform pairing industry-leading silver reserves, record free cash flow and a net-cash balance sheet with major organic options at La Colorada, Timmins, Jacobina, Escobal and Navidad.",
+  "asOf": "2026-06-04",
+  "dataStatus": "official-presentation",
+  "source": {
+    "title": "Pan American Silver Investor Presentation - June 2026",
+    "url": "https://panamericansilver.com/wp-content/uploads/2026/06/PAAS-Investor-Presentation_June_2026_vF.pdf",
+    "published": "2026-06"
+  },
+  "whyItMatters": [
+    {
+      "label": "Operating scale",
+      "value": "10 mines",
+      "detail": "Ten producing silver and gold operations across the Americas, excluding Dolores residual leaching.",
+      "progress": 92,
+      "tone": "positive",
+      "sourcePage": 3
+    },
+    {
+      "label": "Silver reserves",
+      "value": "452 Moz",
+      "detail": "Company-reported silver mineral reserves as of June 30, 2025, before adding acquired MAG reserves.",
+      "progress": 96,
+      "tone": "positive",
+      "sourcePage": 3
+    },
+    {
+      "label": "Cash generation",
+      "value": "$553M",
+      "detail": "Q1 2026 attributable free cash flow, the highest quarter shown in the presentation.",
+      "progress": 94,
+      "tone": "positive",
+      "sourcePage": 5
+    },
+    {
+      "label": "Financial capacity",
+      "value": "$2.56B",
+      "detail": "Total available liquidity plus Pan American's attributable cash at Juanicipio at March 31, 2026.",
+      "progress": 91,
+      "tone": "positive",
+      "sourcePage": 6
+    },
+    {
+      "label": "Growth optionality",
+      "value": "5 vectors",
+      "detail": "La Colorada Skarn, Timmins Camp, Jacobina optimization, Escobal and Navidad create distinct growth paths.",
+      "progress": 90,
+      "tone": "positive",
+      "sourcePage": 3
+    }
+  ],
+  "assets": [
+    {
+      "name": "La Colorada",
+      "country": "Mexico",
+      "jurisdiction": "Zacatecas",
+      "commodity": "Silver / Zinc / Lead",
+      "stage": "Producing",
+      "latitude": 23.42,
+      "longitude": -103.72,
+      "production": "5.80-6.25 Moz silver guidance",
+      "reserveLife": "90.7 Moz Ag P&P",
+      "description": "A 100%-owned vein mine alongside a large skarn project with an initial 37-year mine plan in the revised PEA.",
+      "sourcePage": 31
+    },
+    {
+      "name": "Juanicipio",
+      "country": "Mexico",
+      "jurisdiction": "Zacatecas",
+      "commodity": "Silver / Gold / Zinc / Lead",
+      "stage": "Producing",
+      "latitude": 23.09,
+      "longitude": -102.83,
+      "production": "6.00-6.50 Moz attributable silver guidance",
+      "reserveLife": "58.2 Moz Ag P&P",
+      "description": "A 44%-owned, high-grade primary silver mine with a 3,750 tpd plant and a new underground conveyor system.",
+      "sourcePage": 32
+    },
+    {
+      "name": "Jacobina",
+      "country": "Brazil",
+      "jurisdiction": "Bahia",
+      "commodity": "Gold",
+      "stage": "Producing",
+      "latitude": -11.18,
+      "longitude": -40.52,
+      "production": "181-191 koz gold guidance",
+      "reserveLife": "16 years",
+      "reserveLifeCalculated": true,
+      "description": "A seven-mine underground complex undergoing plant, tailings and mine optimization across an eight-kilometre trend.",
+      "sourcePage": 33
+    },
+    {
+      "name": "El Peñon",
+      "country": "Chile",
+      "jurisdiction": "Antofagasta",
+      "commodity": "Gold / Silver",
+      "stage": "Producing",
+      "latitude": -25.42,
+      "longitude": -69.84,
+      "production": "104-111 koz gold and 3.65-3.95 Moz silver guidance",
+      "reserveLife": "626 koz Au P&P",
+      "description": "A 100%-owned underground gold-silver mine with district-scale exploration and spare mill capacity.",
+      "sourcePage": 34
+    },
+    {
+      "name": "Timmins",
+      "country": "Canada",
+      "jurisdiction": "Ontario",
+      "commodity": "Gold",
+      "stage": "Producing",
+      "latitude": 48.48,
+      "longitude": -81.33,
+      "production": "105.5-115 koz gold guidance",
+      "reserveLife": "846 koz Au P&P",
+      "description": "Two underground mines and a central plant, with a shaft extension and satellite deposits supporting a district-scale plan.",
+      "sourcePage": 35
+    },
+    {
+      "name": "Cerro Moro",
+      "country": "Argentina",
+      "jurisdiction": "Santa Cruz",
+      "commodity": "Silver / Gold",
+      "stage": "Producing",
+      "latitude": -48.01,
+      "longitude": -66.56,
+      "production": "2.80-3.00 Moz silver and 80-86 koz gold guidance",
+      "reserveLife": "5.0 Moz Ag P&P",
+      "description": "A mixed open-pit and underground operation where gold by-product credits drive negative silver-segment AISC guidance.",
+      "sourcePage": 38
+    },
+    {
+      "name": "Huaron",
+      "country": "Peru",
+      "jurisdiction": "Pasco",
+      "commodity": "Silver / Zinc / Lead / Copper",
+      "stage": "Producing",
+      "latitude": -11.0,
+      "longitude": -76.44,
+      "production": "3.25-3.50 Moz silver guidance",
+      "reserveLife": "40.7 Moz Ag P&P",
+      "description": "An underground polymetallic mine advancing deeper extensions after commissioning dry-stack tailings infrastructure.",
+      "sourcePage": 39
+    },
+    {
+      "name": "Escobal",
+      "country": "Guatemala",
+      "jurisdiction": "Santa Rosa",
+      "commodity": "Silver / Gold / Lead / Zinc",
+      "stage": "Care and maintenance",
+      "latitude": 14.17,
+      "longitude": -90.06,
+      "production": "Historically ~20 Moz silver annually",
+      "reserveLife": "264.5 Moz Ag P&P",
+      "description": "A large, built primary silver mine suspended pending completion of the Guatemalan government's ILO 169 consultation.",
+      "sourcePage": 19
+    },
+    {
+      "name": "Navidad",
+      "country": "Argentina",
+      "jurisdiction": "Chubut",
+      "commodity": "Silver / Copper / Lead",
+      "stage": "Development",
+      "latitude": -42.43,
+      "longitude": -68.86,
+      "production": "Development-stage project",
+      "reserveLife": "632.4 Moz Ag M&I",
+      "description": "A 100%-owned, large undeveloped primary silver deposit whose development depends on a provincial mining-law change.",
+      "sourcePage": 41
+    }
+  ],
+  "production": [
+    {
+      "label": "2026 silver guidance",
+      "value": "25-27 Moz",
+      "detail": "Total attributable silver production guidance across the silver and gold segments.",
+      "progress": 92,
+      "tone": "positive",
+      "sourcePage": 27
+    },
+    {
+      "label": "2026 gold guidance",
+      "value": "700-750 koz",
+      "detail": "Total attributable gold production guidance across the diversified portfolio.",
+      "progress": 88,
+      "tone": "positive",
+      "sourcePage": 27
+    },
+    {
+      "label": "Silver AISC guidance",
+      "value": "$15.75-18.25",
+      "detail": "2026 silver-segment AISC per ounce, net of by-product credits.",
+      "progress": 90,
+      "tone": "positive",
+      "sourcePage": 27
+    },
+    {
+      "label": "Gold AISC guidance",
+      "value": "$1,700-1,850",
+      "detail": "2026 gold-segment AISC per ounce, net of by-product credits.",
+      "progress": 78,
+      "tone": "neutral",
+      "sourcePage": 27
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "Bull case",
+      "headline": "Record cash flow funds shareholder returns while La Colorada becomes a new tier-one growth engine.",
+      "probability": "30%",
+      "target": "Re-rate",
+      "tone": "positive",
+      "sourcePages": [5, 7, 9, 12],
+      "points": [
+        "Strong metal prices sustain the margin expansion visible in Q1 2026.",
+        "The company delivers its targeted 35%-40% return of attributable free cash flow to shareholders.",
+        "La Colorada's decline and engineering program de-risk a 37-year expansion plan.",
+        "Timmins and Jacobina optimization add durable production beyond current guidance."
+      ]
+    },
+    {
+      "name": "Base case",
+      "headline": "The portfolio delivers guidance and converts strong liquidity into disciplined organic growth.",
+      "probability": "50%",
+      "target": "Compound",
+      "tone": "neutral",
+      "sourcePages": [6, 8, 27, 29],
+      "points": [
+        "Attributable production lands within 25-27 Moz silver and 700-750 koz gold guidance.",
+        "Silver and gold segment AISC remain within the published full-year ranges.",
+        "The $515-$550M capital program advances priority projects without stressing the balance sheet.",
+        "Dividends, buybacks and project spending remain supported by operating cash generation."
+      ]
+    },
+    {
+      "name": "Bear case",
+      "headline": "Portfolio complexity and capital intensity dilute the benefits of strong silver exposure.",
+      "probability": "20%",
+      "target": "De-rate",
+      "tone": "negative",
+      "sourcePages": [2, 19, 27, 29],
+      "points": [
+        "Metal prices fall below the assumptions used in 2026 cost guidance.",
+        "Higher-cost mines miss operating targets or require additional sustaining capital.",
+        "La Colorada, Timmins or Jacobina projects require more capital or longer schedules.",
+        "Escobal and Navidad remain unavailable because political and consultation processes do not resolve."
+      ]
+    }
+  ],
+  "financials": [
+    {
+      "label": "Market cap",
+      "value": "$22.4B",
+      "detail": "FactSet market capitalization disclosed by the company as of June 4, 2026.",
+      "tone": "neutral",
+      "sourcePage": 25
+    },
+    {
+      "label": "Cash + investments",
+      "value": "$1.61B",
+      "detail": "Cash and investments at March 31, 2026, excluding Pan American's $199M share of Juanicipio cash.",
+      "tone": "positive",
+      "sourcePage": 6
+    },
+    {
+      "label": "Total debt",
+      "value": "$845M",
+      "detail": "Company-defined total debt at March 31, 2026, primarily senior notes.",
+      "tone": "neutral",
+      "sourcePage": 6
+    },
+    {
+      "label": "Net cash",
+      "value": "~$769M",
+      "detail": "Calculated as $1.614B cash and investments less $845M total debt; excludes attributable Juanicipio cash.",
+      "tone": "positive",
+      "sourcePage": 6,
+      "calculated": true
+    },
+    {
+      "label": "Q1 free cash flow",
+      "value": "$553M",
+      "detail": "Attributable free cash flow reported for the first quarter of 2026.",
+      "tone": "positive",
+      "sourcePage": 5
+    }
+  ],
+  "rickRule": [
+    {
+      "label": "Survival score",
+      "value": "94",
+      "detail": "$2.56B of total liquidity plus attributable Juanicipio cash and a calculated net-cash position support cycle resilience.",
+      "progress": 94,
+      "tone": "positive",
+      "sourcePage": 6,
+      "calculated": true
+    },
+    {
+      "label": "Asset quality",
+      "value": "91",
+      "detail": "Ten producing mines, 452 Moz of disclosed silver reserves and tier-one-scale options at La Colorada and Escobal.",
+      "progress": 91,
+      "tone": "positive",
+      "sourcePage": 3,
+      "calculated": true
+    },
+    {
+      "label": "Jurisdiction",
+      "value": "75",
+      "detail": "Americas diversification reduces single-country exposure, offset by political constraints at Escobal and Navidad.",
+      "progress": 75,
+      "tone": "neutral",
+      "sourcePage": 3,
+      "calculated": true
+    },
+    {
+      "label": "Valuation",
+      "value": "72",
+      "detail": "Calculated research score balancing the disclosed $22.4B market capitalization against record cash flow and growth optionality.",
+      "progress": 72,
+      "tone": "neutral",
+      "sourcePage": 25,
+      "calculated": true
+    }
+  ],
+  "ericSprott": [
+    {
+      "label": "Torque score",
+      "value": "88",
+      "detail": "The shares showed 78% one-year correlation to silver while the portfolio retains major undeveloped silver optionality.",
+      "progress": 88,
+      "tone": "positive",
+      "sourcePage": 23,
+      "calculated": true
+    },
+    {
+      "label": "Silver leverage",
+      "value": "96",
+      "detail": "Pan American reports the largest silver reserve position in its peer comparison and guides to 25-27 Moz in 2026.",
+      "progress": 96,
+      "tone": "positive",
+      "sourcePage": 23,
+      "calculated": true
+    },
+    {
+      "label": "Growth score",
+      "value": "93",
+      "detail": "La Colorada Skarn, Timmins Camp, Jacobina optimization, Escobal and Navidad offer multiple independent growth paths.",
+      "progress": 93,
+      "tone": "positive",
+      "sourcePage": 3,
+      "calculated": true
+    },
+    {
+      "label": "Catalyst score",
+      "value": "91",
+      "detail": "La Colorada decline work, the Timmins PEA, mine optimizations and potential political unlocks create a deep catalyst calendar.",
+      "progress": 91,
+      "tone": "positive",
+      "sourcePage": 24,
+      "calculated": true
+    }
+  ],
+  "timeline": [
+    {
+      "year": "30+ yrs",
+      "title": "Americas operating platform",
+      "category": "Milestone",
+      "description": "Pan American highlights more than three decades operating and building mines across the Americas.",
+      "status": "complete",
+      "sourcePage": 3
+    },
+    {
+      "year": "2019",
+      "title": "Shahuindo joins the portfolio",
+      "category": "Acquisition",
+      "description": "The Peru heap-leach gold mine was acquired in 2019 and remains a meaningful contributor to 2026 guidance.",
+      "status": "complete",
+      "sourcePage": 36
+    },
+    {
+      "year": "Sep 2025",
+      "title": "MAG acquisition adds Juanicipio",
+      "category": "Acquisition",
+      "description": "The acquisition established a 44% interest in one of the world's largest and lowest-cost primary silver mines.",
+      "status": "complete",
+      "sourcePage": 32
+    },
+    {
+      "year": "Q1 2026",
+      "title": "Record financial performance",
+      "category": "Milestone",
+      "description": "Attributable revenue reached $1.332B and attributable free cash flow reached $553M.",
+      "status": "current",
+      "sourcePage": 5
+    },
+    {
+      "year": "2026-30",
+      "title": "La Colorada access program",
+      "category": "Expansion",
+      "description": "A $265.1M decline program is planned over five years to access and de-risk the skarn ore bodies.",
+      "status": "future",
+      "sourcePage": 12
+    },
+    {
+      "year": "H1 2029",
+      "title": "Bell Creek shaft extension target",
+      "category": "Catalyst",
+      "description": "Commissioning of the Timmins Bell Creek shaft extension is targeted for the first half of 2029.",
+      "status": "future",
+      "sourcePage": 18
+    }
+  ],
+  "risks": [
+    {
+      "name": "Political",
+      "probability": 3,
+      "impact": 4,
+      "level": "High",
+      "mitigation": "The operating portfolio spans multiple countries, but Escobal requires completion of Guatemala's ILO 169 consultation and Navidad depends on provincial law change.",
+      "sourcePage": 19
+    },
+    {
+      "name": "Operational",
+      "probability": 3,
+      "impact": 4,
+      "level": "High",
+      "mitigation": "Ten operating mines diversify asset risk, while mine-level production and AISC ranges provide transparent execution benchmarks.",
+      "sourcePage": 27
+    },
+    {
+      "name": "Commodity price",
+      "probability": 4,
+      "impact": 4,
+      "level": "High",
+      "mitigation": "Gold and base-metal by-products diversify revenue, although the investment case remains deliberately leveraged to silver.",
+      "sourcePage": 23
+    },
+    {
+      "name": "Balance sheet",
+      "probability": 2,
+      "impact": 3,
+      "level": "Medium",
+      "mitigation": "$1.614B of cash and investments, an undrawn $750M revolver and record free cash flow provide substantial funding capacity.",
+      "sourcePage": 6
+    }
+  ]
+}
