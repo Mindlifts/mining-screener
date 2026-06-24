@@ -1,98 +1,101 @@
-import { AbsurdMetricBadge } from "@/components/absurd/AbsurdMetricBadge";
 import { AbsurdMetricIllustration } from "@/components/absurd/AbsurdMetricIllustrations";
+import { AbsurdMetricMicroViz } from "@/components/absurd/AbsurdMetricMicroViz";
 import { AbsurdMetricTooltip } from "@/components/absurd/AbsurdMetricTooltip";
 import type { AbsurdMetricResult } from "@/types/absurdMetrics";
 
-const accents: Record<AbsurdMetricResult["visualTheme"], string> = {
-  truck: "text-[#d3a552]",
-  sleep: "text-[#b8c7dc]",
-  infrastructure: "text-[#c98d55]",
-  institutional: "text-[#78aee8]",
-  builders: "text-[#c88c58]",
-  hype: "text-[#ef6b72]",
-  conversion: "text-[#b7bdc8]",
-  complexity: "text-[#d5a762]",
-  valuation: "text-[#9de58b]",
-  giant: "text-[#d9b55e]"
+const accentColors: Record<AbsurdMetricResult["visualTheme"], string> = {
+  truck: "#42bce8",
+  sleep: "#78d26a",
+  infrastructure: "#ef8738",
+  institutional: "#b778e4",
+  builders: "#e4bd40",
+  hype: "#24c6a4",
+  conversion: "#b36de2",
+  complexity: "#ef8738",
+  valuation: "#e4bd40",
+  giant: "#d887dc"
+};
+
+const formulas: Record<AbsurdMetricResult["id"], string> = {
+  "barrick-bother": "Scale + Resource + Mine Life",
+  "ceo-sleep": "Cash Runway - Debt Stress",
+  "road-to-starbucks": "Road + Power + Logistics",
+  "institutional-comfort": "Jurisdiction + Liquidity + Permits",
+  "shovel-density": "Builders / Key People",
+  "hype-liability": "Buzzwords / Announcements",
+  "geology-reality": "Reserves / Resources + Recovery",
+  "things-must-go-right": "Critical Dependencies",
+  "double-without-news": "Value Without Catalysts",
+  "sleeping-giant": "Quality / Attention Discount"
 };
 
 export function AbsurdMetricCard({
   metric,
-  featured = false,
+  number = 1,
   adminNote
 }: {
   metric: AbsurdMetricResult;
+  number?: number;
   featured?: boolean;
   adminNote?: string;
 }) {
+  const color = accentColors[metric.visualTheme];
+
   return (
     <article
-      className={`group relative flex min-w-0 flex-col overflow-hidden rounded-lg border border-zincLine bg-[linear-gradient(145deg,rgba(24,27,34,0.95),rgba(10,12,17,0.96))] p-4 transition duration-300 hover:-translate-y-0.5 hover:border-zinc-500 ${
-        featured ? "min-h-[360px] sm:p-6" : "min-h-[310px]"
-      }`}
+      className="group relative flex min-h-[286px] min-w-0 flex-col overflow-hidden border border-[#28343d] bg-[#091117] p-3 shadow-[inset_0_0_24px_rgba(35,93,113,0.05)] transition duration-200 hover:border-[#415564] hover:bg-[#0b151c]"
+      style={{ boxShadow: `inset 0 2px 0 ${color}66` }}
     >
-      <div className={`absolute -right-4 -top-2 h-32 w-48 opacity-65 transition duration-300 group-hover:opacity-100 ${accents[metric.visualTheme]}`}>
-        <AbsurdMetricIllustration id={metric.id} />
+      <div className="flex min-w-0 items-start gap-2.5">
+        <span
+          className="grid h-8 w-8 shrink-0 place-items-center border font-mono text-lg"
+          style={{ borderColor: `${color}88`, color, backgroundColor: `${color}12` }}
+        >
+          {number}
+        </span>
+        <div className="min-w-0 flex-1">
+          <h3 className="text-[11px] font-semibold uppercase leading-4 text-zinc-100">{metric.name}</h3>
+          <p className="mt-1 truncate text-[9px] text-zinc-600">{formulas[metric.id]}</p>
+        </div>
+        <div className="h-9 w-12 shrink-0 opacity-80" style={{ color }}>
+          <AbsurdMetricIllustration id={metric.id} />
+        </div>
       </div>
 
-      <div className="relative z-10 max-w-[72%] min-w-0">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-600">
-          {metric.shortName}
+      <div className="mt-4 text-center">
+        <p className="font-mono text-3xl font-medium" style={{ color }}>{metric.score ?? "—"}</p>
+        <p className="mt-1 text-[9px] font-semibold uppercase tracking-[0.14em]" style={{ color }}>
+          {metric.label}
         </p>
-        <h3 className={`${featured ? "mt-3 text-2xl" : "mt-2 text-lg"} break-words font-semibold text-zinc-50`}>
-          {metric.name}
-        </h3>
       </div>
 
-      <div className="relative z-10 mt-auto pt-16">
-        <div className="flex min-w-0 items-end justify-between gap-3">
-          <div className="min-w-0">
-            <p className={`${featured ? "text-6xl" : "text-4xl"} font-mono font-semibold ${accents[metric.visualTheme]}`}>
-              {metric.score ?? "—"}
-            </p>
-            <div className="mt-2">
-              <AbsurdMetricBadge metric={metric} />
-            </div>
-          </div>
-          <AbsurdMetricTooltip label={`${metric.confidence} confidence · ${metric.mode} · ${metric.inputHealth} input coverage`}>
+      <div className="mt-1">
+        <AbsurdMetricMicroViz metric={metric} color={color} />
+      </div>
+
+      <div className="mt-auto border-t border-[#202a31] pt-2">
+        <div className="flex items-center justify-between gap-2">
+          <p className="truncate text-[9px] text-zinc-600">
+            {metric.isHigherBetter ? "Higher = stronger" : "Lower = safer"}
+          </p>
+          <AbsurdMetricTooltip label={`${metric.explanation} Confidence: ${metric.confidence}. Mode: ${metric.mode}.`}>
             <button
               type="button"
-              aria-label={`Explain confidence for ${metric.name}`}
-              className="grid h-7 w-7 place-items-center rounded-full border border-zincLine text-xs text-zinc-500 hover:border-zinc-500 hover:text-zinc-200"
+              aria-label={`Explain ${metric.name}`}
+              className="grid h-5 w-5 place-items-center border border-[#2c3942] text-[9px] text-zinc-500 hover:text-zinc-100"
             >
-              ?
+              i
             </button>
           </AbsurdMetricTooltip>
         </div>
-
-        <p className="mt-4 text-xs leading-5 text-zinc-400">{metric.explanation}</p>
-
-        <div className="mt-4 flex flex-wrap gap-1.5 text-[9px] font-semibold uppercase tracking-wide">
-          <span className="rounded border border-zincLine px-2 py-1 text-zinc-500">{metric.mode}</span>
-          <span className="rounded border border-zincLine px-2 py-1 text-zinc-500">{metric.confidence} confidence</span>
+        <div className="mt-2 flex items-center gap-1.5">
+          <span className="border border-[#28343d] px-1.5 py-0.5 text-[8px] uppercase text-zinc-600">{metric.mode}</span>
+          <span className="border border-[#28343d] px-1.5 py-0.5 text-[8px] uppercase text-zinc-600">{metric.confidence}</span>
           {metric.missingInputs.length ? (
-            <span className="rounded border border-caution/30 bg-caution/5 px-2 py-1 text-caution">
-              {metric.missingInputs.length} missing
-            </span>
+            <span className="ml-auto text-[8px] text-caution">{metric.missingInputs.length} missing</span>
           ) : null}
         </div>
-
-        {metric.missingInputs.length ? (
-          <details className="mt-3 border-t border-zincLine pt-3">
-            <summary className="cursor-pointer text-[10px] font-semibold uppercase tracking-wide text-zinc-600">
-              Missing inputs
-            </summary>
-            <p className="mt-2 break-words text-[11px] leading-5 text-zinc-500">
-              {metric.missingInputs.join(", ")}
-            </p>
-          </details>
-        ) : null}
-
-        {adminNote ? (
-          <p className="mt-3 border-l-2 border-caution/60 pl-3 text-[11px] leading-5 text-caution/80">
-            Admin note: {adminNote}
-          </p>
-        ) : null}
+        {adminNote ? <p className="mt-2 line-clamp-2 text-[9px] leading-4 text-caution/70">{adminNote}</p> : null}
       </div>
     </article>
   );

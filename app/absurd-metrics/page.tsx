@@ -10,18 +10,21 @@ export const metadata: Metadata = {
 
 export default function AbsurdMetricsPage() {
   return (
-    <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-zinc-950 text-zinc-100">
-      <div className="mx-auto flex w-full max-w-[1540px] flex-col gap-5 overflow-hidden px-3 py-3 sm:px-5 lg:px-6">
+    <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#050b10] bg-[repeating-linear-gradient(0deg,rgba(78,126,137,0.025)_0,rgba(78,126,137,0.025)_1px,transparent_1px,transparent_4px)] text-zinc-100">
+      <div className="mx-auto flex w-full max-w-[1780px] flex-col gap-2 overflow-hidden px-2 py-2 sm:px-3 lg:px-4">
         <AppNavigation />
-        <header className="border-b border-zincLine pb-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-caution">
-            Serious inputs. Memorable outputs.
+        <header className="border-b border-[#20313a] bg-[#071016] px-3 py-4">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#45c7c4]">
+            Mining intelligence special situations desk
           </p>
-          <h1 className="mt-3 max-w-4xl text-3xl font-semibold tracking-tight text-zinc-50 sm:text-5xl">
-            Absurd But True Mining Metrics
+          <h1 className="mt-2 max-w-5xl text-3xl font-semibold uppercase tracking-tight text-zinc-50 sm:text-4xl">
+            Absurdly Brilliant Metrics
           </h1>
-          <p className="mt-4 max-w-3xl text-sm leading-6 text-zinc-400 sm:text-base">
-            A playful analytics layer for takeover appeal, financing runway, infrastructure, investability, promotion risk and project complexity. Missing evidence lowers confidence instead of creating fake precision.
+          <p className="mt-1 text-sm font-medium uppercase tracking-wide text-caution">
+            That find reasons to invest in mining companies
+          </p>
+          <p className="mt-3 max-w-3xl text-xs leading-5 text-zinc-500">
+            Ten unconventional but evidence-aware metrics that cut through valuation noise, financing risk, infrastructure, promotion and project complexity.
           </p>
         </header>
         <AbsurdMetricsExplorer companies={companies} />

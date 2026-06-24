@@ -20,14 +20,14 @@ export function AbsurdMetricComparisonTable({ companies }: { companies: Company[
   }));
 
   return (
-    <section className="w-full max-w-full overflow-hidden rounded-lg border border-zincLine bg-zincPanel/75">
-      <header className="border-b border-zincLine p-4">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-600">Side-by-side</p>
-        <h2 className="mt-2 text-lg font-semibold text-zinc-50">Absurd metric comparison</h2>
+    <section className="w-full max-w-full overflow-hidden border border-[#20313a] bg-[#081117]">
+      <header className="border-b border-[#20313a] bg-[#0b1920] p-3">
+        <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[#45c7c4]">Side-by-side</p>
+        <h2 className="mt-1 text-sm font-semibold uppercase text-zinc-100">Absurd metric comparison</h2>
       </header>
       <div className="max-w-full overflow-x-auto">
         <table className="w-full min-w-[760px] text-xs">
-          <thead className="bg-zinc-950/80 text-zinc-500">
+          <thead className="bg-[#060d12] text-zinc-500">
             <tr>
               <th className="px-4 py-3 text-left uppercase tracking-wide">Metric</th>
               {rows.map(({ company }) => (
@@ -47,7 +47,7 @@ export function AbsurdMetricComparisonTable({ companies }: { companies: Company[
               const worst = Math.min(...normalized.filter((value): value is number => value !== null));
 
               return (
-                <tr key={id} className="border-t border-zincLine">
+                <tr key={id} className="border-t border-[#1d2a31]">
                   <td className="px-4 py-3 font-medium text-zinc-300">{available[0]?.shortName ?? id}</td>
                   {rows.map((row) => {
                     const metric = row.metrics[id];

@@ -21,7 +21,7 @@ export function AbsurdMetricRadarChart({ metrics }: { metrics: AbsurdMetricResul
 
   if (selected.length < 3) {
     return (
-      <div className="grid min-h-64 place-items-center rounded-lg border border-zincLine bg-zincPanel/70 p-6 text-center text-sm text-zinc-500">
+      <div className="grid min-h-64 place-items-center border border-[#20313a] bg-[#081117] p-6 text-center text-sm text-zinc-500">
         At least three scored metrics are needed for the radar view.
       </div>
     );
@@ -30,10 +30,10 @@ export function AbsurdMetricRadarChart({ metrics }: { metrics: AbsurdMetricResul
   const polygon = points.map(({ x, y }) => `${x},${y}`).join(" ");
 
   return (
-    <section className="min-w-0 overflow-hidden rounded-lg border border-zincLine bg-zincPanel/75 p-4">
+    <section className="min-w-0 overflow-hidden border border-[#20313a] bg-[#081117] p-3">
       <div>
-        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-600">Shape of the thesis</p>
-        <h3 className="mt-2 text-lg font-semibold text-zinc-50">Absurd metrics radar</h3>
+        <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[#45c7c4]">Shape of the thesis</p>
+        <h3 className="mt-1 text-sm font-semibold uppercase text-zinc-100">Absurd metrics radar</h3>
       </div>
       <svg viewBox="0 0 220 220" className="mx-auto mt-3 aspect-square w-full max-w-sm" role="img" aria-label="Absurd metrics radar chart">
         {[0.25, 0.5, 0.75, 1].map((scale) => {
@@ -41,7 +41,7 @@ export function AbsurdMetricRadarChart({ metrics }: { metrics: AbsurdMetricResul
             const angle = (Math.PI * 2 * index) / selected.length - Math.PI / 2;
             return `${center + Math.cos(angle) * radius * scale},${center + Math.sin(angle) * radius * scale}`;
           }).join(" ");
-          return <polygon key={scale} points={ring} fill="none" stroke="#30343f" strokeWidth="1" />;
+          return <polygon key={scale} points={ring} fill="none" stroke="#26343d" strokeWidth="1" />;
         })}
         {points.map(({ labelX, labelY, metric }, index) => (
           <g key={metric.id}>
@@ -58,8 +58,8 @@ export function AbsurdMetricRadarChart({ metrics }: { metrics: AbsurdMetricResul
             </text>
           </g>
         ))}
-        <polygon points={polygon} fill="rgba(157,229,139,.18)" stroke="#9de58b" strokeWidth="2" />
-        {points.map(({ x, y, metric }) => <circle key={metric.id} cx={x} cy={y} r="3" fill="#f4c167" />)}
+        <polygon points={polygon} fill="rgba(42,204,151,.2)" stroke="#2acc97" strokeWidth="2" />
+        {points.map(({ x, y, metric }) => <circle key={metric.id} cx={x} cy={y} r="3" fill="#45c7c4" />)}
       </svg>
       <div className="grid grid-cols-1 gap-1.5 text-[11px] sm:grid-cols-2">
         {selected.map((metric, index) => (
