@@ -219,7 +219,7 @@ export function InvestmentCaseTemplate({ data }: { data: InvestmentCaseData }) {
         </section>
 
         <section>
-          <SectionHeader eyebrow="02 · Operating footprint" title="A portfolio built for metals torque" description="Hover or tap each node to inspect the mine-level role inside the investment case." />
+          <SectionHeader eyebrow="02 · Operating footprint" title="A portfolio built for metals torque" description="Select a node to inspect the asset. Pan, pinch, scroll, or use the map controls to zoom." />
           <div className="mt-8">
             <InvestmentCaseMapClient assets={data.assets} />
           </div>

@@ -17,6 +17,32 @@ export function InvestmentCaseMap({ assets }: { assets: InvestmentCaseAsset[] })
   const broadPortfolio = latitudeRange > 30;
   const mapCenter: [number, number] = broadPortfolio ? [-78, 1] : [-108, 31];
   const mapScale = broadPortfolio ? 210 : 520;
+  const [mapPosition, setMapPosition] = useState<{
+    coordinates: [number, number];
+    zoom: number;
+  }>({
+    coordinates: mapCenter,
+    zoom: 1
+  });
+
+  function changeZoom(delta: number) {
+    setMapPosition((current) => ({
+      ...current,
+      zoom: Math.max(1, Math.min(4, current.zoom + delta))
+    }));
+  }
+
+  function resetMap() {
+    setMapPosition({ coordinates: mapCenter, zoom: 1 });
+  }
+
+  function selectAsset(asset: InvestmentCaseAsset) {
+    setSelected(asset);
+    setMapPosition((current) => ({
+      coordinates: [asset.longitude, asset.latitude],
+      zoom: Math.max(current.zoom, 1.75)
+    }));
+  }
 
   return (
     <div className="grid min-w-0 grid-cols-1 overflow-hidden rounded-lg border border-zincLine bg-[#080a0e] lg:grid-cols-[minmax(0,1fr)_320px]">
@@ -24,15 +50,55 @@ export function InvestmentCaseMap({ assets }: { assets: InvestmentCaseAsset[] })
         <div className="absolute left-3 top-3 z-10 rounded border border-zincLine bg-zinc-950/90 px-2 py-1 font-mono text-[10px] text-zinc-400">
           {assets.length} OPERATING NODES
         </div>
+        <div className="absolute right-3 top-3 z-20 flex flex-col gap-1">
+          <button
+            type="button"
+            onClick={() => changeZoom(0.5)}
+            disabled={mapPosition.zoom >= 4}
+            aria-label="Zoom in"
+            title="Zoom in"
+            className="grid h-10 w-10 place-items-center rounded border border-zincLine bg-zinc-950/90 font-mono text-xl text-zinc-200 shadow-lg transition hover:border-zinc-500 hover:text-zinc-50 disabled:cursor-not-allowed disabled:opacity-35"
+          >
+            +
+          </button>
+          <button
+            type="button"
+            onClick={() => changeZoom(-0.5)}
+            disabled={mapPosition.zoom <= 1}
+            aria-label="Zoom out"
+            title="Zoom out"
+            className="grid h-10 w-10 place-items-center rounded border border-zincLine bg-zinc-950/90 font-mono text-xl text-zinc-200 shadow-lg transition hover:border-zinc-500 hover:text-zinc-50 disabled:cursor-not-allowed disabled:opacity-35"
+          >
+            −
+          </button>
+          <button
+            type="button"
+            onClick={resetMap}
+            aria-label="Reset map view"
+            title="Reset map view"
+            className="h-9 rounded border border-zincLine bg-zinc-950/90 px-2 font-mono text-[9px] text-zinc-400 shadow-lg transition hover:border-zinc-500 hover:text-zinc-50"
+          >
+            RESET
+          </button>
+          <span className="rounded border border-zincLine bg-zinc-950/90 px-1 py-1 text-center font-mono text-[9px] text-zinc-500">
+            {Math.round(mapPosition.zoom * 100)}%
+          </span>
+        </div>
         <ComposableMap
           projection="geoMercator"
           projectionConfig={{ center: mapCenter, scale: mapScale }}
           width={900}
           height={520}
-          className="block h-full min-h-[360px] w-full max-w-full bg-[radial-gradient(circle_at_40%_45%,rgba(70,79,94,0.25),transparent_58%)]"
+          className="block h-full min-h-[360px] w-full max-w-full touch-pan-y bg-[radial-gradient(circle_at_40%_45%,rgba(70,79,94,0.25),transparent_58%)]"
           aria-label="Investment case asset map"
         >
-          <ZoomableGroup center={mapCenter} zoom={1} minZoom={1} maxZoom={4}>
+          <ZoomableGroup
+            center={mapPosition.coordinates}
+            zoom={mapPosition.zoom}
+            minZoom={1}
+            maxZoom={4}
+            onMoveEnd={(position) => setMapPosition(position)}
+          >
             <Geographies geography={countries}>
               {({ geographies }) => geographies.map((geography) => (
                 <Geography
@@ -61,9 +127,9 @@ export function InvestmentCaseMap({ assets }: { assets: InvestmentCaseAsset[] })
                   tabIndex={0}
                   aria-label={`${asset.name}, ${asset.country}, ${asset.stage}`}
                   onMouseEnter={() => setSelected(asset)}
-                  onClick={() => setSelected(asset)}
+                  onClick={() => selectAsset(asset)}
                   onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") setSelected(asset);
+                    if (event.key === "Enter" || event.key === " ") selectAsset(asset);
                   }}
                   className="cursor-pointer outline-none"
                 >
@@ -115,7 +181,7 @@ export function InvestmentCaseMap({ assets }: { assets: InvestmentCaseAsset[] })
             <button
               key={asset.name}
               type="button"
-              onClick={() => setSelected(asset)}
+              onClick={() => selectAsset(asset)}
               className={`rounded border px-2 py-1 text-[10px] font-semibold uppercase transition ${
                 selected.name === asset.name
                   ? "border-zinc-300 bg-zinc-100 text-zinc-950"
