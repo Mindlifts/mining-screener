@@ -1,8 +1,11 @@
 import type { Company } from "../types/company.ts";
 import type {
+  AbsurdMetricBenchmark,
+  AbsurdArchetype,
   AbsurdMetricId,
   AbsurdMetricManualInputs,
   AbsurdMetricResult,
+  AbsurdThesis,
   DoubleWithoutNewsResult,
   MetricCalculationMode,
   MetricConfidence,
@@ -11,6 +14,7 @@ import type {
   MetricVisualTheme,
   SleepingGiantWeights
 } from "../types/absurdMetrics.ts";
+import { enrichAbsurdMetricResult } from "./absurdMetricsConfig.ts";
 
 export const defaultSleepingGiantWeights: SleepingGiantWeights = {
   valuation: 0.25,
@@ -96,7 +100,10 @@ function makeResult(options: BaseMetricOptions): AbsurdMetricResult {
     inputHealth,
     confidence: confidence(inputHealth),
     riskBand: riskBand(options.score, options.isHigherBetter),
-    mode: options.mode ?? (options.missingInputs.length ? "hybrid" : "auto")
+    mode: options.mode ?? (options.missingInputs.length ? "hybrid" : "auto"),
+    investorTakeaway: "",
+    signalBadge: null,
+    statusTier: "neutral"
   };
 }
 
@@ -104,11 +111,11 @@ function applyConfig(company: Company, result: AbsurdMetricResult) {
   const override = company.absurdMetrics?.overrides?.[result.id];
   const configuredMode = company.absurdMetrics?.metricModes?.[result.id];
 
-  return {
+  return enrichAbsurdMetricResult(company, {
     ...result,
     ...override,
     mode: configuredMode ?? override?.mode ?? result.mode
-  };
+  });
 }
 
 function jurisdictionScore(company: Company) {
@@ -589,4 +596,137 @@ export function calculateAbsurdMetrics(company: Company): AbsurdMetricResult[] {
 
 export function getAbsurdMetric(company: Company, id: AbsurdMetricId) {
   return calculateAbsurdMetrics(company).find((metric) => metric.id === id) ?? null;
+}
+
+function quantile(values: number[], percentile: number) {
+  if (!values.length) return undefined;
+  const sorted = values.slice().sort((a, b) => a - b);
+  const index = Math.min(sorted.length - 1, Math.max(0, Math.ceil(percentile * sorted.length) - 1));
+  return Math.round(sorted[index]);
+}
+
+export function calculateAbsurdBenchmarks(
+  companies: Company[],
+  selectedCompany: Company
+): Partial<Record<AbsurdMetricId, AbsurdMetricBenchmark>> {
+  const peers = companies.filter(
+    (company) =>
+      company.slug !== selectedCompany.slug &&
+      company.commodity === selectedCompany.commodity &&
+      company.status === selectedCompany.status &&
+      company.active &&
+      !company.hidden
+  );
+  const peerResults = peers.map((company) => calculateAbsurdMetrics(company));
+  const benchmarks: Partial<Record<AbsurdMetricId, AbsurdMetricBenchmark>> = {};
+
+  for (const id of absurdMetricIds) {
+    const metricValues = peerResults
+      .map((results) => results.find((metric) => metric.id === id))
+      .filter((metric): metric is AbsurdMetricResult => Boolean(metric && metric.score !== null));
+    const values = metricValues.map((metric) => metric.score!);
+    if (values.length < 2) continue;
+    const higherBetter = metricValues[0].isHigherBetter;
+    benchmarks[id] = {
+      peerAverage: Math.round(average(values)),
+      peerCount: values.length,
+      topQuartileThreshold: quantile(values, higherBetter ? 0.75 : 0.25),
+      sourceLabel: `${selectedCompany.commodity} ${selectedCompany.status.toLowerCase()} app peer set`
+    };
+  }
+
+  return benchmarks;
+}
+
+function scored(metrics: AbsurdMetricResult[], id: AbsurdMetricId) {
+  return metrics.find((metric) => metric.id === id)?.score ?? null;
+}
+
+function archetypeFor(company: Company, metrics: AbsurdMetricResult[]): [AbsurdArchetype, string] {
+  const giant = scored(metrics, "sleeping-giant") ?? 0;
+  const finance = scored(metrics, "ceo-sleep") ?? 0;
+  const takeover = scored(metrics, "barrick-bother") ?? 0;
+  const builders = scored(metrics, "shovel-density") ?? 0;
+  const infrastructure = scored(metrics, "road-to-starbucks") ?? 0;
+  const complexity = scored(metrics, "things-must-go-right") ?? 50;
+
+  if (company.status === "royalty" || company.status === "streamer") {
+    return ["Hidden Royalty", "Asset exposure can compound without carrying the full operating burden of a mine builder."];
+  }
+  if (finance < 30 && complexity >= 50) {
+    return ["Dilution Machine", "Financing pressure and a complicated path to value make shareholder dilution the dominant risk."];
+  }
+  if (giant < 35 && finance < 40) {
+    return ["Zombie Miner", "Weak survivability and limited hidden-quality evidence suggest the discount may be deserved."];
+  }
+  if (builders >= 75) {
+    return ["Mine Builder Mafia", "An unusually experienced operating bench is the company’s clearest differentiated asset."];
+  }
+  if (takeover >= 70) {
+    return ["Future Takeover", "Strategic scale and asset quality create credible major-company optionality."];
+  }
+  if (infrastructure >= 75) {
+    return ["Infrastructure Winner", "Existing access and logistics remove risk that remote peers still need to finance and build."];
+  }
+  if (finance >= 75 && (company.fcfYield ?? 0) > 5) {
+    return ["Cash Cow", "Cash generation and balance-sheet flexibility let the company compound without depending on capital markets."];
+  }
+  if (complexity >= 60 && company.commodityLeverage >= 70) {
+    return ["Lottery Ticket", "The upside can be large, but too many linked assumptions sit between the company and cash flow."];
+  }
+  return ["Sleeping Giant", giant >= 60
+    ? "The quality and valuation mix looks better than current investor attention implies."
+    : "There are hints of hidden value, but the evidence is not yet strong enough for a high-conviction classification."];
+}
+
+function unique(items: string[]) {
+  return [...new Set(items)].slice(0, 4);
+}
+
+export function buildAbsurdThesis(company: Company, metrics = calculateAbsurdMetrics(company)): AbsurdThesis {
+  const available = metrics.filter((metric) => metric.score !== null);
+  const positives = available
+    .filter((metric) => (metric.isHigherBetter ? metric.score! : 100 - metric.score!) >= 65)
+    .sort((a, b) => (b.isHigherBetter ? b.score! : 100 - b.score!) - (a.isHigherBetter ? a.score! : 100 - a.score!));
+  const negatives = available
+    .filter((metric) => (metric.isHigherBetter ? metric.score! : 100 - metric.score!) < 45)
+    .sort((a, b) => (a.isHigherBetter ? a.score! : 100 - a.score!) - (b.isHigherBetter ? b.score! : 100 - b.score!));
+  const miracles = metrics.find((metric) => metric.id === "things-must-go-right");
+  const manualInputs = company.absurdMetrics?.manualInputs;
+  const mustGoRight = [
+    ...(manualInputs?.financingNeeded ? ["Financing must arrive without excessive dilution."] : []),
+    ...(manualInputs?.permitPending ? ["Permitting must advance on the expected timetable."] : []),
+    ...(manualInputs?.metallurgyUnresolved ? ["Metallurgy must confirm economic recoveries."] : []),
+    ...(manualInputs?.infrastructureMissing ? ["Infrastructure must be financed and delivered."] : []),
+    ...(manualInputs?.metalPriceIncreaseNeeded ? [`${company.commodity} prices must remain supportive or improve.`] : []),
+    ...(manualInputs?.capexBlowoutRisk ? ["Project capital must remain within the stated plan."] : [])
+  ];
+  const [archetype, archetypeExplanation] = archetypeFor(company, metrics);
+
+  return {
+    convictionScore: scored(metrics, "sleeping-giant"),
+    archetype,
+    archetypeExplanation,
+    whyItMightWork: unique(
+      positives.length
+        ? positives.map((metric) => metric.investorTakeaway)
+        : ["No strong positive signal has enough evidence yet. The opportunity needs further diligence."]
+    ),
+    whyItMightFail: unique([
+      ...negatives.map((metric) => metric.investorTakeaway),
+      ...company.riskFlags.slice(0, 2)
+    ]).slice(0, 4).length
+      ? unique([
+          ...negatives.map((metric) => metric.investorTakeaway),
+          ...company.riskFlags.slice(0, 2)
+        ]).slice(0, 4)
+      : ["No decisive red flag is scored, but incomplete evidence can still hide project-specific risk."],
+    whatMustGoRight: unique(
+      mustGoRight.length
+        ? mustGoRight
+        : miracles?.score !== null && miracles && miracles.score < 25
+          ? ["Management must execute the existing plan without introducing new dependencies."]
+          : ["Complete the dependency checklist before treating the thesis as fully underwritten."]
+    )
+  };
 }

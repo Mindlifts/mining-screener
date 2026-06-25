@@ -14,6 +14,37 @@ export type MetricInputHealth = "complete" | "partial" | "insufficient";
 export type MetricConfidence = "high" | "medium" | "low";
 export type MetricRiskBand = "low" | "medium" | "high" | "critical";
 export type MetricCalculationMode = "auto" | "manual" | "hybrid";
+export type MetricScoreDirection = "higher_is_better" | "lower_is_better" | "balanced";
+export type MetricStatusTier = "weak" | "neutral" | "strong" | "extreme";
+export type MetricVisualizationType = "sparkline" | "gauge" | "bars" | "people" | "dominoes";
+
+export type AbsurdMetricBenchmark = {
+  peerAverage?: number;
+  peerCount?: number;
+  sectorAverage?: number;
+  topQuartileThreshold?: number;
+  sourceLabel?: string;
+};
+
+export type AbsurdArchetype =
+  | "Sleeping Giant"
+  | "Cash Cow"
+  | "Future Takeover"
+  | "Lottery Ticket"
+  | "Zombie Miner"
+  | "Hidden Royalty"
+  | "Mine Builder Mafia"
+  | "Infrastructure Winner"
+  | "Dilution Machine";
+
+export type AbsurdThesis = {
+  convictionScore: number | null;
+  archetype: AbsurdArchetype;
+  archetypeExplanation: string;
+  whyItMightWork: string[];
+  whyItMightFail: string[];
+  whatMustGoRight: string[];
+};
 
 export type MetricVisualTheme =
   | "truck"
@@ -43,6 +74,10 @@ export type AbsurdMetricResult = {
   visualTheme: MetricVisualTheme;
   riskBand: MetricRiskBand;
   mode: MetricCalculationMode;
+  investorTakeaway: string;
+  signalBadge: string | null;
+  statusTier: MetricStatusTier;
+  benchmark?: AbsurdMetricBenchmark;
 };
 
 export type AbsurdMetric = {
@@ -53,6 +88,33 @@ export type AbsurdMetric = {
   isHigherBetter: boolean;
   visualTheme: MetricVisualTheme;
   mode: MetricCalculationMode;
+};
+
+export type AbsurdMetricScoreRange = {
+  min: number;
+  max: number;
+  label: string;
+  signalBadge?: string;
+  takeaway: string;
+  statusTier: MetricStatusTier;
+};
+
+export type AbsurdMetricDefinition = {
+  id: AbsurdMetricId;
+  name: string;
+  shortName: string;
+  absurdName: string;
+  description: string;
+  whyItMatters: string;
+  highScoreMeaning: string;
+  lowScoreMeaning: string;
+  formulaExplanation: string;
+  scoreDirection: MetricScoreDirection;
+  labelsByScoreRange: AbsurdMetricScoreRange[];
+  dataFieldsUsed: string[];
+  confidenceLevel: MetricConfidence;
+  benchmarkSupport: boolean;
+  visualizationType: MetricVisualizationType;
 };
 
 export type StudyLevel = "none" | "resource" | "PEA" | "PFS" | "DFS" | "operating";

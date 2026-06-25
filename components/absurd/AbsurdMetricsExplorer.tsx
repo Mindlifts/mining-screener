@@ -5,8 +5,9 @@ import { useMemo, useState } from "react";
 import { AbsurdMetricComparisonTable } from "@/components/absurd/AbsurdMetricComparisonTable";
 import { AbsurdMetricGrid } from "@/components/absurd/AbsurdMetricGrid";
 import { AbsurdMetricRadarChart } from "@/components/absurd/AbsurdMetricRadarChart";
+import { AbsurdThesisSummary } from "@/components/absurd/AbsurdThesisSummary";
 import { commodities } from "@/data/mining-universe";
-import { calculateAbsurdMetrics } from "@/lib/absurdMetrics";
+import { buildAbsurdThesis, calculateAbsurdBenchmarks, calculateAbsurdMetrics } from "@/lib/absurdMetrics";
 import type { AbsurdMetricResult } from "@/types/absurdMetrics";
 import type { Commodity, Company } from "@/types/company";
 
@@ -147,7 +148,7 @@ export function AbsurdMetricsExplorer({ companies }: { companies: Company[] }) {
         .map((company) => {
           const metrics = calculateAbsurdMetrics(company);
           const giant = metrics.find((metric) => metric.id === "sleeping-giant");
-          return { company, metrics, giant };
+          return { company, metrics, giant, thesis: buildAbsurdThesis(company, metrics) };
         })
         .sort((a, b) => (b.giant?.score ?? -1) - (a.giant?.score ?? -1)),
     [companies]
@@ -195,6 +196,7 @@ export function AbsurdMetricsExplorer({ companies }: { companies: Company[] }) {
 
       {selected ? (
         <>
+          <AbsurdThesisSummary thesis={selected.thesis} />
           <section className="grid min-w-0 grid-cols-1 gap-2 2xl:grid-cols-[210px_minmax(0,1fr)_230px]">
             <div className="hidden min-w-0 2xl:block">
               <MethodologyRail />
@@ -214,7 +216,10 @@ export function AbsurdMetricsExplorer({ companies }: { companies: Company[] }) {
                   <span className="font-mono text-2xl text-terminalGreen">{selected.giant?.score ?? "—"}</span>
                 </div>
               </div>
-              <AbsurdMetricGrid metrics={selected.metrics} />
+              <AbsurdMetricGrid
+                metrics={selected.metrics}
+                benchmarks={calculateAbsurdBenchmarks(companies, selected.company)}
+              />
             </div>
 
             <div className="hidden min-w-0 2xl:block">

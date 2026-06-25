@@ -7,6 +7,7 @@ import {
   calculateAbsurdMetrics,
   defaultSleepingGiantWeights
 } from "@/lib/absurdMetrics";
+import { absurdMetricsConfig } from "@/lib/absurdMetricsConfig";
 import type { Company } from "@/types/company";
 import type {
   AbsurdMetricCompanyConfig,
@@ -15,19 +16,6 @@ import type {
   MetricCalculationMode,
   SleepingGiantWeights
 } from "@/types/absurdMetrics";
-
-const labels: Record<AbsurdMetricId, string> = {
-  "barrick-bother": "Would Barrick Bother?",
-  "ceo-sleep": "CEO Sleep",
-  "road-to-starbucks": "Road to Starbucks",
-  "institutional-comfort": "Institutional Comfort",
-  "shovel-density": "Shovel Density",
-  "hype-liability": "Hype Liability",
-  "geology-reality": "Geology to Reality",
-  "things-must-go-right": "Things Must Go Right",
-  "double-without-news": "Double Without News",
-  "sleeping-giant": "Sleeping Giant"
-};
 
 const weightLabels: Record<keyof SleepingGiantWeights, string> = {
   valuation: "Valuation",
@@ -133,7 +121,7 @@ export function AbsurdMetricsAdminEditor({
             <details key={id} className="rounded border border-zincLine bg-zinc-950/70 p-3">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
                 <span className="min-w-0">
-                  <span className="block truncate text-xs font-semibold text-zinc-200">{labels[id]}</span>
+                  <span className="block truncate text-xs font-semibold text-zinc-200">{absurdMetricsConfig[id].absurdName}</span>
                   <span className="mt-1 block text-[10px] text-zinc-600">
                     {disabled ? "Disabled" : `${result?.score ?? "—"} · ${result?.confidence ?? "low"} confidence`}
                   </span>
@@ -141,9 +129,12 @@ export function AbsurdMetricsAdminEditor({
                 <Toggle
                   checked={!disabled}
                   onChange={(enabled) => setMetricConfig(id, { disabled: !enabled })}
-                  label={`Enable ${labels[id]}`}
+                  label={`Enable ${absurdMetricsConfig[id].absurdName}`}
                 />
               </summary>
+              <p className="mt-3 text-[11px] leading-5 text-zinc-500">
+                {absurdMetricsConfig[id].whyItMatters}
+              </p>
               <div className="mt-4 grid grid-cols-1 gap-3 border-t border-zincLine pt-3 sm:grid-cols-2">
                 <label>
                   <span className="text-[10px] uppercase tracking-wide text-zinc-600">Mode</span>
