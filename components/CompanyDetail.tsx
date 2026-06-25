@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { getMarketRecord, getMetricQuality, getOfficialRecord, type Company } from "@/data/screener-data";
+import { companies, getMarketRecord, getMetricQuality, getOfficialRecord, type Company } from "@/data/screener-data";
 import { toDisplayDate } from "@/lib/dataCache";
 import { scoreCompany } from "@/lib/scoring";
 import { AppNavigation } from "@/components/AppNavigation";
 import { getInvestmentCase } from "@/data/investment-cases";
 import { AbsurdMetricGrid } from "@/components/absurd/AbsurdMetricGrid";
 import { AbsurdMetricRadarChart } from "@/components/absurd/AbsurdMetricRadarChart";
-import { calculateAbsurdMetrics } from "@/lib/absurdMetrics";
+import { AbsurdThesisSummary } from "@/components/absurd/AbsurdThesisSummary";
+import { buildAbsurdThesis, calculateAbsurdBenchmarks, calculateAbsurdMetrics } from "@/lib/absurdMetrics";
 
 const moneyFormatter = new Intl.NumberFormat("en-US", {
   notation: "compact",
@@ -103,6 +104,8 @@ export function CompanyDetail({ company }: { company: Company }) {
   const marketRecord = getMarketRecord(company.slug);
   const investmentCase = getInvestmentCase(company.slug);
   const absurdMetrics = calculateAbsurdMetrics(company);
+  const absurdThesis = buildAbsurdThesis(company, absurdMetrics);
+  const absurdBenchmarks = calculateAbsurdBenchmarks(companies, company);
   const showAdminNotes = process.env.ADMIN_ENABLED === "true";
 
   return (
@@ -135,7 +138,12 @@ export function CompanyDetail({ company }: { company: Company }) {
                 {company.commodity} · {company.stage} · {company.exchange}
               </p>
               <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight text-zinc-50">{company.company}</h1>
-              <p className="mt-2 font-mono text-sm text-caution">{company.ticker}</p>
+              <div className="mt-2 flex flex-wrap items-center gap-2">
+                <p className="font-mono text-sm text-caution">{company.ticker}</p>
+                <span className="border border-caution/40 bg-caution/5 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-caution">
+                  {absurdThesis.archetype}
+                </span>
+              </div>
             </div>
             <div className="grid w-full min-w-0 grid-cols-1 gap-2 text-xs sm:grid-cols-3 lg:max-w-[460px]">
               <div className="min-w-0 border border-zincLine bg-zincPanel px-3 py-2">
@@ -252,10 +260,14 @@ export function CompanyDetail({ company }: { company: Company }) {
               Memorable shorthand for financing, infrastructure, execution, promotion and asymmetric value. Missing inputs are shown on each card and reduce confidence.
             </p>
           </div>
+          <div className="mt-6">
+            <AbsurdThesisSummary thesis={absurdThesis} />
+          </div>
           <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1fr)_340px]">
             <AbsurdMetricGrid
               metrics={absurdMetrics}
               adminNotes={showAdminNotes ? company.absurdMetrics?.adminNotes : undefined}
+              benchmarks={absurdBenchmarks}
             />
             <AbsurdMetricRadarChart metrics={absurdMetrics} />
           </div>

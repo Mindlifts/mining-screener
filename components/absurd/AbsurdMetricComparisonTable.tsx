@@ -18,6 +18,17 @@ export function AbsurdMetricComparisonTable({ companies }: { companies: Company[
     company,
     metrics: Object.fromEntries(calculateAbsurdMetrics(company).map((metric) => [metric.id, metric]))
   }));
+  const strongest = rows.slice().sort(
+    (a, b) => (b.metrics["sleeping-giant"]?.score ?? -1) - (a.metrics["sleeping-giant"]?.score ?? -1)
+  )[0];
+  const redFlag = rows
+    .flatMap((row) => Object.values(row.metrics).map((metric) => ({ company: row.company, metric })))
+    .filter(({ metric }) => metric?.score !== null)
+    .sort((a, b) => {
+      const left = a.metric!.isHigherBetter ? a.metric!.score! : 100 - a.metric!.score!;
+      const right = b.metric!.isHigherBetter ? b.metric!.score! : 100 - b.metric!.score!;
+      return left - right;
+    })[0];
 
   return (
     <section className="w-full max-w-full overflow-hidden border border-[#20313a] bg-[#081117]">
@@ -25,6 +36,20 @@ export function AbsurdMetricComparisonTable({ companies }: { companies: Company[
         <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[#45c7c4]">Side-by-side</p>
         <h2 className="mt-1 text-sm font-semibold uppercase text-zinc-100">Absurd metric comparison</h2>
       </header>
+      <div className="grid grid-cols-1 gap-px border-b border-[#20313a] bg-[#20313a] sm:grid-cols-2">
+        <div className="bg-[#081117] p-3">
+          <p className="text-[9px] uppercase tracking-wide text-terminalGreen">Most attractive asymmetry</p>
+          <p className="mt-1 text-xs text-zinc-200">
+            {strongest ? `${strongest.company.ticker} · Sleeping Giant ${strongest.metrics["sleeping-giant"]?.score ?? "—"}/100` : "Unavailable"}
+          </p>
+        </div>
+        <div className="bg-[#081117] p-3">
+          <p className="text-[9px] uppercase tracking-wide text-red-300">Biggest red flag</p>
+          <p className="mt-1 text-xs text-zinc-200">
+            {redFlag ? `${redFlag.company.ticker} · ${redFlag.metric?.shortName}: ${redFlag.metric?.label}` : "Unavailable"}
+          </p>
+        </div>
+      </div>
       <div className="max-w-full overflow-x-auto">
         <table className="w-full min-w-[760px] text-xs">
           <thead className="bg-[#060d12] text-zinc-500">
