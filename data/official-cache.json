@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-12T14:42:19.950Z",
-  "expiresAt": "2026-07-13T14:42:19.950Z",
+  "generatedAt": "2026-07-13T17:36:07.935Z",
+  "expiresAt": "2026-07-14T17:36:07.935Z",
   "sourcePolicy": "Official/regulatory filings are refreshed at most once per calendar day. Prefer SEC bulk files for broader universes and preserve the last cache if a source is unavailable.",
   "records": {
     "pan-american-silver": {
@@ -8,7 +8,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000771992.json",
       "regulator": "SEC",
       "filedAt": "2026-02-18",
-      "refreshedAt": "2026-07-12T14:42:12.304Z",
+      "refreshedAt": "2026-07-13T17:36:00.799Z",
       "metrics": {
         "revenue": 3619,
         "cash": 1215,
@@ -22,7 +22,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001308648.json",
       "regulator": "SEC",
       "filedAt": "2026-03-31",
-      "refreshedAt": "2026-07-12T14:42:12.669Z",
+      "refreshedAt": "2026-07-13T17:36:01.203Z",
       "metrics": {
         "revenue": 1257.2,
         "cash": 793.4,
@@ -36,7 +36,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001277866.json",
       "regulator": "SEC",
       "filedAt": "2026-03-30",
-      "refreshedAt": "2026-07-12T14:42:12.977Z",
+      "refreshedAt": "2026-07-13T17:36:01.511Z",
       "metrics": {
         "revenue": 467.5,
         "cash": 215.4,
@@ -50,7 +50,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000719413.json",
       "regulator": "SEC",
       "filedAt": "2026-05-05",
-      "refreshedAt": "2026-07-12T14:42:13.744Z",
+      "refreshedAt": "2026-07-13T17:36:02.212Z",
       "metrics": {
         "revenue": 646,
         "cash": 587.6,
@@ -65,7 +65,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001796073.json",
       "regulator": "SEC",
       "filedAt": "2025-07-18",
-      "refreshedAt": "2026-07-12T14:42:14.015Z",
+      "refreshedAt": "2026-07-13T17:36:02.492Z",
       "metrics": {
         "sharesOutstanding": 298374460
       },
@@ -80,7 +80,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001009001.json",
       "regulator": "SEC",
       "filedAt": "2026-03-19",
-      "refreshedAt": "2026-07-12T14:42:14.330Z",
+      "refreshedAt": "2026-07-13T17:36:02.837Z",
       "metrics": {
         "sharesOutstanding": 435457978
       },
@@ -95,7 +95,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001698535.json",
       "regulator": "SEC",
       "filedAt": "2026-03-04",
-      "refreshedAt": "2026-07-12T14:42:14.815Z",
+      "refreshedAt": "2026-07-13T17:36:03.145Z",
       "metrics": {
         "sharesOutstanding": 659960072
       },
@@ -110,7 +110,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001063259.json",
       "regulator": "SEC",
       "filedAt": "2026-03-30",
-      "refreshedAt": "2026-07-12T14:42:15.165Z",
+      "refreshedAt": "2026-07-13T17:36:03.475Z",
       "metrics": {
         "revenue": 11.1,
         "cash": 2.9,
@@ -124,7 +124,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000831259.json",
       "regulator": "SEC",
       "filedAt": "2026-05-08",
-      "refreshedAt": "2026-07-12T14:42:15.645Z",
+      "refreshedAt": "2026-07-13T17:36:04.145Z",
       "metrics": {
         "revenue": 6254,
         "cash": 3737,
@@ -140,7 +140,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001001838.json",
       "regulator": "SEC",
       "filedAt": "2026-04-30",
-      "refreshedAt": "2026-07-12T14:42:16.331Z",
+      "refreshedAt": "2026-07-13T17:36:04.695Z",
       "metrics": {
         "revenue": 4251.4,
         "cash": 4915.4,
@@ -155,7 +155,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001164727.json",
       "regulator": "SEC",
       "filedAt": "2026-04-23",
-      "refreshedAt": "2026-07-12T14:42:17.612Z",
+      "refreshedAt": "2026-07-13T17:36:05.336Z",
       "metrics": {
         "revenue": 7307,
         "cash": 8775,
@@ -171,7 +171,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002809.json",
       "regulator": "SEC",
       "filedAt": "2026-03-19",
-      "refreshedAt": "2026-07-12T14:42:17.933Z",
+      "refreshedAt": "2026-07-13T17:36:05.741Z",
       "metrics": {
         "sharesOutstanding": 500046600
       },
@@ -182,7 +182,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001064728.json",
       "regulator": "SEC",
       "filedAt": "2026-05-06",
-      "refreshedAt": "2026-07-12T14:42:18.610Z",
+      "refreshedAt": "2026-07-13T17:36:06.364Z",
       "metrics": {
         "revenue": 973.3,
         "cash": 492.5,
@@ -197,7 +197,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001710366.json",
       "regulator": "SEC",
       "filedAt": "2026-05-07",
-      "refreshedAt": "2026-07-12T14:42:19.157Z",
+      "refreshedAt": "2026-07-13T17:36:07.205Z",
       "metrics": {
         "revenue": 1084.3,
         "cash": 412.7,
@@ -212,7 +212,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001162896.json",
       "regulator": "SEC",
       "filedAt": "2026-05-14",
-      "refreshedAt": "2026-07-12T14:42:19.634Z",
+      "refreshedAt": "2026-07-13T17:36:07.622Z",
       "metrics": {
         "revenue": 83.4,
         "cash": 0.3,
@@ -226,7 +226,7 @@
       "sourceUrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001017413.json",
       "regulator": "SEC",
       "filedAt": "2026-03-26",
-      "refreshedAt": "2026-07-12T14:42:19.950Z",
+      "refreshedAt": "2026-07-13T17:36:07.935Z",
       "metrics": {
         "sharesOutstanding": 2081578000
       },
