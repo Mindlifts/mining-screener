@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-04T14:26:13.994Z",
-  "expiresAt": "2026-09-05T14:26:13.994Z",
+  "generatedAt": "2026-09-05T13:29:03.470Z",
+  "expiresAt": "2026-09-06T13:29:03.470Z",
   "sourcePolicy": "Daily market cache refreshes at most once per calendar day. Yahoo chart data is a clearly marked fallback until Alpha Vantage, FMP, or another terms-safe provider is configured. Direct source values should be preferred over calculated values.",
   "records": {}
 }

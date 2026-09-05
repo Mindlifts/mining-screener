@@ -1,42 +1,42 @@
 {
-  "generatedAt": "2026-09-04T14:26:13.994Z",
-  "expiresAt": "2026-09-05T14:26:13.995Z",
+  "generatedAt": "2026-09-05T13:29:03.470Z",
+  "expiresAt": "2026-09-06T13:29:03.471Z",
   "sourcePolicy": "Commodity cache refreshes at most once per calendar day. Current values use fallback futures/alternative symbols where free chart data is available; replace with Alpha Vantage, FRED, exchange, or specialist vendor feeds for production use.",
   "records": {
     "Gold": {
-      "price": 4482,
-      "changePercent": 1.1,
+      "price": 4429.8,
+      "changePercent": 0,
       "source": "Yahoo Finance delayed COMEX gold futures",
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/GC%3DF?range=5d&interval=1d",
       "quoteTime": "2026-09-04T04:00:00.000Z",
-      "refreshedAt": "2026-09-04T14:26:13.276Z",
+      "refreshedAt": "2026-09-05T13:29:02.135Z",
       "stale": false
     },
     "Silver": {
-      "price": 66.79,
-      "changePercent": 0.9,
+      "price": 66.05,
+      "changePercent": -0.3,
       "source": "Yahoo Finance delayed COMEX silver futures",
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/SI%3DF?range=5d&interval=1d",
       "quoteTime": "2026-09-04T04:00:00.000Z",
-      "refreshedAt": "2026-09-04T14:26:13.415Z",
+      "refreshedAt": "2026-09-05T13:29:02.344Z",
       "stale": false
     },
     "Copper": {
-      "price": 6.68,
-      "changePercent": 1.2,
+      "price": 6.6,
+      "changePercent": 0.1,
       "source": "Yahoo Finance delayed COMEX copper futures",
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/HG%3DF?range=5d&interval=1d",
       "quoteTime": "2026-09-04T04:00:00.000Z",
-      "refreshedAt": "2026-09-04T14:26:13.569Z",
+      "refreshedAt": "2026-09-05T13:29:02.550Z",
       "stale": false
     },
     "Oil & Gas": {
-      "price": 89.35,
-      "changePercent": 4.2,
+      "price": 91.48,
+      "changePercent": 6.7,
       "source": "Yahoo Finance delayed NYMEX WTI futures",
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/CL%3DF?range=5d&interval=1d",
       "quoteTime": "2026-09-04T04:00:00.000Z",
-      "refreshedAt": "2026-09-04T14:26:13.708Z",
+      "refreshedAt": "2026-09-05T13:29:02.956Z",
       "stale": false
     },
     "Uranium": {
@@ -45,7 +45,7 @@
       "source": "Yahoo Finance uranium futures/alternative symbol",
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/UX%3DF?range=5d&interval=1d",
       "quoteTime": "2026-09-03T16:06:29.000Z",
-      "refreshedAt": "2026-09-04T14:26:13.852Z",
+      "refreshedAt": "2026-09-05T13:29:03.197Z",
       "stale": false
     },
     "Coal": {
@@ -54,7 +54,7 @@
       "source": "Yahoo Finance coal futures/alternative symbol",
       "sourceUrl": "https://query2.finance.yahoo.com/v8/finance/chart/MTF%3DF?range=5d&interval=1d",
       "quoteTime": "2025-02-06T09:12:41.000Z",
-      "refreshedAt": "2026-09-04T14:26:13.994Z",
+      "refreshedAt": "2026-09-05T13:29:03.470Z",
       "stale": true
     }
   }
